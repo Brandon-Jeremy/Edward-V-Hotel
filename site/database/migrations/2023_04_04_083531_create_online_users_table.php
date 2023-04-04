@@ -28,6 +28,7 @@ class CreateOnlineUsersTable extends Migration
             $table->rememberToken();
             $table->timestamp('email_created_at');
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('details')->nullable();
         });
     }
 
