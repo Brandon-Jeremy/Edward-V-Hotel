@@ -23,7 +23,14 @@ class CreateOnlineUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone_num')->unique();
             $table->string('password');
-            $table->string('billing_address');
+            //$table->string('billing_address');
+            $table->string('card_number');
+            $table->string('card_name');
+            $table->string('card_cvv');
+            $table->string('card_exp');
+            $table->string('card_type');
+            $table->string('card_country');
+            
             $table->string('passport_id')->unique();
             $table->rememberToken();
             $table->timestamp('email_created_at');
