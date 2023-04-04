@@ -17,8 +17,8 @@ class CreatePurchaseGiftcodeTable extends Migration
             $table->id();
             $table->timestamps();
             //Purchase giftcode table additions
-            $table->int('onlineuser_id');
-            $table->int('giftcard_id');
+            $table->integer('onlineuser_id');
+            $table->integer('giftcard_id');
 
         });
     }

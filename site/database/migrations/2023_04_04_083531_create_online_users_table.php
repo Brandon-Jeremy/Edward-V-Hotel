@@ -16,6 +16,7 @@ class CreateOnlineUsersTable extends Migration
         Schema::create('online_users', function (Blueprint $table) {
             //Table important
             $table->id();
+            $table->timestamps();
             //User important
             $table->string('first_name');
             $table->string('last_name');
@@ -24,7 +25,7 @@ class CreateOnlineUsersTable extends Migration
             $table->string('phone_num')->unique();
             $table->string('password');
 
-            $table->int('points');
+            $table->integer('points');
 
             //$table->string('billing_address');
             $table->string('card_number');

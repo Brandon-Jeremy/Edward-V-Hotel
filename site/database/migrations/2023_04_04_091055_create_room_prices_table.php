@@ -20,8 +20,8 @@ class CreateRoomPricesTable extends Migration
             //room prices information
             $table->boolean('view');
             $table->string('type');
-            $table->float('price');
-            $table->int('capacity');
+            $table->integer('price');
+            $table->integer('capacity');
         });
     }
 
