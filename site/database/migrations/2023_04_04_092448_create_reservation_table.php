@@ -22,6 +22,7 @@ class CreateReservationTable extends Migration
             $table->date('date_to');
             $table->int('room_id');
             $table->int('user_id');
+            $table->enum('user_type',['online','in_person']);
         });
     }
 
