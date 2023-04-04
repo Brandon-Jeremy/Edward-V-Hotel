@@ -17,7 +17,7 @@ class CreateRewardTable extends Migration
             $table->id();
             $table->timestamps();
             //reward additions
-            $table->int('price');
+            $table->integer('price');
             $table->string('item');
             $table->string('details');
         });

@@ -17,8 +17,8 @@ class CreateReedemsTable extends Migration
             $table->id();
             $table->timestamps();
             //
-            $table->int('user_id');
-            $table->int('reward_id');
+            $table->integer('user_id');
+            $table->integer('reward_id');
             $table->boolean('reedemed');
         });
     }

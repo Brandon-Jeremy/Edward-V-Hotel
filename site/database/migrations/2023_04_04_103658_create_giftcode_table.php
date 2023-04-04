@@ -19,9 +19,9 @@ class CreateGiftcodeTable extends Migration
             //giftcodes additions
             $table->boolean('isRedeemed');
             $table->string('token');
-            $table->int('value');
-            $table->timestamp('creation_date');
-            $table->timestamp('expiration_date');
+            $table->integer('value');
+            $table->timestamp('creation_date')->nullable();
+            $table->timestamp('expiration_date')->nullable();
         });
     }
 
