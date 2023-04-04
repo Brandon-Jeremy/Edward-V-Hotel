@@ -26,6 +26,7 @@ class CreateOnlineUsersTable extends Migration
             $table->string('billing_address');
             $table->string('passport_id')->unique();
             $table->rememberToken();
+            $table->timestamp('email_created_at');
             $table->timestamp('email_verified_at')->nullable();
         });
     }
