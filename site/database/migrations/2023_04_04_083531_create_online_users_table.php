@@ -23,6 +23,9 @@ class CreateOnlineUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone_num')->unique();
             $table->string('password');
+
+            $table->int('points');
+
             //$table->string('billing_address');
             $table->string('card_number');
             $table->string('card_name');
