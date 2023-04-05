@@ -12,7 +12,8 @@
             <div class="col-md-4 col-md-offset-4">
                 <h4>Registration</h4>
                 <hr>
-                <form action="">
+                <form action="{{route('register-user')}}" method="post">
+                    @csrf
                     <div class="form-group">
                         <label for="firstname">First name</label>
                         <input type="text" class="form-control" placeholder="Enter First Name"
