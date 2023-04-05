@@ -18,7 +18,7 @@ class CreateEmployeeTable extends Migration
             $table->id();
             $table->timestamps();
             //Employee additions
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('password');
             $table->boolean('special_access');
         });

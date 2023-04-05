@@ -20,12 +20,11 @@ class CreateInPersonUsersTable extends Migration
             //Guest information
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('passport_id')->unique();
             $table->string('gender')->nullable();
-            $table->date('dob');
+            $table->date('dob')->nullable();
             $table->string('nationality')->nullable();
             //Is this needed?
-            $table->string('phone_num')->unique();
+            $table->string('phone_num')->unique()->nullable();
             $table->string('details')->nullable();
             //Is the remember token needed?
             $table->remembertoken();
