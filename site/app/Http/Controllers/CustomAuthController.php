@@ -34,13 +34,6 @@ class CustomAuthController extends Controller
             $pass=$request->password;
             $user->password=hash("sha256",$pass);
             $user->points=0;
-            $user->card_number="";
-            $user->card_name="";
-            $user->card_cvv="";
-            $user->card_exp="";
-            $user->card_type="";
-            $user->card_country="";
-            $user->passport_id="";
             $user->email_created_at=Carbon::now();
             $user->email_verified_at=NULL;
             $user->details="";
