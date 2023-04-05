@@ -42,8 +42,7 @@ class CustomAuthController extends Controller
             $user->card_country="";
             $user->passport_id="";
             $user->email_created_at=Carbon::now();
-            //This needs to change to a time to represent not verified yet
-            $user->email_verified_at=Carbon::now();
+            $user->email_verified_at=NULL;
             $user->details="";
 
             $user->save();
@@ -58,4 +57,21 @@ class CustomAuthController extends Controller
             "success" => true
         ]);
     }
+
+    public function loginUser(Request $request){
+    $hashedPassword = hash("sha256", $request->password);
+
+    $users = onlineUser::all();
+    foreach ($users as $user){
+        if ($user->email == $request->email && $user->password == $hashedPassword) {
+            return response()->json([
+                "success" => true
+            ]);
+        }
+    }
+    return response()->json([
+        "success" => false
+    ]);
+    }
+
 }

@@ -25,6 +25,7 @@ Route::get('/registration',[CustomAuthController::class,'registration']);
 
 //This one works. Above are not connected to anything
 Route::post('/register-user',[CustomAuthController::class,'registerUser'])->name('register-user');
+Route::post('/login-user',[CustomAuthController::class,'loginUser'])->name('login-user');
  
 
 
