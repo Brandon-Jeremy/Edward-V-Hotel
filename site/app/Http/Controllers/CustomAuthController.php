@@ -36,7 +36,7 @@ class CustomAuthController extends Controller
             $user->points=0;
             $user->email_created_at=Carbon::now();
             $user->email_verified_at=NULL;
-            $user->details="";
+            $user->details=NULL;
 
             $user->save();
         }
