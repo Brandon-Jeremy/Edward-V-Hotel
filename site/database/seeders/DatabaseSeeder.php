@@ -46,5 +46,32 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        $roomTypes = ['single', 'double', 'suite'];
+        $roomViews = [true, false];
+        $prices = [
+            ['single', true, 50,2],
+            ['single', false, 40,2],
+            ['double', true, 70,2],
+            ['double', false, 60,2],
+            ['suite', true, 90,3],
+            ['suite', false, 80,3],
+        ];
+
+        foreach ($prices as $values) {
+            $roomType = $values[0];
+            $roomView = $values[1];
+            $price = $values[2];
+            $capacity = $values[3];
+
+            DB::table('room_prices')->insert([
+                'type' => $roomType,
+                'view' => $roomView,
+                'price' => $price,
+                'capacity' =>$capacity,
+            ]);
+        }
+
+
     }
 }
