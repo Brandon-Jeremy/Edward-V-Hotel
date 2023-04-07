@@ -1,132 +1,171 @@
-/* Reset CSS */
-* {
-  box-sizing: border-box;
+/* Basic styling */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
   margin: 0;
   padding: 0;
-}
-
-/* Global Styles */
-body {
-  font-family: 'Helvetica Neue', sans-serif;
-  font-size: 16px;
-  line-height: 1.4;
-  color: #333;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 15px;
 }
 
-/* Header Styles */
-.header {
+header {
+  background-color: #f9f9f9;
+  padding: 20px 0;
+}
+
+.header-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  border-bottom: 1px solid #ccc;
 }
 
-.header__logo {
-  font-size: 2rem;
+.header-logo {
+  text-decoration: none;
+  font-size: 24px;
   font-weight: bold;
   color: #333;
-  text-decoration: none;
 }
 
-.header__nav {
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.header-menu {
   display: flex;
-  justify-content: flex-end;
+  list-style: none;
+  padding: 0;
+}
+
+.header-menu li a {
+  text-decoration: none;
+  padding: 10px;
+  color: #333;
+}
+
+.header-actions {
+  display: flex;
   align-items: center;
 }
 
-.header__nav-item {
+.toggle-button {
+  margin-left: auto;
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
   margin-left: 10px;
-  font-size: 1.2rem;
-  color: #333;
-  text-decoration: none;
 }
 
-/* Main Content Styles */
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 50px 0;
-  min-height: calc(100vh - 250px);
-}
-
-.main__heading {
-  font-size: 3rem;
-  font-weight: bold;
+.header-content {
   text-align: center;
+  margin-top: 50px;
+}
+
+.header-content h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.header-content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.about,
+.rooms,
+.reservation {
+  padding: 50px 0;
+}
+
+h2 {
+  font-size: 36px;
   margin-bottom: 20px;
 }
 
-.main__subheading {
-  font-size: 1.5rem;
-  text-align: center;
-  margin-bottom: 40px;
+p {
+  font-size: 18px;
 }
 
-.main__button {
-  display: inline-block;
+.footer-nav {
+  display: flex;
+  justify-content: center;
   background-color: #333;
-  color: #fff;
-  font-size: 1.2rem;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-/* Footer Styles */
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 20px 0;
-  border-top: 1px solid #ccc;
 }
 
-.footer__nav {
+.footer-menu {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  list-style: none;
+  padding: 0;
 }
 
-.footer__nav-item {
-  margin-right: 10px;
-  font-size: 1.2rem;
-  color: #333;
+.footer-menu li a {
   text-decoration: none;
+  padding: 10px;
+  color: #fff;
 }
 
-/* Login and Registration Styles */
-.login-registration {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin: 20px 0;
+.footer-content {
+  text-align: center;
+  background-color: #222;
+  padding: 20px 0;
 }
 
-.login-registration__item {
-  margin-left: 20px;
-  font-size: 1.2rem;
-  color: #333;
-  text-decoration: none;
+.footer-content p {
+  color: #aaa;
 }
 
-.login-registration__item:hover {
-  text-decoration: underline;
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .header-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #f9f9f9;
+  }
+
+  .header-menu.show-menu {
+    display: flex;
+  }
 }
 
-.login-registration__item--active {
-  font-weight: bold;
-  color: #333;
+.reservation {
+  text-align: center;
 }
 
-.login-registration__item--active:hover {
-  text-decoration: none;
+.reservation a {
+  display: inline-block;
+  margin-top: 20px;
 }
+
+.about h2,
+.rooms h2 {
+  text-align: center;
+}
+
