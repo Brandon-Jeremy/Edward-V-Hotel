@@ -112,20 +112,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Sacramento&display=swap');
 .left-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-basis: 50%;
+  flex-direction: column;
+  justify-content:stretch;
+  flex-basis: 40%;
 }
 
 .container {
   display: flex;
   flex-direction: row;
   justify-content:center;
-  flex-basis: 50%;
+  column-gap: 0cap;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
+  color: white;
   margin: 0;
   padding: 0;
 }
@@ -138,6 +139,7 @@ h1 {
 }
 
 h3 {
+  color: white;
   font-weight: 600;
   font-size: 24px;
   margin-bottom: 20px;
@@ -148,9 +150,9 @@ h3 {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  flex-basis: 60%;
   max-width: 400px;
   margin: 0 auto;
-  border-radius: 8px;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
@@ -175,13 +177,13 @@ h3 {
   padding: 10px;
   font-size: 16px;
   font-family: 'Poppins', sans-serif;
-  background: #F0EFFF;
+  background: #ecf6c1;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .registration-form button[type="submit"] {
-  background-color: #4D47C3;
-  box-shadow: 0px 4px 61px #4D47C366;
+  background-color: #dfd224;
+  box-shadow: 0px 4px 61px #d1d403;
   border-radius: 9px;
   color: #FFFFFF;
   border: none;
@@ -194,20 +196,21 @@ h3 {
 }
 
 .login-route {
+  color: white;
   margin-top: 20px;
   text-align: center;
 }
 
 .login-route a {
-  color: #4D47C3;
+  color: #d1d403;
   text-decoration: none;
 }
 
 @media only screen and (min-width: 768px) {
   .left-container {
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    flex-basis: 65%;
+    flex-basis: 40%;
     margin-right: 50px;
   }
 
