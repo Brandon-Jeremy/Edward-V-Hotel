@@ -7,6 +7,7 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -16,7 +17,8 @@ import { HeaderComponent } from './header/header.component';
     HomeComponent,
     UserLoginComponent,
     UserRegistrationComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
