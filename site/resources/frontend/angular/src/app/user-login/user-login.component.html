@@ -1,14 +1,31 @@
-<div>
-  <h1>Welcome Back to Edward V Hotel</h1>
-  <h3>Login Here</h3>
-  <form>
-    <div>
-      <label for="email">Email</label>
-      <input required type="text">
-      <label for="password">Password</label>
-      <input type="password">
+<!DOCTYPE html>
+<html lang="en">
+  <body background="assets/gold-background.jpg">
+    <h1>Edward V Hotel</h1>
+    <div class="container">
+      <div class="left-container">
+        <div class="left-image">
+          <img src="assets/Register-img.jpg" alt="room">
+        </div>  
+      </div>
+      <form class="login-form">
+        <div class="create-acc">
+          <h3>Login to Account</h3>
+        </div>
+        <div class="form-group email">
+          <label for="email"></label>
+          <input type="email" name="email" required placeholder="Email:">
+        </div>
+        <div class="form-group password">
+          <label for="password"></label>
+          <input type="password" name="password" required placeholder="Password:">
+        </div>
+        <div class="routes">
+          <span>Dont have an account? <a routerLink="/registration">Register</a></span>
+          <span>Forgot password? <a routerLink="/forgot-password">Forget Password</a></span>
+        </div>
+        <button type="submit">Login</button>
+      </form>
     </div>
-    <button>Submit</button>
-  </form>
-  <span>Don't have an account? <a routerLink="/registration">Register</a></span>
-</div>
+  </body>
+</html>

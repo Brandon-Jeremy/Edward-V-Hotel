@@ -34,6 +34,7 @@ header {
   button {
     background-color: #4d4d4d;
     border: none;
+    border-radius: 5px;
     color: #fff;
     padding: 10px 20px;
     margin-left: 10px;
