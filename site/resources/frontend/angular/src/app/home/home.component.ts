@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  menuOpen = false;
 
+  constructor() {}
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
 }
