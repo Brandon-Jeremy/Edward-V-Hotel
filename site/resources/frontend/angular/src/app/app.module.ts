@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { RewardComponent } from './reward/reward.component';
+import { BookingComponent } from './booking/booking.component';
 
 
 
@@ -18,7 +20,9 @@ import { FooterComponent } from './footer/footer.component';
     UserLoginComponent,
     UserRegistrationComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RewardComponent,
+    BookingComponent
   ],
   imports: [
     BrowserModule,
