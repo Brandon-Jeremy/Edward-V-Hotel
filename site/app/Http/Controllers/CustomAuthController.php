@@ -72,4 +72,34 @@ class CustomAuthController extends Controller
         "success" => false
     ]);
     }
+
+    public function changePassword(Request $request){
+        /*TODO Ask: Can I find the user based off their ID instead
+         * Instead of using a query builder to find the user based off their email can the frontend send the
+         * users's DB id that is autoincrement?
+        */
+
+        //How this works: Frontend sends a post request containing 2 pieces of information, the user's email
+        //and the user's new password
+        //If the password is the same as the one in the DB, return failure otherwise return success
+        $email = $request->email;
+        $newPassword = hash("sha256",$request->password);
+        $password = DB::table('guests')->where('email', $email)->value('password');
+        if ($password == $newPassword){
+            return response()->json([
+                "success" => false
+            ]);
+        }
+        else{
+            $newData = [
+                'password' => $newPassword,
+                'updated_at' => Carbon::now(),
+            ];
+            DB::table('guests')->where('email',$email)->update($newData);
+            
+            return response()->json([
+                "success" => true
+            ]);
+        }
+    }
 }
