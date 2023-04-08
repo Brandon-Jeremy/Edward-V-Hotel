@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Models\onlineUser;
+use App\Models\Guests;
+use Illuminate\Support\Facades\DB;
+
 
 class CustomAuthController extends Controller
 {
@@ -25,10 +27,11 @@ class CustomAuthController extends Controller
     public function registerUser(Request $request){
         try{
 
-            $user=new onlineUser;
+            $user=new Guests;
             $user->first_name=$request->first_name;
             $user->last_name=$request->last_name;
             $user->dob=$request->dob;
+            $user->nationality=NULL;
             $user->email=$request->email;
             $user->phone_num=$request->phone_num;
             $pass=$request->password;
@@ -42,7 +45,10 @@ class CustomAuthController extends Controller
         }
         catch (\Exception $e) {
             // Code to handle the exception goes here
-            return response()->json(['error' => $e->getMessage()], 500);
+            // return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json([
+                "success" => false
+            ]);
         }
         
 
@@ -54,7 +60,7 @@ class CustomAuthController extends Controller
     public function loginUser(Request $request){
     $hashedPassword = hash("sha256", $request->password);
 
-    $users = onlineUser::all();
+    $users = Guests::all();
     foreach ($users as $user){
         if ($user->email == $request->email && $user->password == $hashedPassword) {
             return response()->json([
@@ -66,5 +72,4 @@ class CustomAuthController extends Controller
         "success" => false
     ]);
     }
-
 }
