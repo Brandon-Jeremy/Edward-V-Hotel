@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Models\Guests;
+use App\Models\RegisteredUser;
 use Illuminate\Support\Facades\DB;
 
 
@@ -27,11 +27,11 @@ class CustomAuthController extends Controller
     public function registerUser(Request $request){
         try{
 
-            $user=new Guests;
+            $user=new RegisteredUser;
             $user->first_name=$request->first_name;
             $user->last_name=$request->last_name;
             $user->dob=$request->dob;
-            $user->nationality=NULL;
+            // $user->nationality=NULL;
             $user->email=$request->email;
             $user->phone_num=$request->phone_num;
             $pass=$request->password;
@@ -60,7 +60,7 @@ class CustomAuthController extends Controller
     public function loginUser(Request $request){
     $hashedPassword = hash("sha256", $request->password);
 
-    $users = Guests::all();
+    $users = RegisteredUser::all();
     foreach ($users as $user){
         if ($user->email == $request->email && $user->password == $hashedPassword) {
             return response()->json([
@@ -71,6 +71,24 @@ class CustomAuthController extends Controller
     return response()->json([
         "success" => false
     ]);
+    }
+
+
+    public function getEmail(Request $request){
+        $email = $request->email;
+        $record = DB::table('registered_users')->where('email', $email)->first();
+
+        if (is_null($record)) {
+            return response()->json([
+                "success" => false
+            ]);
+        } 
+        else {
+            return response()->json([
+                "success" => true
+            ]);
+}
+
     }
 
     public function changePassword(Request $request){
@@ -84,7 +102,7 @@ class CustomAuthController extends Controller
         //If the password is the same as the one in the DB, return failure otherwise return success
         $email = $request->email;
         $newPassword = hash("sha256",$request->password);
-        $password = DB::table('guests')->where('email', $email)->value('password');
+        $password = DB::table('registered_users')->where('email', $email)->value('password');
         if ($password == $newPassword){
             return response()->json([
                 "success" => false
@@ -95,7 +113,7 @@ class CustomAuthController extends Controller
                 'password' => $newPassword,
                 'updated_at' => Carbon::now(),
             ];
-            DB::table('guests')->where('email',$email)->update($newData);
+            DB::table('registered_users')->where('email',$email)->update($newData);
             
             return response()->json([
                 "success" => true

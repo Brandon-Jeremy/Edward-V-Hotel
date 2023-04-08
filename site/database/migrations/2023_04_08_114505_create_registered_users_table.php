@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOnlineUsersTable extends Migration
+class CreateRegisteredUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class CreateOnlineUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('online_users', function (Blueprint $table) {
-            //Table important
+        Schema::create('registered_users', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             //User important
@@ -41,6 +40,6 @@ class CreateOnlineUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('online_users');
+        Schema::dropIfExists('registered_users');
     }
 }

@@ -26,6 +26,8 @@ use App\Http\Controllers\CustomAuthController;
 //This one works. Above are not connected to anything
 Route::post('/register-user',[CustomAuthController::class,'registerUser'])->name('register-user');
 Route::post('/login-user',[CustomAuthController::class,'loginUser'])->name('login-user');
+
+Route::post('/request-email',[CustomAuthController::class,'getEmail'])->name('request-email');
 Route::post('/change-password',[CustomAuthController::class,'changePassword'])->name('change-password');
  
 
