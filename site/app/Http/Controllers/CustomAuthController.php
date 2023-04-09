@@ -113,8 +113,7 @@ class CustomAuthController extends Controller
             return response()->json([
                 "success" => true
             ]);
-}
-
+        }
     }
 
     public function changePassword(Request $request){

@@ -33,6 +33,7 @@ Route::post('/request-email',[CustomAuthController::class,'getEmail'])->name('re
 Route::post('/change-password',[CustomAuthController::class,'changePassword'])->name('change-password');
 
 Route::get('/get-rewards',[rewardController::class,'getRewards'])->name('get-rewards');
+Route::post('/purchase-reward',[rewardController::class,'purchaseReward'])->name('purchase-reward');
  
 
 
