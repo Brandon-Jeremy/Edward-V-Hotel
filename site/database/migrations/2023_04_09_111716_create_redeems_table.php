@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReedemsTable extends Migration
+class CreateRedeemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateReedemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reedems', function (Blueprint $table) {
+        Schema::create('redeems', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             //
             $table->integer('user_id');
             $table->integer('reward_id');
-            $table->boolean('reedemed');
+            $table->boolean('redeemed');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateReedemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reedems');
+        Schema::dropIfExists('redeems');
     }
 }
