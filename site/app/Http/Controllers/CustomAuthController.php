@@ -7,6 +7,12 @@ use Carbon\Carbon;
 use App\Models\RegisteredUser;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+/**Run `composer require laravel/ui` to install Laravel's UI package.
+ * Run `php artisan ui vue --auth` to generate the authentication views and routes.
+ * Run `npm install && npm run dev` to compile the frontend assets. 
+*/
 
 class CustomAuthController extends Controller
 {
@@ -57,20 +63,40 @@ class CustomAuthController extends Controller
         ]);
     }
 
-    public function loginUser(Request $request){
-    $hashedPassword = hash("sha256", $request->password);
+    use AuthenticatesUsers, ThrottlesLogins;
+    public function loginUser(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
 
-    $users = RegisteredUser::all();
-    foreach ($users as $user){
-        if ($user->email == $request->email && $user->password == $hashedPassword) {
+        // Add rate limiting
+        $maxAttempts = 5;
+        $decayMinutes = 5;
+        $this->incrementLoginAttempts($request);
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
             return response()->json([
-                "success" => true
+                'success' => false,
+                'message' => 'Too many login attempts. Please try again in ' . $decayMinutes . ' minute(s).',
             ]);
         }
-    }
-    return response()->json([
-        "success" => false
-    ]);
+
+        $hashedPassword = hash("sha256", $request->password);
+        $user = RegisteredUser::where('email', $request->email)->where('password', $hashedPassword)->first();
+
+        if ($user) {
+            // Clear rate limiting
+            $this->clearLoginAttempts($request);
+            return response()->json([
+                "success" => true,
+            ]);
+        } else {
+            // Add failed login attempt to rate limiting
+            $this->incrementLoginAttempts($request);
+            return response()->json([
+                "success" => false,
+                "message" => "Invalid email or password",
+            ]);
+        }
     }
 
 
