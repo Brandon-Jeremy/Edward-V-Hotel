@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Reward;
 use App\Models\RegisteredUser;
+use App\Models\Redeem;
 
 use Illuminate\Support\Facades\DB;
 
@@ -43,6 +44,13 @@ class rewardController extends Controller
         // Deduct the points from the user
         $user->points -= $reward->price;
         $user->save();
+
+        //Create a redeem record and update the redeems table
+        $redeem = new Redeem;
+        $redeem->reward_id=$reward->id;
+        $redeem->user_id=$user->id;
+        $redeem->redeemed=false;
+        $redeem->save();
 
         // Return success response
         return response()->json([
