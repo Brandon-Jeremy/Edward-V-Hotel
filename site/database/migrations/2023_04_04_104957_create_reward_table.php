@@ -20,6 +20,7 @@ class CreateRewardTable extends Migration
             $table->integer('price');
             $table->string('item');
             $table->string('details');
+            $table->string('img_path');
         });
     }
 
