@@ -5,17 +5,17 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Travelix</title>
+    <title>Edward V Hotel</title>
     <!--Font awesome CDN-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="home.component.css">
 </head>
 <body>
-    <header class="header">
+    <header id="header" class="header">
         <div class="container">
             <nav class="nav">
-                <a href="home.component.html" class="logo">
-                    <img src="./images/logo.png" alt="">
+                <a href ="#header" class="logo">
+                    <img src="assets/home-images/logo.png" alt="">
                 </a>
                 <div class="hamburger-menu" (click)="onHamburgerMenuClick()">
                     <i class="fas fa-bars"></i>
@@ -23,19 +23,19 @@
                 </div>
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="home.component.html" class="nav-link">Home</a>
+                        <a href="#header" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">About</a>
+                        <a href="#about" class="nav-link">About</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Rooms</a>
+                        <a href="#roms" class="nav-link">Rooms</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Reservations</a>
+                        <a href="#booking" class="nav-link">Reservations</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Contact</a>
+                        <a href="#contact" class="nav-link">Contact</a>
                     </li>
                 </ul>     
             </nav>
@@ -48,13 +48,14 @@
                     <h1 class="title">Discover</h1>
                     <h2 class="subtitle">Luxury hotel</h2>
                 </div>
-                <a href="#" class="btn btn-gradient">Explore Now
-                    <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
-                </a>
+                <div class="btns">
+                    <a routerLink="#" (click)="openLoginForm()" class="btn btn-gradient">Login</a>
+                    <a routerLink="#" (click)="openSignUpForm()" class="btn btn-gradient">Sign Up</a>
+                </div>                    
             </div>
         </div>
 
-        <section class="booking">
+        <section id="booking" class="booking">
             <div class="container">
                 <form action="" class="book-form">
                     <div class="input-group">
@@ -106,7 +107,7 @@
                 <div class="grid-container">
                     <div class="grid">
                         <div class="grid-item featured-hotels">
-                            <img src="./images/hotel_astro_resort.jpg" alt="" class="hotel-image">
+                            <img src="assets/home-images/hotel_astro_resort.jpg" alt="" class="hotel-image">
                             <h5 class="hotel-name">Astro Hotel</h5>
                             <span class="hotel-price">From 200$/Night</span>
                             <div class="hotel-rating">
@@ -123,7 +124,7 @@
                             </a>
                         </div>
                         <div class="grid-item featured-hotels">
-                            <img src="./images/hotel_the_enchanted_garden.jpg" alt="" class="hotel-image">
+                            <img src="assets/home-images/hotel_the_enchanted_garden.jpg" alt="" class="hotel-image">
                             <h5 class="hotel-name">The Paradise</h5>
                             <span class="hotel-price">From 350$/Night</span>
                             <div class="hotel-rating">
@@ -140,7 +141,7 @@
                             </a>
                         </div>
                         <div class="grid-item featured-hotels">
-                            <img src="./images/hotel_the_paradise.jpg" alt="" class="hotel-image">
+                            <img src="assets/home-images/hotel_the_paradise.jpg" alt="" class="hotel-image">
                             <h5 class="hotel-name">Astro Hotel</h5>
                             <span class="hotel-price">From 200$/Night</span>
                             <div class="hotel-rating">
@@ -195,7 +196,7 @@
                 <div class="grid rooms-grid">
                     <div class="grid-item featured-rooms">
                         <div class="image-wrap">
-                            <img class="room-image" src="./images/room_1.jpg" alt="">
+                            <img class="room-image" src="assets/home-images/room_1.jpg" alt="">
                             <h5 class="room-name">Astro Hotel</h5>
                         </div>
                         <div class="room-info-wrap">
@@ -210,7 +211,7 @@
                     </div>
                     <div class="grid-item featured-rooms">
                         <div class="image-wrap">
-                            <img class="room-image" src="./images/room_2.jpg" alt="">
+                            <img class="room-image" src="assets/home-images/room_2.jpg" alt="">
                             <h5 class="room-name">Astro Hotel</h5>
                         </div>
                         <div class="room-info-wrap">
@@ -225,7 +226,7 @@
                     </div>
                     <div class="grid-item featured-rooms">
                         <div class="image-wrap">
-                            <img class="room-image" src="./images/room_3.jpg" alt="">
+                            <img class="room-image" src="assets/home-images/room_3.jpg" alt="">
                             <h5 class="room-name">Astro Hotel</h5>
                         </div>
                         <div class="room-info-wrap">
@@ -240,7 +241,7 @@
                     </div>
                     <div class="grid-item featured-rooms">
                         <div class="image-wrap">
-                            <img class="room-image" src="./images/room_4.jpg" alt="">
+                            <img class="room-image" src="./assets/home-images/room_4.jpg" alt="">
                             <h5 class="room-name">Astro Hotel</h5>
                         </div>
                         <div class="room-info-wrap">
@@ -256,14 +257,14 @@
                 </div>
             </div>
         </section>
-        <section class="contact">
+        <section id="contact" class="contact">
             <div class="container">
                 <h5 class="section-head">
                     <span class="heading">Contact</span>
                     <span class="sub-heading">Get in touch with Us</span>
                 </h5>
                 <div class="contact-content">   
-                    <img class="traveler-wrap" src="images/traveler.png" alt="">
+                    <img class="traveler-wrap" src="assets/home-images/traveler.png" alt="">
                 
                     <form action="" class="form contact-form">
                         <div class="input-group-wrap">
@@ -297,8 +298,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-content-brand">
-                    <a href="home.component.html" class="logo">
-                        <img src="images/logo.png" alt="" class="logo-image">
+                    <a href="#header" class="logo">
+                        <img src="assets/home-images/logo.png" alt="" class="logo-image">
                     </a>
                     <div class="footer-paragraph">faskdjfsdfa
                         fasdfasdfasdf
@@ -318,6 +319,6 @@
             </div>
         </div>
     </footer>
-    <script src="main.js"></script>
+    <script src="home.component.ts"></script>
 </body>
 </html>

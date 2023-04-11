@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Sacramento&display=swap');
- .left-container {
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Poppins:wght@200&family=Sacramento&display=swap');
+.left-container {
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -26,6 +27,13 @@
    font-size: 48px;
    text-align: center;
    margin-block-end: 5%;
+ }
+
+ h2{
+  font-family: 'Kalam', cursive;
+  font-size: 100px;
+  text-align: center;
+  margin-block-end: 5%;
  }
  
  h3 {

@@ -1,4 +1,6 @@
 import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
+import { UserLoginComponent } from './user-login/user-login.component';
+import { UserRegistrationComponent } from './user-registration/user-registration.component'; 
 
 @Component({
   selector: 'app-home',
@@ -26,4 +28,14 @@ export class HomeComponent implements OnInit {
     const windowPosition = window.scrollY > 0;
     this.header.nativeElement.classList.toggle('menu-open', windowPosition);
   }
+
+  openLoginForm(){
+
+  }
+  
+  openSignUpForm(){
+
+  }
+
+
 }
