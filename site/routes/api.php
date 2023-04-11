@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\rewardController;
+use App\Http\Controllers\OnlineReservationController;
+use App\Http\Controllers\WalkInBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,8 @@ Route::post('/change-password',[CustomAuthController::class,'changePassword'])->
 Route::get('/get-rewards',[rewardController::class,'getRewards'])->name('get-rewards');
 Route::post('/purchase-reward',[rewardController::class,'purchaseReward'])->name('purchase-reward');
  
+Route::post('/create-reservation',[OnlineReservationController::class,'createReservation'])->name('create-reservation');
 
-
-
+Route::post('/get-available',[WalkInBookingController::class,'fetchAvailable'])->name('get-available');
+Route::post('/add-user',[WalkInBookingController::class,'addUser'])->name('add-user');
+Route::post('/book-room',[WalkInBookingController::class,'bookRoom'])->name('book-room');
