@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RewardComponent } from './reward/reward.component';
 import { BookingComponent } from './booking/booking.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
@@ -22,7 +23,8 @@ import { BookingComponent } from './booking/booking.component';
     HeaderComponent,
     FooterComponent,
     RewardComponent,
-    BookingComponent
+    BookingComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

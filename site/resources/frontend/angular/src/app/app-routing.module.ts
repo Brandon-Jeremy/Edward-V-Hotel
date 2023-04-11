@@ -5,6 +5,7 @@ import { UserRegistrationComponent } from    './user-registration/user-registrat
 import { HomeComponent } from './home/home.component';
 import { BookingComponent } from './booking/booking.component';
 import { RewardComponent } from './reward/reward.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:"registration", component:UserRegistrationComponent},
   {path:"home", component:HomeComponent},
   {path:"book", component:BookingComponent},
-  {path:"rewards", component:RewardComponent}
+  {path:"rewards", component:RewardComponent},
+  {path:"forgot-password", component:ForgotPasswordComponent}
 ];
 
 @NgModule({
