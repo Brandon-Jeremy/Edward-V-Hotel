@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class DatabaseSeeder extends Seeder
@@ -72,6 +73,24 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        $admin_username = 'admin';
+        $admin_password = 'admin';
+        DB::table('employee')->insert([
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'username' => $admin_username,
+            'password' => $admin_password,
+            'special_access' => true,
+        ]);
 
+        $employee_username = 'employee';
+        $employee_password = 'employee';
+        DB::table('employee')->insert([
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'username' => $employee_username,
+            'password' => $employee_password,
+            'special_access' => false,
+        ]);
     }
 }
