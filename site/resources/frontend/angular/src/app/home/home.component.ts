@@ -1,7 +1,4 @@
 import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
-import { UserLoginComponent } from './user-login/user-login.component';
-import { UserRegistrationComponent } from './user-registration/user-registration.component'; 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,6 +7,8 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 export class HomeComponent implements OnInit {
   header!: ElementRef;
   hamburgerMenu!: ElementRef;
+  showLoginForm = false;
+  showSignUpForm = false;
 
   constructor(private elementRef: ElementRef) {}
 
@@ -30,12 +29,19 @@ export class HomeComponent implements OnInit {
   }
 
   openLoginForm(){
-
+    this.showLoginForm = true;
   }
   
   openSignUpForm(){
-
+    this.showSignUpForm = true;
   }
 
+  closeLoginForm() {
+    this.showLoginForm = false;
+  }
+
+  closeSignUpForm() {
+    this.showSignUpForm = false;
+  }
 
 }

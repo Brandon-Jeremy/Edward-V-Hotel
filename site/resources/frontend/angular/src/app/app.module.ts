@@ -11,6 +11,9 @@ import { FooterComponent } from './footer/footer.component';
 import { RewardComponent } from './reward/reward.component';
 import { BookingComponent } from './booking/booking.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { PopupComponent } from './popup/popup.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 
 
 
@@ -24,7 +27,10 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     FooterComponent,
     RewardComponent,
     BookingComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    PopupComponent,
+    LoginFormComponent,
+    SignUpFormComponent
   ],
   imports: [
     BrowserModule,
