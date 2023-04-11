@@ -23,13 +23,22 @@ export class SignUpFormComponent {
       alert('Passwords do not match.');
       return;
     }
-    this.authService.signUp(this.email, this.password, this.firstName, this.lastName, this.number, this.confirmPassword)
-      .then(() => {
-        alert('Sign up successful.');
-        this.closePopup.emit();
-      })
-      .catch(error => {
-        alert('Error: ' + error.message);
-      });
+    // this.authService.signUp(this.email, this.password, this.firstName, this.lastName, this.number, this.confirmPassword)
+    //   .then(() => {
+    //     alert('Sign up successful.');
+    //     this.closePopup.emit();
+    //   })
+    //   .catch(error => {
+    //     alert('Error: ' + error.message);
+    //   });
+  }
+
+  clearForm(){
+    this.email = '';
+    this.password = '';
+    this.firstName = '';
+    this.lastName = '';
+    this.number = '';
+    this.confirmPassword = '';
   }
 }

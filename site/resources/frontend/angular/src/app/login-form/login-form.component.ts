@@ -1,32 +1,30 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { ViewChild } from '@angular/core';
-import { PopupComponent } from '../popup/popup.component';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
+  @ViewChild('loginForm') loginForm!: NgForm;
+  @ViewChild('templateRef') templateRef!: ElementRef;
+
   email = '';
   password = '';
-  
-  @ViewChild('popup') popup!: PopupComponent;
 
-  constructor(private authService: AuthService) {}
+  constructor() { }
+
+  ngOnInit(): void {
+  }
 
   onSubmit(): void {
-    this.authService.login(this.email, this.password)
-      .then(() => {
-        // Clear the form and close the popup
-        this.email = '';
-        this.password = '';
-        this.popup.close();
-      })
-      .catch(() => {
-        // Handle login error
-        console.log('Login failed');
-      });
+    // Handle form submission
+  }
+
+  clearForm(): void {
+    this.email = '';
+    this.password = '';
+    this.loginForm.resetForm();
   }
 }

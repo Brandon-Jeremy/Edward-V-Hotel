@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, TemplateRef } from '@angular/core';
+import { Component, Input, ViewChild, TemplateRef, ElementRef } from '@angular/core';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { SignUpFormComponent } from '../sign-up-form/sign-up-form.component';
 
@@ -10,8 +10,8 @@ import { SignUpFormComponent } from '../sign-up-form/sign-up-form.component';
 export class PopupComponent {
   @ViewChild('popupOverlay') popupOverlay!: any;
   @ViewChild('popupContent') popupContent!: TemplateRef<any>;
-  @ViewChild(LoginFormComponent) loginForm!: LoginFormComponent;
-  @ViewChild(SignUpFormComponent) signUpForm!: SignUpFormComponent;
+  @ViewChild(LoginFormComponent) loginForm!: ElementRef;
+  @ViewChild(SignUpFormComponent) signUpForm!: ElementRef;
   @Input() title = '';
   isOpen = false;
 
@@ -28,14 +28,14 @@ export class PopupComponent {
   }
 
   openLoginForm(): void {
-    this.loginForm.clearForm();
-    this.popupContent = this.loginForm.templateRef;
+    this.loginForm.nativeElement.clearForm();
+    this.popupContent = this.loginForm.nativeElement.templateRef;
     this.openPopup();
   }
 
   openSignUpForm(): void {
-    this.signUpForm.clearForm();
-    this.popupContent = this.signUpForm.templateRef;
+    this.signUpForm.nativeElement.clearForm();
+    this.popupContent = this.signUpForm.nativeElement.templateRef;
     this.openPopup();
   }
 }

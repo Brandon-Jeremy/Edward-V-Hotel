@@ -23,10 +23,10 @@
                 </div>
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Home</a>
+                        <a href="#header" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#header" class="nav-link">About</a>
+                        <a href="#about" class="nav-link">About</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">Rooms</a>
@@ -48,9 +48,10 @@
                     <h1 class="title">Discover</h1>
                     <h2 class="subtitle">Luxury hotel</h2>
                 </div>
-                <a href="#" class="btn btn-gradient">Explore Now
-                    <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
-                </a>
+                <div class="btns">
+                    <a routerLink="#" (click)="openLoginForm()" class="btn btn-gradient">Login</a>
+                    <a routerLink="#" (click)="openSignUpForm()" class="btn btn-gradient">Sign Up</a>
+                </div>
             </div>
         </div>
 
