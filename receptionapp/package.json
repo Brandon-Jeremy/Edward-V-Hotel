@@ -1,0 +1,22 @@
+{
+  "name": "edwardvreception",
+  "version": "1.0.0",
+  "description": "Reception application for Edward V Hotel that handles booking, payment and other functionalities.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brandon-Jeremy/Edward-V-Hotel.git"
+  },
+  "author": "visacardshawty",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brandon-Jeremy/Edward-V-Hotel/issues"
+  },
+  "homepage": "https://github.com/Brandon-Jeremy/Edward-V-Hotel#readme",
+  "dependencies": {
+    "electron": "^24.0.0"
+  }
+}
