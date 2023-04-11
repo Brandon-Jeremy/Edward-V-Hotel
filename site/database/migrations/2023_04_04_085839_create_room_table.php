@@ -21,8 +21,8 @@ class CreateRoomTable extends Migration
             $table->boolean('view');
             $table->string('room_number');
             $table->string('floor');
-            $table->enum('type',['single','double','suite']);
-            $table->enum('status',['available','booked','maintenance','dirty']);
+            $table->string('type');
+            $table->string('status');
         });
     }
 
