@@ -1,16 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  menuOpen = false;
+export class HomeComponent implements OnInit {
+  header!: ElementRef;
+  hamburgerMenu!: ElementRef;
 
-  constructor() {}
+  constructor(private elementRef: ElementRef) {}
 
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
+  ngOnInit(): void {
+    this.header = this.elementRef.nativeElement.querySelector('.header');
+    this.hamburgerMenu = this.elementRef.nativeElement.querySelector('.hamburger-menu');
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(): void {
+    const windowPosition = window.scrollY > 0;
+    this.header.nativeElement.classList.toggle('active', windowPosition);
+  }
+
+  onHamburgerMenuClick(): void {
+    const windowPosition = window.scrollY > 0;
+    this.header.nativeElement.classList.toggle('menu-open', windowPosition);
   }
 }
