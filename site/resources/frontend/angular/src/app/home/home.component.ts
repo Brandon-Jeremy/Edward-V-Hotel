@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { PopupComponent } from '../popup/popup.component';
 
 @Component({
@@ -8,21 +8,22 @@ import { PopupComponent } from '../popup/popup.component';
 })
 export class HomeComponent implements OnInit {
   @ViewChild(PopupComponent) popup!: PopupComponent;
+  header: HTMLElement | null = null; // define header property
 
   constructor() { }
 
   ngOnInit(): void {
-    const header = document.querySelector('.header');
+    this.header = document.querySelector('.header'); // assign value to header property
     const hamburgerMenu = document.querySelector('.hamburger-menu');
 
-    if (header && hamburgerMenu) {
-      window.addEventListener('scroll', function () {
-        const windowposition = this.window.scrollY > 0;
-        header.classList.toggle('active', windowposition);
+    if (this.header && hamburgerMenu) {
+      window.addEventListener('scroll', () => {
+        const windowposition = window.scrollY > 0;
+        this.header!.classList.toggle('active', windowposition); // use header property
       });
 
-      hamburgerMenu.addEventListener('click', function(){
-        header.classList.toggle('menu-open');
+      hamburgerMenu.addEventListener('click', () => {
+        this.header!.classList.toggle('menu-open'); // use header property
       });
     }
   }
@@ -34,5 +35,4 @@ export class HomeComponent implements OnInit {
   openSignUpForm(): void {
     this.popup.openSignUpForm();
   }
-
 }
