@@ -1,0 +1,82 @@
+@font-face {
+    font-family: ibara;
+    src: url(font/Ibarra.ttf)
+}
+
+* {
+    font-family: ibara;
+}
+
+.title {
+    color:crimson;
+    text-align: center;
+    margin:40px;
+}
+.menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 40px;
+    align-items: center;
+    justify-content: center;
+    border:none;
+    width: 70%;
+    margin: auto;
+    margin-top:20px;
+    height: 600px;
+
+}
+
+.options {
+    width: 100%; 
+    height: 100%;
+    color:crimson;
+    border-radius: 1px;
+    border:none;
+    font-size: 310%;
+    background-color: rgb(216, 217, 218);
+    justify-self: center;
+    align-self: center;
+    transition: 0.2s;
+    cursor:pointer;
+}
+
+.options h1{
+    float:left;
+    margin:8px;
+    align-self: flex-start;
+
+}
+
+.options:hover {
+    width: 104%; 
+    height: 104%;
+    background-color: crimson;
+    color:white;
+    font-size:318%;
+}
+.signout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:40px;
+}
+.signout button {
+    width: 130px;
+    height: 40px;
+    background: transparent;
+    border: 3px solid crimson;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: crimson;
+    font-weight: 500;
+    transition: 0.2s;
+}
+.signout button:hover {
+    background-color: crimson;
+    color:white;
+}
+body {
+    background-color: rgba(228, 229, 230 , 0.6);
+}
