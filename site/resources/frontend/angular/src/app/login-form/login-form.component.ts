@@ -18,6 +18,13 @@ export class LoginFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openForm(){
+    const loginFormElement = document.getElementById("login-form");
+    if (loginFormElement) {
+      loginFormElement.style.display = "block";
+    }
+  }
+
   onSubmit(): void {
     // Handle form submission
   }
