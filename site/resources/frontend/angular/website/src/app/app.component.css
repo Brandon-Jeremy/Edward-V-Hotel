@@ -26,7 +26,17 @@ html, body {
   }
   
   .reservation-bar-section {
-    background-color: #EFEFEF;
-    color: #333;
+    position: relative;
+    top: 175px;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
   }
+
+  .about-section{
+    margin-top: 15%;
+    position: relative;
+  }
+
+  
   
