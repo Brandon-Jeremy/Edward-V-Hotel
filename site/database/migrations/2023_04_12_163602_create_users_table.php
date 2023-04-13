@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGuestsTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateGuestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('guests', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
@@ -24,6 +24,7 @@ class CreateGuestsTable extends Migration
 
             //exclusive to in person guests
             $table->string('nationality')->nullable();
+            // $table->string('gender')->nullable();
             
             //exclusive to online guests
             $table->string('email')->nullable()->unique();
@@ -35,6 +36,10 @@ class CreateGuestsTable extends Migration
             $table->timestamp('email_created_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('details')->nullable();
+
+            //User token
+            $table->string('token')->unique();
+            $table->timestamp('token_expiration')->nullable();
         });
     }
 
@@ -45,6 +50,6 @@ class CreateGuestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('guests');
+        Schema::dropIfExists('users');
     }
 }

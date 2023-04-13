@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail; //
 use Illuminate\Foundation\Auth\User as Authenticatable; //
 use Illuminate\Notifications\Notifiable; //
 
-class RegisteredUser extends Authenticatable //extends Model
+class User extends Authenticatable //extends Model
 {
     use HasFactory, Notifiable; //use HasFactory
 }
