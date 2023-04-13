@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular';
+  
+
 }

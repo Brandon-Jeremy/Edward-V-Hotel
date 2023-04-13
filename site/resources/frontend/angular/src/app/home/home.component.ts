@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { PopupComponent } from '../popup/popup.component';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginFormComponent } from '../login-form/login-form.component';
+import { SignUpFormComponent } from '../sign-up-form/sign-up-form.component';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +9,10 @@ import { PopupComponent } from '../popup/popup.component';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @ViewChild(PopupComponent) popup!: PopupComponent;
+  constructor(private dialog: MatDialog) {}
   header: HTMLElement | null = null; // define header property
 
-  constructor() { }
+  // constructor() { }
 
   ngOnInit(): void {
     this.header = document.querySelector('.header'); // assign value to header property
@@ -28,11 +30,19 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  
+
   openLoginForm(): void {
-    this.popup.openLoginForm();
+    this.dialog.open(LoginFormComponent, {
+      width: '500px', // Adjust the width
+      height: '600px', // Adjust the height
+    });
   }
 
   openSignUpForm(): void {
-    this.popup.openSignUpForm();
+    this.dialog.open(SignUpFormComponent, {
+      width: '500px', // Adjust the width
+      height: '600px', // Adjust the height
+    });
   }
 }

@@ -1,25 +1,17 @@
-<form #signUpForm (ngSubmit)="onSignUp()">
-    <h2 class="form-title">Sign Up</h2>
-    <div class="form-group">
-        <label for="first-name">First Name:</label>
-        <input type="text" id="first-name" name="first-name" required>
-      </div>
-      <div class="form-group">
-        <label for="last-name">Email:</label>
-        <input type="text" id="last-name" name="last-name" required>
-      </div>  
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-    </div>
-    <div class="form-group">
-      <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" id="confirmPassword" name="confirmPassword" required>
-    </div>
-    <button type="submit" class="submit-btn">Sign Up</button>
+<!-- sign-up.component.html -->
+<div class="header">
+  <h2>Hotel Name</h2>
+  <p>Welcome</p>
+</div>
+<form class="popup">
+  <mat-form-field>
+    <input matInput placeholder="Username" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Email" type="email" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Password" type="password" required>
+  </mat-form-field>
+  <button class="popup-button" mat-raised-button color="primary" type="submit">Sign Up</button>
 </form>
-  

@@ -1,13 +1,12 @@
-<ng-container #loginForm>
-  <form id="login-form" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</ng-container>
+<!-- login.component.html -->
+<h2>Hotel Name</h2>
+<p>Welcome</p>
+<form class="popup">
+  <mat-form-field>
+    <input matInput placeholder="Username" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Password" type="password" required>
+  </mat-form-field>
+  <button class="popup-button" mat-raised-button color="primary" type="submit">Login</button>
+</form>

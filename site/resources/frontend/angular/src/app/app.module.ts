@@ -15,6 +15,11 @@ import { PopupComponent } from './popup/popup.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -37,9 +42,17 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
+    FormsModule,
+    MatInputModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [LoginFormComponent, SignUpFormComponent]
 })
 export class AppModule { }

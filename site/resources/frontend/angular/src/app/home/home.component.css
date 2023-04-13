@@ -58,6 +58,11 @@ section{
     border-radius: 10rem;
     display: inline-flex;
     align-items: center;
+
+}
+
+.btn:hover{
+    cursor: pointer;
 }
 
 .container{
