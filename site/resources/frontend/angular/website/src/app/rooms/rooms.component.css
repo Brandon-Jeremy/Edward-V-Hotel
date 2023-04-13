@@ -1,0 +1,35 @@
+.flex1 {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .room .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .room img {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .room .box {
+    box-shadow: 0 13px 43px 0 rgb(37 46 89/10%);
+  }
+  
+  .room .text {
+    padding: 20px;
+  }
+  
+  .room h3 {
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  
+  .room p span {
+    font-size: 12px;
+    color: grey;
+  }
+  
+  .room p {
+    font-size: 20px;
+  }
