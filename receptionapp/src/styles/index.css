@@ -7,10 +7,34 @@
     font-family: ibara;
 }
 
-.title {
-    color:crimson;
+.sidebar {
+    width:10%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: crimson;
+    overflow-x: hidden;
+    padding: 2px;
+    padding-bottom:8px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: 1fr 1fr 1fr 10fr;
+    grid-gap: 30px;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    margin:40px;
+    color:white;
+    white-space: pre-wrap;
+}
+
+.time {
+    align-self:center;
+    height: 10%;
+    display:flex;
+    text-align: center;
+    margin-left:18px;
+    margin-top:0px;
 }
 .menu {
     display: grid;
@@ -22,9 +46,9 @@
     border:none;
     width: 70%;
     margin: auto;
-    margin-top:20px;
+    margin-top:40px;
+    margin-left: 20%;
     height: 600px;
-
 }
 
 .options {
@@ -59,23 +83,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin:40px;
+    position:absolute;
+    bottom:0;
+    margin-bottom:6px;
+    margin-left: 12px;
 }
 .signout button {
     width: 130px;
     height: 40px;
     background: transparent;
-    border: 3px solid crimson;
+    border: 3px solid white;
     outline: none;
     cursor: pointer;
     font-size: 1.2em;
-    color: crimson;
+    color: white;
     font-weight: 500;
     transition: 0.2s;
+    margin-bottom:18px;
 }
 .signout button:hover {
-    background-color: crimson;
-    color:white;
+    background-color: white;
+    color:crimson;
 }
 body {
     background-color: rgba(228, 229, 230 , 0.6);
