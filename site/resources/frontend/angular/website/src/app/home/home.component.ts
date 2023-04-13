@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  constructor(private router: Router) { }
+
   ngOnInit() {
-    const hambuger = document.querySelector('.hambuger') as HTMLElement;
+    const hamburger = document.querySelector('.hamburger') as HTMLElement;
     const navMenu = document.querySelector('.nav-menu') as HTMLElement;
 
-    hambuger.addEventListener('click', mobileMenu);
+    hamburger.addEventListener('click', mobileMenu);
 
     function mobileMenu() {
-      hambuger.classList.toggle('active');
+      hamburger.classList.toggle('active');
       navMenu.classList.toggle('active');
     }
 
@@ -22,18 +25,21 @@ export class HomeComponent implements OnInit {
     navLink.forEach((n) => n.addEventListener('click', closeMenu));
 
     function closeMenu() {
-      hambuger.classList.remove('active');
+      hamburger.classList.remove('active');
       navMenu.classList.remove('active');
     }
   }
 
+  public backgroundImage = "url('/assets/angular/image/jounieh-wallpaper.jpg')";
+
   img(change: string) {
-    const slide = document.querySelector('.slide') as HTMLImageElement;
+    this.backgroundImage = `url('${change}')`;
     this.changeBackground(change);
   }
 
   changeBackground(change: string) {
-    const line = document.querySelector('.image') as HTMLElement;
-    line.style.background = `url('${change}') center/cover no-repeat`;
+    const image = document.querySelector('.image') as HTMLElement;
+    image.style.backgroundImage = `url('${change}')`;
   }
+
 }

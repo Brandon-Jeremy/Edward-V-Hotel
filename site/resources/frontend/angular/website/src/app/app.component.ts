@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HomeComponent } from './home/home.component';
+import { ReservationBarComponent } from './reservation-bar/reservation-bar.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'website';
+  title = 'Edward V Hotel';
+  sections = [
+    { component: HomeComponent, className: 'home-section' },
+    { component: ReservationBarComponent, className: 'reservation-bar-section' },
+    // { component: AboutComponent, className: 'about-section' },
+    // { component: FooterComponent, className: 'footer-section' }
+  ];
 }

@@ -1,0 +1,32 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .app-root {
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .home-section {
+    background-color: #F0F0F0;
+    color: #333;
+  }
+  
+  .reservation-bar-section {
+    background-color: #EFEFEF;
+    color: #333;
+  }
+  

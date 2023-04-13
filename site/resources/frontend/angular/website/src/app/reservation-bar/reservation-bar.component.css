@@ -1,0 +1,52 @@
+.flex {
+    display: flex;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+  }
+  
+  .book {
+    margin-top: 5%;
+    width: 100%;
+    height: 20vh;
+    color: white;
+  }
+  
+  .book .input {
+    background: #242e5a;
+    padding: 20px 20px 40px 20px;
+  }
+  
+  .book .search {
+    background: #3f9cc1;
+    padding: 20px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    outline: none;
+    background: #263760;
+    margin-top: 20px;
+    color: white;
+  }
+  
+  ::placeholder {
+    color: white;
+  }
+  
+  .book .search {
+    width: 20%;
+  }
+  
+  .book .search input {
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 40px;
+  }
