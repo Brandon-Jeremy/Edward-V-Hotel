@@ -50,3 +50,27 @@ ul{
 section{
     padding: 5rem 0;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+mat-form-field {
+    width: 100%;
+}
+
+.mat-dialog-container {
+    overflow-y: hidden !important;
+    padding: 24px;
+}
+
+form .popup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+  
+
+
+
