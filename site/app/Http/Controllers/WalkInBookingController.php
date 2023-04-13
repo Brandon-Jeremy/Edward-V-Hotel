@@ -63,26 +63,26 @@ class WalkInBookingController extends Controller
         
     }
 
-public function fetchAvailable(Request $request){
-    $roomtype = $request->roomtype;
-    $view = $request->view;
-    $status = "available";
+    public function fetchAvailable(Request $request){
+        $roomtype = $request->roomtype;
+        $view = $request->view;
+        $status = "available";
 
-    $result = DB::table('room')->select('type','floor','room_number','view')
-        ->where('type', $roomtype)
-        ->where('status', $status)
-        ->where('view',$view)
-        ->get();
+        $result = DB::table('room')->select('type','floor','room_number','view')
+            ->where('type', $roomtype)
+            ->where('status', $status)
+            ->where('view',$view)
+            ->get();
 
-    $prices = DB::table('room_prices')->select('price','capacity')
-        ->where('view', $view)
-        ->where('type', $roomtype)
-        ->get();
+        $prices = DB::table('room_prices')->select('price','capacity')
+            ->where('view', $view)
+            ->where('type', $roomtype)
+            ->get();
 
-    $availableRooms = $result->merge($prices);
+        $availableRooms = $result->merge($prices);
 
-    return response()->json($availableRooms);
-}
+        return response()->json($availableRooms);
+    }
         
 
     public function bookRoom(Request $request){
@@ -99,6 +99,7 @@ public function fetchAvailable(Request $request){
         $date_from = "2023-04-11";
         $date_to = "2023-04-15";
         $user_type = "Walk in";
+        $activity = "active";
 
         $room = DB::table('room')->select('id')
         ->where('floor', $room_floor)
@@ -124,7 +125,8 @@ public function fetchAvailable(Request $request){
                 'date_to' => $date_to,
                 'room_id' => $room->id,
                 'user_id' => $user_id,
-                'user_type' => $user_type
+                'user_type' => $user_type,
+                'activity' => $activity
             ]);
         
             // Update the room status to booked
@@ -147,7 +149,102 @@ public function fetchAvailable(Request $request){
             ]);
         }
 
+    }
 
+    // public function getReserved(){
+    //     $roomInfo = DB::table('room')->select('room_number','floor','id')
+    //     ->where('status', 'reserved')
+    //     ->get();
+
+    //     $reservationInfo = DB::table('reservation')->select('user_id','date_from','date_to')
+    //     ->where('activity', 'active')
+    //     ->get();
+
+    //     $userInformation = DB::table('users')->select('first_name','last_name')
+    //     ->where('id', $reservationInfo->user_id)
+    //     ->first();
+
+
+
+    // }
+    // public function getReserved(){
+    //     $roomInfo = DB::table('room')
+    //         ->select('room_number','floor','id')
+    //         ->where('status', 'reserved')
+    //         ->get();
+
+    //     // return response()->json([
+    //     //     'result' => $roomInfo
+    //     // ]);
+    
+    //     $reservationInfo = DB::table('reservation')
+    //         ->select('user_id','date_from','date_to')
+    //         ->where('activity', 'active')
+    //         ->get();
+
+    //     // return response()->json([
+    //     //     'result' => $reservationInfo
+    //     // ]);
+    
+    //     $userInformation = DB::table('users')
+    //         ->select('id', 'first_name','last_name')
+    //         ->whereIn('id', $reservationInfo->pluck('user_id')->toArray())
+    //         ->get();
+    //         // ->keyBy('id');
+
+    //     // return response()->json([
+    //     //     'result' => $userInformation
+    //     // ]);    
+    // }
+    public function getReserved(){
+        $roomInfo = DB::table('room')
+            ->select('room_number','floor','id')
+            ->where('status', 'reserved')
+            ->get();
+
+
+        // var_dump($roomInfo);die;
+        // return response()->json([
+        //     'result' => $roomInfo
+        // ]);
+    
+        $reservationInfo = DB::table('reservation')
+            ->select('room_id', 'user_id','date_from','date_to')
+            ->where('activity', 'active')
+            ->get();
+
+        // return response()->json([
+        //     'result' => $reservationInfo
+        // ]);
+        
+        $userInformation = DB::table('users')
+            ->select('id', 'first_name','last_name')
+            ->whereIn('id', $reservationInfo->pluck('user_id')->toArray())
+            ->get();
+            
+            $mergedData = $roomInfo->map(function ($room) use ($reservationInfo, $userInformation) 
+            { 
+                $reservation = $reservationInfo->firstWhere('room_id', $room->id); 
+                // var_dump($reservation);die;
+                $user = $userInformation->firstWhere('id',$reservation->user_id); 
+                
+                return [ 
+                    'room_number' => $room->room_number, 
+                    'floor' => $room->floor, 
+                    'user' => 
+                        [ 
+                            'id' => $user->id, 
+                            'first_name' => $user->first_name, 
+                            'last_name' => $user->last_name 
+                        ], 
+                            'date_from' => $reservation->date_from, 
+                            'date_to' => $reservation->date_to 
+                    ];
+            }); 
+                        
+                return $mergedData; 
 
     }
+    
+    
 }
