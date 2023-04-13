@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Models\RegisteredUser;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -32,8 +34,7 @@ class CustomAuthController extends Controller
 
     public function registerUser(Request $request){
         try{
-
-            $user=new RegisteredUser;
+            $user=new User;
             $user->first_name=$request->first_name;
             $user->last_name=$request->last_name;
             $user->dob=$request->dob;
@@ -47,14 +48,19 @@ class CustomAuthController extends Controller
             $user->email_verified_at=NULL;
             $user->details=NULL;
 
+            // Generate a random token of size 10
+            $token = Str::random(10);
+            $user->token = $token;
+            $user->token_expiration=NULL;
+
             $user->save();
         }
         catch (\Exception $e) {
             // Code to handle the exception goes here
-            // return response()->json(['error' => $e->getMessage()], 500);
-            return response()->json([
-                "success" => false
-            ]);
+            return response()->json(['error' => $e->getMessage()], 500);
+            // return response()->json([
+            //     "success" => false
+            // ]);
         }
         
 
@@ -81,7 +87,7 @@ class CustomAuthController extends Controller
         }
 
         $hashedPassword = hash("sha256", $request->password);
-        $user = RegisteredUser::where('email', $request->email)->where('password', $hashedPassword)->first();
+        $user = User::where('email', $request->email)->where('password', $hashedPassword)->first();
 
         if ($user) {
             // Clear rate limiting

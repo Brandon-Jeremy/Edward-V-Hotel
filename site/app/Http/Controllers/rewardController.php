@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Reward;
-use App\Models\RegisteredUser;
+use App\Models\User;
 use App\Models\Redeem;
 
 use Illuminate\Support\Facades\DB;
@@ -25,7 +25,7 @@ class rewardController extends Controller
         $reward = Reward::find($request->id);
         //Find the user from the registered user table
         $email = $request->email;
-        $user = RegisteredUser::where('email', $email)->first();
+        $user = User::where('email', $email)->first();
 
         if (!$user) {
             return response()->json([
