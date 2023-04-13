@@ -34,6 +34,10 @@ Route::post('/login-user',[CustomAuthController::class,'loginUser'])->name('logi
 Route::post('/request-email',[CustomAuthController::class,'getEmail'])->name('request-email');
 Route::post('/change-password',[CustomAuthController::class,'changePassword'])->name('change-password');
 
+//To be done like this with token, used to send to email
+Route::post('/change-pass/{token}',[CustomAuthController::class,'changePass'])->name('change-pass');
+
+//Authenticated APIs
 Route::get('/get-rewards',[rewardController::class,'getRewards'])->name('get-rewards');
 Route::post('/purchase-reward',[rewardController::class,'purchaseReward'])->name('purchase-reward');
  
@@ -42,3 +46,4 @@ Route::post('/create-reservation',[OnlineReservationController::class,'createRes
 Route::post('/get-available',[WalkInBookingController::class,'fetchAvailable'])->name('get-available');
 Route::post('/add-user',[WalkInBookingController::class,'addUser'])->name('add-user');
 Route::post('/book-room',[WalkInBookingController::class,'bookRoom'])->name('book-room');
+Route::post('/get-reserved',[WalkInBookingController::class,'getReserved'])->name('get-reserved');

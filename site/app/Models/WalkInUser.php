@@ -10,7 +10,7 @@ class WalkInUser extends Model
     //This model is for all users that rent a room at the hotel in person
     //NOT through the website.
     //Through the reception desk
-    protected $table = 'in_person_users';
+    protected $table = 'users';
     
     use HasFactory;
 }

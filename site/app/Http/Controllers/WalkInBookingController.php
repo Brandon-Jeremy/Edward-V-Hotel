@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 use App\Models\WalkInUser;
 use App\Models\Rooms;
@@ -29,16 +30,25 @@ class WalkInBookingController extends Controller
 
         if(!$id){
             //User is not in the table
-            $newUser = DB::table('in_person_users')->insertGetId([
+            $token = Str::random(10);
+            $newUser = DB::table('users')->insertGetId([
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+
                 'first_name' => $first_name,
                 'last_name'  => $last_name,
-                'gender' => $gender,
+                // 'gender' => $gender,
                 'dob' => $dob,
                 'nationality' => $nationality,
                 'phone_num' => $phone_num,
+                'email' => NULL,
+                'password' => NULL,
+                'points' => 0,
                 'details' => NULL,
+                'email_created_at' => NULL,
+                'email_verified_at' => NULL,
+                'token' => $token,
+                'token_expiration' => NULL
             ]);
             
             return response()->json([
@@ -53,20 +63,27 @@ class WalkInBookingController extends Controller
         
     }
 
-    public function fetchAvailable(Request $request){
-        $roomtype = $request->roomtype;
-        $status = "available";
-            
-        $result = DB::table('room')->select('type','floor','room_number')
-            ->where('type', $roomtype)
-            ->where('status', $status)
-            ->get();
-            
-        return response()->json([
-            'result' => $result
-        ]);
-    }
-    
+public function fetchAvailable(Request $request){
+    $roomtype = $request->roomtype;
+    $view = $request->view;
+    $status = "available";
+
+    $result = DB::table('room')->select('type','floor','room_number','view')
+        ->where('type', $roomtype)
+        ->where('status', $status)
+        ->where('view',$view)
+        ->get();
+
+    $prices = DB::table('room_prices')->select('price','capacity')
+        ->where('view', $view)
+        ->where('type', $roomtype)
+        ->get();
+
+    $availableRooms = $result->merge($prices);
+
+    return response()->json($availableRooms);
+}
+        
 
     public function bookRoom(Request $request){
         // $user_id = $request->id;
