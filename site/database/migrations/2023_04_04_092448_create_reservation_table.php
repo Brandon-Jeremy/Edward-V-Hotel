@@ -23,6 +23,7 @@ class CreateReservationTable extends Migration
             $table->integer('room_id');
             $table->integer('user_id');
             $table->string('user_type');
+            $table->string('activity');
         });
     }
 

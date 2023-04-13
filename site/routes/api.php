@@ -46,4 +46,4 @@ Route::post('/create-reservation',[OnlineReservationController::class,'createRes
 Route::post('/get-available',[WalkInBookingController::class,'fetchAvailable'])->name('get-available');
 Route::post('/add-user',[WalkInBookingController::class,'addUser'])->name('add-user');
 Route::post('/book-room',[WalkInBookingController::class,'bookRoom'])->name('book-room');
-Route::post('/get-reserved',[WalkInBookingController::class,'getReserved'])->name('get-reserved');
+Route::get('/get-reserved',[WalkInBookingController::class,'getReserved'])->name('get-reserved');
