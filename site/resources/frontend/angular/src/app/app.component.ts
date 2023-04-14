@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
+import { HomeComponent } from './home/home.component';
+import { BookingComponent } from './booking/booking.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { ContactComponent } from './contact/contact.component';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,11 @@ import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular';
-  
-
+  title = 'Edward V Hotel';
+  sections = [
+    { component:HomeComponent, className: 'home-section' },
+    { component:BookingComponent, className: 'book-section' },
+    { component:RoomsComponent, className: 'rooms-section' },
+    { component:ContactComponent, className: 'contact-section' },
+  ];
 }
