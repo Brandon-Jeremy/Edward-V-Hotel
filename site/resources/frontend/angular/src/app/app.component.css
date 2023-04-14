@@ -6,6 +6,8 @@ html, body {
   }
   
   .app-root {
+    margin: 0;
+    padding: 0;
     height: 100%;
     overflow: hidden;
   }
@@ -18,27 +20,4 @@ html, body {
     align-items: center;
     text-align: center;
     padding: 50px;
-  }
-  
-  .home-section {
-    background-color: #F0F0F0;
-    color: #333;
-  }
-  
-  .reservation-bar-section {
-    position: relative;
-    top: 175px;
-    bottom: 0;
-    width: 100%;
-    z-index: 1;
-  }
-
-  .about-section{
-    margin-top: 15%;
-    position: relative;
-  }
-
-  .rooms-section{
-    position: relative;
-    top: 300px;
   }

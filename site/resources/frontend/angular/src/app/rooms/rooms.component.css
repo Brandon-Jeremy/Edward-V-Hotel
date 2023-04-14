@@ -1,41 +1,91 @@
-/* Booking section styles */
-
-.booking{
-    background-image: var(--gradient-color);
+/* Rooms section styles */
+.rooms{
+    margin-top: 0%;
+    padding-top: 0%;
 }
 
-.input-group{
-    margin-bottom: 1.5rem;
+.section-head{
+    text-align: center;
+    margin-bottom: 5rem;
+
 }
 
-.input-label{
+.heading{
     display: block;
-    font-size: 1.3rem;
+    font-size: 4rem;
     text-transform: uppercase;
-    color: #fff;
-    font-weight: bold;
-    margin-bottom: 1rem;
 }
 
-.input,
-.options{
-    outline: none;
-    border: none;
-    width: 100%;
-    min-height: 4rem;
-    padding: 1rem;
-    font-weight: bold;
+.sub-heading{
+    font-size: 1.7rem;
+    font-family: 'Courgette', cursive;
+    font-weight: 300;
     color: #a5a5a5;
-    letter-spacing: 2px;
-    font-family: 'Open Sans', sans-serif;
-    resize: none;
-
 }
 
-
-::placeholder{
-    color: inherit;
+.grid-container {
+    max-width: 90%; /* Adjust the percentage to control the space between the grid and the screen edges */
+    margin: 0 auto; /* This centers the grid container */
 }
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    grid-gap: 2.5rem;
+}
+
+.grid-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.featured-hotels{
+    height: 35rem;
+    color: #ffff;
+    padding: 1rem;
+    position: relative;
+    z-index: 0;
+}
+
+.featured-hotels::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--purple-transparent-alt);
+    z-index: -1;
+}
+
+.hotel-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+.hotel-name{
+    font-size: 2.6rem;
+}
+
+.hotel-price{
+    font-size: 1.8rem;
+}
+
+/* .hotel-rating{
+    margin: 1rem 0 2.5rem;
+}
+
+.rating{
+    color: var(--yellow-solid);
+} */
+
 
 @media screen and (min-width: 768px){
     .header{

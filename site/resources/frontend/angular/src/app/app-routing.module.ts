@@ -6,6 +6,8 @@ import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 // import { UserRegistrationComponent } from    './user-registration/user-registration.component';
 import { HomeComponent } from './home/home.component';
 import { BookingComponent } from './booking/booking.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { ContactComponent } from './contact/contact.component';
 import { RewardComponent } from './reward/reward.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
@@ -17,6 +19,8 @@ const routes: Routes = [
   // {path:"login", component:UserLoginComponent},
   // {path:"registration", component:UserRegistrationComponent},
   {path:"book", component:BookingComponent},
+  {path:"rooms", component:RoomsComponent},
+  {path:"contact", component:ContactComponent},
   {path:"rewards", component:RewardComponent},
   {path:"forgot-password", component:ForgotPasswordComponent}
 ];

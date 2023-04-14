@@ -20,6 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { RoomsComponent } from './rooms/rooms.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
@@ -36,7 +38,9 @@ import { MatInputModule } from '@angular/material/input';
     ForgotPasswordComponent,
     PopupComponent,
     LoginFormComponent,
-    SignUpFormComponent
+    SignUpFormComponent,
+    RoomsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
