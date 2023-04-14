@@ -306,4 +306,69 @@ class WalkInBookingController extends Controller
         ]);
     }
     
+
+    /**
+     * Check out guest from user.
+     * Set room activity to inactive after checkout.
+     * Set room status to dirty if the activity was set as available.
+     * Set room status to available if the activity was set as pending.
+     *
+     * @param Request $request The HTTP request object.
+     * @return JsonResponse A JSON response with a message according to the updated activity and status.
+     */
+    public function checkOut(Request $request){
+        //TODO: Ask this, should app send me roomid or table id?
+
+        $roomId = $request->roomid;
+        $id = $request->id; //reservation id
+
+        $reservations = DB::table('reservation')
+        ->select('activity')
+        ->where('room_id', $roomId)
+        ->where('id', $id)
+        ->whereIn('activity', ['active', 'pending'])
+        ->first();
+
+        // var_dump($reservations);
+
+        if ($reservations && $reservations->activity === 'active') {
+            DB::table('reservation')
+            ->where('id', $id)
+            ->update(['activity' => 'inactive']);
+
+            DB::table('room')
+            ->where('id',$roomId)
+            ->update(['status' => 'dirty']);
+
+            return response()->json([
+                'success' => true,
+                'activity' => 'inactive',
+                'status' => 'dirty'
+            ]);
+        }
+        elseif($reservations && $reservations->activity === 'pending'){
+            DB::table('reservation')
+            ->where('id', $id)
+            ->update(['activity' => 'inactive']);
+
+            DB::table('room')
+            ->where('id',$roomId)
+            ->update(['status' => 'available']);
+
+            return response()->json([
+                'success' => true,
+                'activity' => 'inactive',
+                'status' => 'available'
+            ]);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'message' => 'No reservation found'
+            ]);
+        }
+    }
+    
+    
+    
 }
