@@ -52,6 +52,7 @@ Route::get('/get-reserved',[WalkInBookingController::class,'getReserved'])->name
 Route::post('/check-in',[WalkInBookingController::class,'checkIn'])->name('check-in');
 Route::get('/show-checkout',[WalkInBookingController::class,'displayCheckOut'])->name('show-checkout');
 Route::post('/check-out',[WalkInBookingController::class,'checkOut'])->name('check-out');
+Route::get('/late-checkout',[WalkInBookingController::class,'lateCheckout'])->name('late-checkout');
 
 //HouseKeeping
 Route::get('/needs-service',[HousekeepingController::class,'getDirty'])->name('needs-service');

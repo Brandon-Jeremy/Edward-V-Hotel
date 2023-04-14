@@ -86,19 +86,19 @@ class WalkInBookingController extends Controller
         
 
     public function bookRoom(Request $request){
-        // $user_id = $request->id;
-        // $room_floor = $request->floor;
-        // $room_number = $request->number;
-        // $date_from = $request->datefrom;
-        // $date_to = $request->dateto;
-        // $user_type = "Walk In";
+        $user_id = $request->id;
+        $room_floor = $request->floor;
+        $room_number = $request->number;
+        $date_from = $request->datefrom;
+        $date_to = $request->dateto;
+        $user_type = "Walk In";
         
-        $user_id = "2";
-        $room_floor = "2";
-        $room_number = "2";
-        $date_from = "2023-04-11";
-        $date_to = "2023-04-15";
-        $user_type = "Walk in";
+        // $user_id = "2";
+        // $room_floor = "2";
+        // $room_number = "2";
+        // $date_from = "2023-04-11";
+        // $date_to = "2023-04-15";
+        // $user_type = "Walk in";
         $activity = "active";
 
         $room = DB::table('room')->select('id')
@@ -132,7 +132,7 @@ class WalkInBookingController extends Controller
             // Update the room status to booked
             DB::table('room')
                 ->where('id', $room->id)
-                ->update(['status' => 'booked']);
+                ->update(['status' => 'busy']);
         
             // Return the success message
             return response()->json([
