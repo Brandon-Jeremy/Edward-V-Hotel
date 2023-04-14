@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class FinancesController extends Controller
 {
+        /**
+         * Return the revenue earned between 2 dates
+         * @param Request 2 Dates: date_from & date_to
+         * @return JSONResponse Information containing the following:
+         *                      Single room count
+         *                      Double room count (with and without views)
+         *                      Suite room count
+         *                      Revenue earned between 2 dates
+         */
         public function computeFinances(Request $request){
             $date_from = $request->datefrom;
             $date_to = $request->dateto;
@@ -87,5 +96,35 @@ class FinancesController extends Controller
                 'Date To' => $date_to,
             ]);
             
+        }
+
+        /**
+         * Number of reservations made at the hotel between 2 dates
+         * @param Request 2 dates: date_from & date_to
+         * @return JSONReponse containing information abt #occupants
+         */
+        public function occupancyData(Request $request){
+            $date_from = $request->datefrom;
+            $date_to = $request->dateto;
+
+            $occupancy = 0;
+
+            // Syntax
+            // ->where('date_to', '<', date('Y-m-d'))
+
+            $roomids = DB::table('reservation')
+            ->where('date_from','>=',$date_from)
+            ->where('date_to','<=',$date_to)
+            ->get();
+
+            $roomID = $roomids->pluck('room_id')->toArray();
+
+            foreach($roomID as $rooms){
+                $occupancy++;
+            }
+
+            return response()->json([
+                "Number of rooms rented" => $occupancy
+            ]);
         }
 }

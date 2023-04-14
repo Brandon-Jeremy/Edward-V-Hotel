@@ -53,10 +53,12 @@ Route::post('/check-in',[WalkInBookingController::class,'checkIn'])->name('check
 Route::get('/show-checkout',[WalkInBookingController::class,'displayCheckOut'])->name('show-checkout');
 Route::post('/check-out',[WalkInBookingController::class,'checkOut'])->name('check-out');
 Route::get('/late-checkout',[WalkInBookingController::class,'lateCheckout'])->name('late-checkout');
+// Route::post('/extend-stay',[WalkInBookingController::class,'extendStay'])->name('extend-stay');
 
 //HouseKeeping
 Route::get('/needs-service',[HousekeepingController::class,'getDirty'])->name('needs-service');
 Route::post('/set-clean',[HousekeepingController::class,'setClean'])->name('set-clean');
 
-//Finances
+//Finances & Hotel Information
 Route::post('/financial-data',[FinancesController::class,'computeFinances'])->name('financial-data');
+Route::post('/occupancy-data',[FinancesController::class,'occupancyData'])->name('occupancy-data');
