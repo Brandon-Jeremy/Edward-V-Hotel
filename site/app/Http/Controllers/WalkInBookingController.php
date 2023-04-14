@@ -368,6 +368,23 @@ class WalkInBookingController extends Controller
             ]);
         }
     }
+
+    /**
+     * Find all rooms that should have been checked out before today's date
+     * @param None GET request
+     * @return JSONResponse with rooms that should have been checked out
+     */
+    public function lateCheckout(){
+        $lateRooms = DB::table('reservation')
+        ->select('id','room_id','user_id','user_type','date_from','date_to')
+        ->where('date_to', '<', date('Y-m-d'))
+        ->where('activity','active')
+        ->get();
+
+        return response()->json([
+            'Rooms' => $lateRooms
+        ]);
+    }
     
     
     
