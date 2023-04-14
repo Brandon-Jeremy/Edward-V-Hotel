@@ -10,12 +10,12 @@ import { RewardComponent } from './reward/reward.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
-  {path:"", redirectTo:"home", pathMatch:"full"},
+  {path:"", component:HomeComponent },
+  {path:"home", component:HomeComponent},
   {path: "login", component: LoginFormComponent },
   {path: "signup", component: SignUpFormComponent },
   // {path:"login", component:UserLoginComponent},
   // {path:"registration", component:UserRegistrationComponent},
-  {path:"home", component:HomeComponent},
   {path:"book", component:BookingComponent},
   {path:"rewards", component:RewardComponent},
   {path:"forgot-password", component:ForgotPasswordComponent}
