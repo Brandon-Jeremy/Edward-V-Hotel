@@ -1,61 +1,101 @@
-.contact-content{
+.contact-content {
     display: flex;
     justify-content: center;
 }
 
-.traveler-wrap{
+.container {
+    width: 100%;
+    max-width: 120rem;
+    padding: 0 1.5rem;
+    margin: 0 auto;
+}
+
+.traveler-wrap {
     display: none;
 }
 
-.contact-form{
+.section-head {
+    text-align: center;
+    font-size: 5rem; /* Increase the font size */
+    margin-bottom: 3.5rem;
+}
+
+.section-head .sub-heading {
+    display: block;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgba(190, 8, 8, 0.9); /* Set a more visible lighter white color */
+    margin-top: 0.5rem;
+}
+
+.contact-form {
     width: 100%;
     background-image: var(--gradient-color);
     padding: 2.5rem;
 }
 
-.contact-form .input{
+.contact-form .input {
     display: block;
     background-color: transparent;
     color: #fff;
     font-weight: normal;
-    border-bottom: 2px solid #fff; /* Set the initial border-bottom to white */
+    border: none;
     padding-left: 0;
+    outline: none;
+    position: relative;
+    font-size: 1.5rem;
 }
 
-.bar{
-    display: block; /* Hide the .bar element */
+.contact-form .input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.bar {
+    display: block;
     position: relative;
 }
 
-.contact-form .input:focus + .bar::after{
-    border-bottom: 2px solid var(--purple-light); /* Change the border-bottom to purple when focused */
-    transform: scaleX(1);
-}
-
-
-.bar::after{
+.bar::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 3px;
+    height: 2px;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
     background-color: var(--purple-light);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform .5s;
+    z-index: 2; /* Make sure the purple line is above the white line */
+}
+
+.contact-form .input:focus + .bar::after {
+    transform: scaleX(1);
+}
+
+.input-group {
+    margin-bottom: 2rem; /* Add more space between input fields */
+}
+
+.btn.form-btn {
+    display: block;
+    margin: 1rem auto; /* Add top and bottom margin of 1rem and auto left and right margin */
+    text-align: center;
 }
 
 @media screen and (min-width: 768px){
-    .header{
-        height: 10rem;
-    }
-    .header.active{
-        height: 6rem;
-    }
-    .title{
-        font-size: 8rem;
-    }
+    
     .contact-content{
         justify-content: space-between;
     }
@@ -81,32 +121,7 @@
         margin-right: 0;
     }
 
-    /* Footer Section */
-    .footer{
-        overflow-x: hidden;
-    }
-
-    .footer-content{
-        display: flex;
-    }
-    .footer-content-brand{
-        margin-bottom: 0;
-        flex: 0 0 60%;
-    }
-
-    .footer .footer-paragraph{
-        margin-top: 2.5rem;
-
-    }
-
-    .footer-heading{
-        margin-bottom: 5rem;
-    }
-
-    .social-media-wrap{
-        flex: 0 0 40%;
-        margin-left: 2.5rem;
-    }
+    
 }
 
 @media screen and (min-width: 1000px){
@@ -165,15 +180,7 @@
         min-width: 10rem;
     }
 
-    /* Room section */
-    .rooms-grid{
-        grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
-        grid-gap: 8rem;
-    }
-    .featured-rooms{
-        flex-direction: row;
-        align-items: flex-start;
-    }
+    
 }
 
 @media screen and (min-width: 1200px){
