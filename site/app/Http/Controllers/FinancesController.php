@@ -50,8 +50,10 @@ class FinancesController extends Controller
                 ->first();
 
             $roomids = DB::table('reservation')
-            ->where('date_from',$date_from)
-            ->where('date_to',$date_to)
+            ->where('date_from','>=',$date_from)
+            ->where('date_to','<=',$date_to)
+            // ->where('date_from',$date_from)
+            // ->where('date_to',$date_to)
             ->get();
 
             $roomID = $roomids->pluck('room_id')->toArray();
