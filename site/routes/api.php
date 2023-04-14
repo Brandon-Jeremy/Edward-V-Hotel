@@ -8,6 +8,7 @@ use App\Http\Controllers\rewardController;
 use App\Http\Controllers\OnlineReservationController;
 use App\Http\Controllers\WalkInBookingController;
 use App\Http\Controllers\HousekeepingController;
+use App\Http\Controllers\FinancesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,5 +53,9 @@ Route::post('/check-in',[WalkInBookingController::class,'checkIn'])->name('check
 Route::get('/show-checkout',[WalkInBookingController::class,'displayCheckOut'])->name('show-checkout');
 Route::post('/check-out',[WalkInBookingController::class,'checkOut'])->name('check-out');
 
+//HouseKeeping
 Route::get('/needs-service',[HousekeepingController::class,'getDirty'])->name('needs-service');
 Route::post('/set-clean',[HousekeepingController::class,'setClean'])->name('set-clean');
+
+//Finances
+Route::post('/financial-data',[FinancesController::class,'computeFinances'])->name('financial-data');
