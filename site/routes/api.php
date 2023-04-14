@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\rewardController;
 use App\Http\Controllers\OnlineReservationController;
 use App\Http\Controllers\WalkInBookingController;
+use App\Http\Controllers\HousekeepingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,5 @@ Route::get('/get-reserved',[WalkInBookingController::class,'getReserved'])->name
 Route::post('/check-in',[WalkInBookingController::class,'checkIn'])->name('check-in');
 Route::get('/show-checkout',[WalkInBookingController::class,'displayCheckOut'])->name('show-checkout');
 Route::post('/check-out',[WalkInBookingController::class,'checkOut'])->name('check-out');
+
+Route::get('/needs-service',[HousekeepingController::class,'getDirty'])->name('needs-service');
