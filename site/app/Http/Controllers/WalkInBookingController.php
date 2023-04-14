@@ -210,7 +210,7 @@ class WalkInBookingController extends Controller
     
         $reservationInfo = DB::table('reservation')
             ->select('room_id', 'user_id','date_from','date_to')
-            ->where('activity', 'active')
+            ->where('activity', 'pending')
             ->get();
 
         // return response()->json([
@@ -221,6 +221,10 @@ class WalkInBookingController extends Controller
             ->select('id', 'first_name','last_name')
             ->whereIn('id', $reservationInfo->pluck('user_id')->toArray())
             ->get();
+
+        // return response()->json([
+        //     'result' => $userInformation
+        // ]);
             
             $mergedData = $roomInfo->map(function ($room) use ($reservationInfo, $userInformation) 
             { 
@@ -244,6 +248,29 @@ class WalkInBookingController extends Controller
                         
                 return $mergedData; 
 
+    }
+
+    public function checkIn(Request $request){
+        $room_floor = $request->floor;
+        $room_number = $request->number;
+    
+        $roomid = DB::table('room')
+            ->select('id')
+            ->where('room_number', $room_number)
+            ->where('floor',$room_floor)
+            ->first();
+
+        // return response()->json([
+        //     'roomID' => $roomid
+        // ]);
+    
+        DB::table('room')
+        ->where('id', $roomid->id)
+        ->update(['status' => 'busy']);
+
+        return response()->json([
+            'success' => true
+        ]);
     }
     
     
