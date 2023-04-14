@@ -385,6 +385,41 @@ class WalkInBookingController extends Controller
             'Rooms' => $lateRooms
         ]);
     }
+
+    /**
+     * Allows for the employee working at the reception desk to extend 
+     * a guest's stay
+     * @param Request floor number & room number, I can infer the room ID
+     *                date_to to extend stay until
+     * @return JSONResponse 1 for true on success and 0 for false on failure
+     */
+    public function extendStay(Request $request){
+        $roomnumber = $request->roomnum;
+        $roomfloor = $request->roomfloor;
+        $activity = 'busy';
+
+        $date_to = $request->dateto;
+
+        $id = DB::table('room')
+        ->where('room_number', $roomnumber)
+        ->where('floor',$roomfloor)
+        ->where('status',$activity)
+        ->first();
+
+        $roomid = $id->id;
+
+        // echo($roomid);
+
+        $updated = DB::table('reservation')
+        ->where('room_id',$roomid)
+        ->where('activity','active')
+        // ->get();
+        ->update(['date_to' => $date_to]);
+
+        return response()->json([
+            'Success' => $updated
+        ]);
+    }
     
     
     
