@@ -272,6 +272,38 @@ class WalkInBookingController extends Controller
             'success' => true
         ]);
     }
+
+    /**
+     * Display rooms that can be checked out on the reception desk
+     * @param None displayCheckOut is a GET request
+     * @return JsonResponse A JSON returning the room_id, id, activity, floor, room_number
+     */
+    public function displayCheckOut(){
+        $date = Carbon::now()->format('Y-m-d');
+        $checkOuts = DB::table('reservation')
+            ->select('room_id','activity','id')
+            ->where('date_to', $date)
+            ->get();
     
+        $roomIds = $checkOuts->pluck('room_id')->toArray();
+    
+        $rooms = DB::table('room')
+            ->select('floor','room_number', 'id')
+            ->whereIn('id', $roomIds)
+            ->get();
+    
+        $checkoutsWithRooms = collect();
+    
+        foreach($checkOuts as $checkout) {
+            $room = $rooms->firstWhere('id', $checkout->room_id);
+            $checkout->floor = $room->floor;
+            $checkout->room_number = $room->room_number;
+            $checkoutsWithRooms->push($checkout);
+        }
+    
+        return response()->json([
+            'Checkouts' => $checkoutsWithRooms,
+        ]);
+    }
     
 }
