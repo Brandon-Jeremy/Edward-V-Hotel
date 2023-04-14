@@ -53,3 +53,4 @@ Route::get('/show-checkout',[WalkInBookingController::class,'displayCheckOut'])-
 Route::post('/check-out',[WalkInBookingController::class,'checkOut'])->name('check-out');
 
 Route::get('/needs-service',[HousekeepingController::class,'getDirty'])->name('needs-service');
+Route::post('/set-clean',[HousekeepingController::class,'setClean'])->name('set-clean');

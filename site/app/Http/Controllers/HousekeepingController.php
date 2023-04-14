@@ -37,4 +37,19 @@ class HousekeepingController extends Controller
             'Room ID' => $roomId,
         ]);
     }
+    /**
+     * @param Request roomID to distinguish what room to set as clean
+     * @return JSONResponse Success after the function is complete
+     */
+    public function setClean(Request $request){
+        $roomid = $request->id;
+        DB::table('room')
+            ->where('id', $roomid)
+            ->update(['status' => 'available']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Room cleaned'
+        ]);
+    }
 }
