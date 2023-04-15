@@ -540,6 +540,14 @@ class WalkInBookingController extends Controller
         ]);
     }
 
+
+    /**
+     * Allow the reception desk to view all unpaid charges
+     * based off room information
+     * @param Request roomnum & floor
+     * @return JSONResponse with room all outstanding charges
+     * due on the room & user
+     */
     public function showCharges(Request $request){
         $roomnumber = $request->roomnum;
         $floor = $request->floor;
@@ -567,6 +575,25 @@ class WalkInBookingController extends Controller
 
         return response()->json([
             "Unpaid charges" => $charges
+        ]);
+    }
+
+    /**
+     * API to pay for each individual extra charge
+     * @param Request additional_charge information
+     * @return JSONResponse with success status
+     */
+    public function payExtraCharges(Request $request){
+        $chargesid = $request->id;
+
+        $paid = 1;
+
+        $result = DB::table('additional_charges')
+        ->where('id',$chargesid)
+        ->update(['paid' => $paid]);
+
+        return response()->json([
+            "Success" => $result
         ]);
     }
     
