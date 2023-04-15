@@ -539,6 +539,36 @@ class WalkInBookingController extends Controller
             "Success" => $result
         ]);
     }
+
+    public function showCharges(Request $request){
+        $roomnumber = $request->roomnum;
+        $floor = $request->floor;
+
+        $id = DB::table('room')
+        ->where('room_number', $roomnumber)
+        ->where('floor',$floor)
+        ->where('status', 'busy')
+        ->first();
+
+        $roomid = $id->id;
+
+        $user_id = DB::table('reservation')
+        ->where('activity','active')
+        ->where('room_id',$roomid)
+        ->first();
+
+        $userid = $user_id->user_id;
+
+        $charges = DB::table('additional_charges')
+        ->where('paid',0)
+        ->where('room_id',$roomid)
+        ->where('user_id',$userid)
+        ->get();
+
+        return response()->json([
+            "Unpaid charges" => $charges
+        ]);
+    }
     
     
     
