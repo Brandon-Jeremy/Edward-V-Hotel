@@ -330,12 +330,27 @@ class WalkInBookingController extends Controller
         $id = $request->id; //reservation id
 
         $reservations = DB::table('reservation')
-        ->select('activity')
+        ->select('activity','user_id')
         ->where('room_id', $roomId)
         ->where('id', $id)
         ->whereIn('activity', ['active', 'pending'])
         ->first();
 
+
+        //Find the user_id
+        $userid = $reservations->user_id;
+        $additionalCharges = DB::table('additional_charges')
+            ->where('room_id', $roomId)
+            ->where('user_id', $userid)
+            ->where('paid', 0)
+            ->get();
+
+        if ($additionalCharges->count() > 0) {
+            // There are unpaid additional charges for the given room & guest
+            return response()->json([
+                "Error" => "Outstanding charges unpaid"
+            ]);
+        }  
         // var_dump($reservations);
 
         if ($reservations && $reservations->activity === 'active') {
