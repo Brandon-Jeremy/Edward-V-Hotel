@@ -1,3 +1,12 @@
-<div *ngFor="let section of sections" [ngClass]="section.className">
-    <ng-container *ngComponentOutlet="section.component"></ng-container>
+<!-- for components on the same page -->
+<div *ngIf="router.url === '/' || router.url === '/home'">
+    <div *ngFor="let section of sections" [ngClass]="section.className">
+        <ng-container *ngComponentOutlet="section.component"></ng-container>
+    </div>
 </div>
+
+<!-- for components on different pages -->
+<div *ngIf="router.url === '/forgot-password' ">
+    <router-outlet></router-outlet>
+</div>
+    

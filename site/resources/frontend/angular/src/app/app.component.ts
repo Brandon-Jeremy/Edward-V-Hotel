@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { BookingComponent } from './booking/booking.component';
 import { RoomsComponent } from './rooms/rooms.component';
@@ -12,6 +13,9 @@ import { ContactComponent } from './contact/contact.component';
 })
 export class AppComponent {
   title = 'Edward V Hotel';
+
+  constructor(public router: Router) {}
+
   sections = [
     { component:HomeComponent, className: 'home-section' },
     { component:BookingComponent, className: 'book-section' },
