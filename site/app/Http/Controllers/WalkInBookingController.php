@@ -270,6 +270,11 @@ class WalkInBookingController extends Controller
 
         //TODO: Change pending to active as well
 
+        DB::table('reservation')
+        ->where('activity','pending')
+        ->where('room_id',$roomid->id)
+        ->update(['activity' => 'active']);
+
         return response()->json([
             'success' => true
         ]);
@@ -414,6 +419,12 @@ class WalkInBookingController extends Controller
         ->where('status',$activity)
         ->first();
 
+        if(empty($id)){
+            return response()->json([
+                "Error" => "No room found"
+            ]);
+        }
+
         $roomid = $id->id;
         $roomtype = $id->type;
         $roomview = $id->view;
@@ -463,6 +474,54 @@ class WalkInBookingController extends Controller
 
         return response()->json([
             'Success' => $updated
+        ]);
+    }
+
+    /**
+     * Add an extra charge onto the room of a specific guest
+     * @param Request room number, floor, item, charge, paid flag
+     * @return JSONResponse with information of its success
+     */
+    public function extraCharge(Request $request){
+        $roomnumber = $request->roomnum;
+        $roomfloor = $request->floor;
+        $price = $request->price;
+        $paid = $request->paid;
+        $item = $request->item;
+
+        $id = DB::table('room')
+        ->where('room_number', $roomnumber)
+        ->where('floor',$roomfloor)
+        ->where('status', 'busy')
+        ->first();
+
+        if(empty($id)){
+            return response()->json([
+                "Error" => "No room found"
+            ]);
+        }
+
+        $roomid = $id->id;
+
+        $user_id = DB::table('reservation')
+        ->where('activity','active')
+        ->where('room_id',$roomid)
+        ->first();
+
+        $userid = $user_id->user_id;
+
+        $result = DB::table('additional_charges')->insert([
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'room_id' => $roomid,
+            'user_id' => $userid,
+            'charge' => $price,
+            'reason' => "Purchased $item",
+            'paid' => $paid
+        ]);
+
+        return response()->json([
+            "Success" => $result
         ]);
     }
     
