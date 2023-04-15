@@ -268,6 +268,8 @@ class WalkInBookingController extends Controller
         ->where('id', $roomid->id)
         ->update(['status' => 'busy']);
 
+        //TODO: Change pending to active as well
+
         return response()->json([
             'success' => true
         ]);
@@ -389,16 +391,22 @@ class WalkInBookingController extends Controller
     /**
      * Allows for the employee working at the reception desk to extend 
      * a guest's stay
-     * @param Request floor number & room number, I can infer the room ID
-     *                date_to to extend stay until
+     * @param Request floor number & room number, I can infer the room ID 
+     * date_to to extend stay until. An additional request input is required
+     * to determine if the user already paid for the extra charge or not.
+     * 
+     * All inputs:
+     * Floor number - Room number - Date to - Paid flag
+     * 
      * @return JSONResponse 1 for true on success and 0 for false on failure
      */
     public function extendStay(Request $request){
         $roomnumber = $request->roomnum;
         $roomfloor = $request->roomfloor;
         $activity = 'busy';
+        $paid = $request->paid; //True or False dropdown menu
 
-        $date_to = $request->dateto;
+        $date_to = Carbon::parse($request->dateto);
 
         $id = DB::table('room')
         ->where('room_number', $roomnumber)
@@ -407,14 +415,51 @@ class WalkInBookingController extends Controller
         ->first();
 
         $roomid = $id->id;
+        $roomtype = $id->type;
+        $roomview = $id->view;
 
-        // echo($roomid);
+        $user_id = DB::table('reservation')
+        ->where('activity','active')
+        ->where('room_id',$roomid)
+        ->first();
+
+        $userid = $user_id->user_id;
 
         $updated = DB::table('reservation')
         ->where('room_id',$roomid)
         ->where('activity','active')
         // ->get();
         ->update(['date_to' => $date_to]);
+
+        $room_price = DB::table('room_prices')
+        ->where('view',$roomview)
+        ->where('type',$roomtype)
+        ->first();
+
+        $roomprice = $room_price->price;
+
+        $olddate = Carbon::parse($user_id->date_to);
+        $numberdays = $date_to->diffInDays($olddate);
+
+        if ($date_to->lessThanOrEqualTo($olddate)) {
+            return response()->json([
+                "Success" => false,
+                "Message" => "New date must be greater than old date."
+            ]);
+        }
+
+        $charge = $roomprice*$numberdays;
+        if($updated == 1){
+            DB::table('additional_charges')->insert([
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'room_id' => $roomid,
+                'user_id' => $userid,
+                'charge' => $charge,
+                'reason' => "$numberdays extra nights in $roomtype",
+                'paid' => $paid
+            ]);
+        }
 
         return response()->json([
             'Success' => $updated
