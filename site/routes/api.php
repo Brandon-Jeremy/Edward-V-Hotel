@@ -9,6 +9,7 @@ use App\Http\Controllers\OnlineReservationController;
 use App\Http\Controllers\WalkInBookingController;
 use App\Http\Controllers\HousekeepingController;
 use App\Http\Controllers\FinancesController;
+use App\Http\Controllers\ReceptionAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,8 @@ Route::post('/extend-stay',[WalkInBookingController::class,'extendStay'])->name(
 Route::post('/extra-charge',[WalkInBookingController::class,'extraCharge'])->name('extra-charge');
 Route::post('/show-charges',[WalkInBookingController::class,'showCharges'])->name('show-charges');
 Route::post('/pay-extracharge', [WalkInBookingController::class, 'payExtraCharges'])->name('pay-extracharge');
+
+Route::post('/reception-login',[ReceptionAuthController::class,'receptionLogin'])->name('reception-login');
 
 //HouseKeeping
 Route::get('/needs-service',[HousekeepingController::class,'getDirty'])->name('needs-service');

@@ -325,6 +325,7 @@ class WalkInBookingController extends Controller
      */
     public function checkOut(Request $request){
         //TODO: Ask this, should app send me roomid or table id?
+        //TODO: Override checkout
 
         $roomId = $request->roomid;
         $id = $request->id; //reservation id
