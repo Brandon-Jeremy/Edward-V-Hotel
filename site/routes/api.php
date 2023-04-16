@@ -59,7 +59,9 @@ Route::post('/extra-charge',[WalkInBookingController::class,'extraCharge'])->nam
 Route::post('/show-charges',[WalkInBookingController::class,'showCharges'])->name('show-charges');
 Route::post('/pay-extracharge', [WalkInBookingController::class, 'payExtraCharges'])->name('pay-extracharge');
 
+//Reception Authentication
 Route::post('/reception-login',[ReceptionAuthController::class,'receptionLogin'])->name('reception-login');
+Route::post('/reception-changepass',[ReceptionAuthController::class,'receptionChangePassword'])->name('reception-changepass');
 
 //HouseKeeping
 Route::get('/needs-service',[HousekeepingController::class,'getDirty'])->name('needs-service');
