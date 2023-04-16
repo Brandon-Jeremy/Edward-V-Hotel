@@ -122,6 +122,8 @@ form .popup{
     font-size: 2.4rem;
     margin-left: .5rem;
     opacity: .75;
+    vertical-align: middle;
+   
 }
   
 

@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -13,7 +15,7 @@ export class LoginFormComponent implements OnInit {
   email = '';
   password = '';
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,13 +25,30 @@ export class LoginFormComponent implements OnInit {
   }
   
   onSubmit(): void {
-    // Handle form submission
+    const loginData = {
+      email: this.email,
+      password: this.password
+    };
+  
+    this.authService.login(loginData).subscribe(
+      (response) => {
+        // Handle successful login, e.g., store the user data, token, etc.
+        this.router.navigate(['/user']);
+      },
+      (error) => {
+        // Handle login error, e.g., display an error message
+      }
+    );
   }
+  
 
   clearForm(): void {
     this.email = '';
     this.password = '';
     this.loginForm.resetForm();
   }
+
+  
+
 }
 

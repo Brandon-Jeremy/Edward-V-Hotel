@@ -8,6 +8,7 @@ import { RoomsComponent } from './rooms/rooms.component';
 import { ContactComponent } from './contact/contact.component';
 import { RewardComponent } from './reward/reward.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {path:"", component:HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:"rooms", component:RoomsComponent},
   {path:"contact", component:ContactComponent},
   {path:"rewards", component:RewardComponent},
+  { path: 'user', component: UserComponent },
   {path:"forgot-password", component:ForgotPasswordComponent}
 ];
 

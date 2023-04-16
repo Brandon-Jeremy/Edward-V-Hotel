@@ -17,10 +17,10 @@ import { HomeComponent } from './home/home.component';
 import { BookingComponent } from './booking/booking.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { ContactComponent } from './contact/contact.component';
+import { UserComponent } from './user/user.component';
+
 import { FooterComponent } from './footer/footer.component';
-
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     LoginFormComponent,
     SignUpFormComponent,
     RoomsComponent,
-    ContactComponent
+    ContactComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

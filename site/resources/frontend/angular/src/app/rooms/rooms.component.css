@@ -1,4 +1,9 @@
 /* Rooms section styles */
+.price-spacing {
+    margin-bottom: 15px;
+    display: block;
+}
+
 .rooms{
     margin-top: 0%;
     padding-top: 0%;
@@ -76,6 +81,10 @@
 
 .hotel-price{
     font-size: 1.8rem;
+}
+
+.submit{
+    display: flow-root;
 }
 
 /* .hotel-rating{

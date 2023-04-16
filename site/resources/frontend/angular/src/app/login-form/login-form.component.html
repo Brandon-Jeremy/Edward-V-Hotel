@@ -1,12 +1,12 @@
 <div class="container">
   <h2 class="center">Hotel Name</h2>
   <p class="center welcome">Welcome</p>
-  <form class="popup">
+  <form class="popup" #loginForm="ngForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <input matInput placeholder="Username" required>
+      <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Password" type="password" required>
+      <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password" required>
     </mat-form-field>
     <button class="popup-button" mat-raised-button color="primary" type="submit">Login</button>
   </form>
