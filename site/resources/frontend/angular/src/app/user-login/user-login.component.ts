@@ -18,7 +18,7 @@ export class UserLoginComponent {
       password: this.password
     };
 
-    this.authService.login(data.email,data.password)
+    this.authService.login(data)
       .subscribe(response => {
         console.log(response);
         // Handle successful login here

@@ -26,6 +26,7 @@ import { PopupComponent } from './popup/popup.component';
 
 import { RoomsComponent } from './rooms/rooms.component';
 import { ContactComponent } from './contact/contact.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ContactComponent } from './contact/contact.component';
     LoginFormComponent,
     SignUpFormComponent,
     RoomsComponent,
-    ContactComponent
+    ContactComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
