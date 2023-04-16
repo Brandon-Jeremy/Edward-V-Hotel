@@ -10,6 +10,7 @@ use App\Http\Controllers\WalkInBookingController;
 use App\Http\Controllers\HousekeepingController;
 use App\Http\Controllers\FinancesController;
 use App\Http\Controllers\ReceptionAuthController;
+use App\Http\Controllers\ExportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,3 +71,6 @@ Route::post('/set-clean',[HousekeepingController::class,'setClean'])->name('set-
 //Finances & Hotel Information
 Route::post('/financial-data',[FinancesController::class,'computeFinances'])->name('financial-data');
 Route::post('/occupancy-data',[FinancesController::class,'occupancyData'])->name('occupancy-data');
+
+//PDF Export
+Route::post('/generate-pdf',[ExportController::class,'generatePDF'])->name('generate-pdf');
