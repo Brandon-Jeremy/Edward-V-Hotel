@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { BookingComponent } from './booking/booking.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { ContactComponent } from './contact/contact.component';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -21,5 +22,6 @@ export class AppComponent {
     { component:BookingComponent, className: 'book-section' },
     { component:RoomsComponent, className: 'rooms-section' },
     { component:ContactComponent, className: 'contact-section' },
+    { component:FooterComponent, className: 'footer-section' }
   ];
 }

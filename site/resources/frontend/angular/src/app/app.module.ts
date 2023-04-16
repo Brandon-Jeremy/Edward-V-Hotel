@@ -13,33 +13,22 @@ import { MatInputModule } from '@angular/material/input';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 
-import { UserLoginComponent } from './user-login/user-login.component';
-import { UserRegistrationComponent } from './user-registration/user-registration.component';
-
 import { HomeComponent } from './home/home.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { RewardComponent } from './reward/reward.component';
 import { BookingComponent } from './booking/booking.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { PopupComponent } from './popup/popup.component';
-
 import { RoomsComponent } from './rooms/rooms.component';
 import { ContactComponent } from './contact/contact.component';
 import { UserComponent } from './user/user.component';
+
+import { FooterComponent } from './footer/footer.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    UserLoginComponent,
-    UserRegistrationComponent,
-    HeaderComponent,
     FooterComponent,
-    RewardComponent,
     BookingComponent,
     ForgotPasswordComponent,
-    PopupComponent,
     LoginFormComponent,
     SignUpFormComponent,
     RoomsComponent,
