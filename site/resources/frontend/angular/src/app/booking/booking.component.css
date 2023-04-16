@@ -71,7 +71,7 @@
     .input-group-wrap .input-group:last-child{
         margin-right: 0;
     }
-
+    
     /* Footer Section */
     .footer{
         overflow-x: hidden;
@@ -172,4 +172,12 @@
         flex: 0 0 30%
     }
 
+}
+
+@media screen and (max-width: 768px) {
+    .btn.form-btn {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
