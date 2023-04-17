@@ -1,15 +1,21 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener, Inject, InjectionToken } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { SignUpFormComponent } from '../sign-up-form/sign-up-form.component';
+import { AuthService } from '../services/auth.service';
+
+export const AUTH_SERVICE = new InjectionToken<AuthService>('AuthService');
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [{ provide: AUTH_SERVICE, useClass: AuthService }]
 })
 export class HomeComponent implements OnInit {
-  constructor(private dialog: MatDialog) {}
+
+  constructor(@Inject(AUTH_SERVICE) private authService: AuthService, private dialog: MatDialog) { }
+
   header: HTMLElement | null = null; // define header property
 
   // constructor() { }
@@ -45,4 +51,9 @@ export class HomeComponent implements OnInit {
       height: '600px', // Adjust the height
     });
   }
+
+  isUserLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+  
 }

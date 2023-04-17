@@ -20,7 +20,7 @@ const routes: Routes = [
   {path:"rooms", component:RoomsComponent},
   {path:"contact", component:ContactComponent},
   {path:"rewards", component:RewardComponent},
-  { path: 'user', component: UserComponent },
+  {path:"user", component: UserComponent },
   {path:"forgot-password", component:ForgotPasswordComponent}
 ];
 

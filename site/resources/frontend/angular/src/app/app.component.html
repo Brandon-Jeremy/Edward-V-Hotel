@@ -1,5 +1,5 @@
 <!-- for components on the same page -->
-<div *ngIf="router.url === '/' || router.url === '/home'"> 
+<div *ngIf="router.url === '/' || router.url === '/home' || router.url === '/book' || router.url === '/rooms'  || router.url === '/contact'"> 
     <div *ngFor="let section of sections" [ngClass]="section.className">
         <ng-container *ngComponentOutlet="section.component"></ng-container>
     </div>

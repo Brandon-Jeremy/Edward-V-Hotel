@@ -1,9 +1,9 @@
 .site-footer {
-    background-color: #726b04;
+    background-color: var( --purple-solid);
     padding: 30px 0;
     text-align: center;
     font-size: 14px;
-    color: black;
+    color: white;
   }
   
   .container {
@@ -28,16 +28,18 @@
   }
   
   .footer-menu a {
-    color: #2c2b2b;
+    color: whitesmoke;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
+    
   }
   
   .footer-menu a:hover {
-    color: black;
+    color: wheat;
   }
   
   .footer-content {
     margin-top: 20px;
+    opacity: 80%;
   }
   

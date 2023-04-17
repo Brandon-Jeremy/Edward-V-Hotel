@@ -10,6 +10,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 
+import { AuthService } from './services/auth.service';
+
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
 
@@ -49,7 +51,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MatInputModule,
     RouterModule.forRoot([]),
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   entryComponents: [LoginFormComponent, SignUpFormComponent]
 })

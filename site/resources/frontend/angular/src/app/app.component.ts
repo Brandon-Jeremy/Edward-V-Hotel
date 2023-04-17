@@ -15,6 +15,8 @@ import { FooterComponent } from './footer/footer.component';
 export class AppComponent {
   title = 'Edward V Hotel';
 
+  isLoggedIn = false;
+
   constructor(public router: Router) {}
 
   sections = [

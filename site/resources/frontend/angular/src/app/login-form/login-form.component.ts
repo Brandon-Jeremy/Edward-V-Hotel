@@ -30,7 +30,7 @@ export class LoginFormComponent implements OnInit {
       password: this.password
     };
   
-    this.authService.login(loginData).subscribe(
+    this.authService.login(loginData.email,loginData.password).subscribe(
       (response) => {
         // Handle successful login, e.g., store the user data, token, etc.
         this.router.navigate(['/user']);
