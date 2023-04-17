@@ -23,21 +23,21 @@
                 </div>
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="#header" class="nav-link">Home</a>
+                        <a routerLink="/home" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#about" class="nav-link">About</a>
+                        <a routerLink="/about" class="nav-link">About</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#rooms" class="nav-link">Rooms</a>
+                        <a routerLink="/rooms" class="nav-link">Rooms</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#reservation" class="nav-link">Reservations</a>
+                        <a routerLink="/reservation" class="nav-link">Reservations</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contact" class="nav-link">Contact</a>
+                        <a routerLink="/contact" class="nav-link">Contact</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item"  *ngIf="isUserLoggedIn()">
                         <a routerLink="/user" class="nav-link">Account</a>
                     </li>
                 </ul>     
