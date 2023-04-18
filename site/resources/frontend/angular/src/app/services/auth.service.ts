@@ -43,10 +43,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  fakeLogin(email: string, password: string) {
-    // Simulate an API call with a delay
-    return of(true).pipe(delay(1000));
-  }
 
   login(email: string, password: string): Observable<any> {
     try {
@@ -57,16 +53,40 @@ export class AuthService {
         throw new Error(errorMessage);
       }
     }
-  
-    // Using fakeLogin for testing purposes
-    return this.fakeLogin(email, password).pipe(
+
+    return this.http.post(`${this.apiUrl}/login`, { email, password }).pipe(
       tap((response) => {
         // Handle successful login, e.g., store the user data, token, etc.
-        this.isAuthenticated.next(true);
+        this.onSuccessfulLogin(response);
+        console.log('isAuthenticated:', this.isAuthenticated.value); // add this line
       }),
       catchError((err) => {
         console.log(err);
         throw err;
+      })
+    );
+}
+
+
+  fakeLogin(email: string, password: string): Observable<any> {
+    const userData = {
+      id: 1,
+      email: email,
+      firstName: 'John',
+      lastName: 'Doe'
+    };
+    const response = {
+      success: true,
+      message: 'Login successful',
+      data: {
+        user: userData,
+        access_token: 'some-auth-token'
+      }
+    };
+    return of({ access_token: 'fakeToken', user: { email, firstName: 'John', lastName: 'Doe' } }).pipe(
+      delay(1000),
+      tap((response) => {
+        this.isAuthenticated.next(true);
       })
     );
   }
@@ -111,8 +131,10 @@ export class AuthService {
 
   // Call this method to check if the user is logged in
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return this.isAuthenticated.getValue();
   }
+  
+  
 
   logout() {
     // Perform your logout logic here, e.g., API calls
@@ -122,6 +144,8 @@ export class AuthService {
 
   setAuthenticated(status: boolean) {
     this.isAuthenticated.next(status);
+    console.log('isAuthenticated:', this.isAuthenticated.value); // add this line
+
   }
 
   getIsAuthenticated(): BehaviorSubject<boolean> {

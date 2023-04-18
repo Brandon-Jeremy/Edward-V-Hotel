@@ -26,6 +26,10 @@ export class HomeComponent implements OnInit {
     this.header = document.querySelector('.header'); // assign value to header property
     const hamburgerMenu = document.querySelector('.hamburger-menu');
 
+    this.authService.authStatus$.subscribe(status => {
+      // do something with the new authentication status
+    });
+
     if (this.header && hamburgerMenu) {
       window.addEventListener('scroll', () => {
         const windowposition = window.scrollY > 0;
@@ -39,6 +43,7 @@ export class HomeComponent implements OnInit {
   }
 
   isUserLoggedIn(): boolean {
+    console.log('authStatus:', this.authService.getIsAuthenticated().getValue());
     return this.authService.getIsAuthenticated().getValue();
   }
 
