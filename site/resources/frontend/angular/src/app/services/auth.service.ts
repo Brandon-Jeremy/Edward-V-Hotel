@@ -8,13 +8,15 @@ import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 import * as z from 'zod';
 
 
-const emailSchema = z.string().email({ message: 'Please enter a valid email address' });
+// const emailSchema = z.string().email({ message: 'Please enter a valid email address' });
+const emailRegex = /^\S+@\S+\.\S+$/;
+const emailSchema = z.string().regex(emailRegex, { message: 'Please enter a valid email address' });
 const passwordSchema = z.string().min(8, { message: 'Password must be at least 8 characters long' });
 const nameRegex = /^[A-Za-z\- ]+$/;
-const firstNameSchema = z.string().regex(nameRegex, { message: 'First name must consists of only alphabets' }).min(2, { message: 'First name must be at least 2 characters long' });
-const lastNameSchema = z.string().regex(nameRegex, { message: 'Last name must consists of only alphabets' }).min(2, { message: 'Last name must be at least 2 characters long' });
+const first_nameSchema = z.string().regex(nameRegex, { message: 'First name must consists of only alphabets' }).min(2, { message: 'First name must be at least 2 characters long' });
+const last_nameSchema = z.string().regex(nameRegex, { message: 'Last name must consists of only alphabets' }).min(2, { message: 'Last name must be at least 2 characters long' });
 const digitsRegex = /^\d+$/;
-const numberSchema = z.string().regex(digitsRegex, { message: 'Please enter a valid phone number' });
+const numberSchema = z.string().regex(digitsRegex, { message: 'Please enter a valid phone phone_num' });
 const confirmPasswordSchema = z.string().min(8, { message: 'Confirm password must be at least 8 characters long' });
 const dobSchema = z.string().refine((value) => {
   const date = new Date(value);
@@ -29,8 +31,8 @@ const userLoginSchema = z.object({
 const userSignUpSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
-  firstName: firstNameSchema,
-  lastName: lastNameSchema,
+  firstName: first_nameSchema,
+  lastName: last_nameSchema,
   dob: dobSchema,
   number: numberSchema,
   confirmPassword: confirmPasswordSchema,
@@ -88,8 +90,8 @@ export class AuthService {
     const userData = {
       id: 1,
       email: email,
-      firstName: 'John',
-      lastName: 'Doe'
+      first_name: 'John',
+      last_name: 'Doe'
     };
     const response = {
       success: true,
@@ -99,7 +101,7 @@ export class AuthService {
         access_token: 'some-auth-token'
       }
     };
-    return of({ access_token: 'fakeToken', user: { email, firstName: 'John', lastName: 'Doe' } }).pipe(
+    return of({ access_token: 'fakeToken', user: { email, first_name: 'John', last_name: 'Doe' } }).pipe(
       delay(1000),
       tap((response) => {
         this.isAuthenticated.next(true);
@@ -107,11 +109,16 @@ export class AuthService {
     );
   }
 
-  signUp(email: string, password: string, firstName: string, lastName: string, number: string, confirmPassword: string): Observable<any> {
+  signUp(email: string, password: string, first_name: string, last_name: string, dob: String, phone_num: string, confirmPassword: string,): Observable<any> {
     try {
-      userSignUpSchema.parse({ email, password, firstName, lastName, number, confirmPassword });
+      userSignUpSchema.parse({ email, password, first_name, last_name, dob, phone_num, confirmPassword });
+      if (password !== confirmPassword) {
+        console.log("hello");
+        throw new Error('Password and confirm password do not match');
+      }
     } catch (error) {
       if (error instanceof z.ZodError) {
+        console.log(error.errors[0].message);
         const errorMessage = error.errors[0].message;
         console.log(error);
         this.showErrorDialog(errorMessage || 'An error occurred');
@@ -120,8 +127,8 @@ export class AuthService {
         throw error;
       }
     }
-  
-    return this.http.post(`${this.apiUrl}/signup`, { email, password, firstName, lastName, number }).pipe(
+
+    return this.http.post(`${this.apiUrl}/register-user`, { first_name, last_name, dob, email, password, phone_num }).pipe(
       catchError((err) => {
         console.log(err);
         throw err;
