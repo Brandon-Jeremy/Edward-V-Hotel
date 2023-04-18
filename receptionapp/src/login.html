@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/lr.css">
+    <title>Reception Login</title>
+</head>
+<body>
+    <header>
+        <h2 class="title"> Edward V Reception </h2>
+        <nav class = "login-buttons"> 
+            <button class = "buttons" id = "regisbutton" onclick = "window.location.href = 'register.html'"> Register </button>
+        </nav>
+    </header>
+    <div class = "credentialsbox">
+        <form id = "loginform">
+            <h2> LOG IN </h2>
+            <input type = "text" id = "username" name="username" placeholder = "Username" required>
+            <br>
+            <input type = "password" id = "password" name = "password" placeholder = "Password" required>
+            <br>
+            <button type = "submit"> Log In </button>
+        </form>
+        <div id = "error"></div>
+    </div>
+
+    <script src=" js/login.js"></script>
+</body>
+</html>
