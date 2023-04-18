@@ -21,6 +21,10 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.nav-link {
+    cursor: pointer;
+  }
  
 .logo img{
     float: left;

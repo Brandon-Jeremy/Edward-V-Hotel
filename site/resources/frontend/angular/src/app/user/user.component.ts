@@ -1,46 +1,84 @@
+// src/app/user/user.component.ts
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service'; 
+import { Router } from '@angular/router'; // Add this import
+//import { MatSnackBar } from '@angular/material/snack-bar'; // Add this import
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
   user: any; // Replace 'any' with your user model/interface
 
-  constructor(private userService: UserService) {
-    this.user = {}; // Initialize the user object
-  }
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private router: Router, // Inject Router here
+    //private snackBar: MatSnackBar // Inject MatSnackBar here
+  ) {}
 
   ngOnInit(): void {
-    // Load user data from the backend, using the UserService
-    this.userService.getUserData().subscribe((userData) => {
-      this.user = userData;
-    });
+    this.getUserData();
   }
 
-  updateProfile(): void {
-    // Update the user profile by calling the UserService
+  getUserData() {
+    this.userService.getUserData().subscribe(
+      (response) => {
+        this.user = response;
+      },
+      (error) => {
+        // Handle error, e.g., display an error message
+      }
+    );
   }
 
-  deleteAccount(): void {
-    // Delete the user account by calling the UserService
+  updateProfile() {
+    this.userService.updateProfile(this.user).subscribe(
+      (response) => {
+        // Handle successful update, e.g., show a success message
+      },
+      (error) => {
+        // Handle error, e.g., display an error message
+      }
+    );
   }
 
-  logout(): void {
-    // Logout the user by calling the UserService
+  deleteAccount() {
+    this.userService.deleteAccount(this.user.id).subscribe(
+      (response) => {
+        // Handle successful deletion, e.g., navigate to another page
+      },
+      (error) => {
+        // Handle error, e.g., display an error message
+      }
+    );
   }
 
-  giftRewards(): void {
-    // Implement the logic for gifting rewards
-  }
+  // Add other methods to call UserService functions as needed
 
-  editReservation(reservationId: number): void {
-    // Edit the reservation using
-    //the reservationId and UserService
+  logout() {
+    this.userService.logout().subscribe(
+      (response) => {
+        // Display a success message
+        console.log('Logout successful'); // Replace this with a proper user-friendly message
+
+        // Update the AuthService state
+        this.authService.logout();
+
+        // Navigate to the home page
+        this.router.navigate(['/home']);
+      },
+      (error) => {
+        // Handle error, e.g., display an error message
+      }
+    );
   }
   
-  // Add any other necessary functions or services as needed
-  
+
+  giftRewards(){
+
+  }
 }

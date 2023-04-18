@@ -33,7 +33,8 @@ export class LoginFormComponent implements OnInit {
     this.authService.login(loginData.email,loginData.password).subscribe(
       (response) => {
         // Handle successful login, e.g., store the user data, token, etc.
-        this.router.navigate(['/user']);
+        this.authService.setAuthenticated(true);
+        this.clearForm();
       },
       (error) => {
         // Handle login error, e.g., display an error message

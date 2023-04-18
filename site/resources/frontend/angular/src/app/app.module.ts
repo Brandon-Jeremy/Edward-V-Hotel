@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from './services/auth.service';
 
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -48,6 +48,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MatDialogModule,
     MatButtonModule,
     FormsModule,
+    MatSnackBarModule,
     MatInputModule,
     RouterModule.forRoot([]),
   ],

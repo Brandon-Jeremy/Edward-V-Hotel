@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { tap, catchError, delay } from 'rxjs/operators';
 import * as z from 'zod';
 
 
@@ -38,7 +38,15 @@ const userSignUpSchema = z.object({
 export class AuthService {
   private apiUrl = 'http://localhost:3000/auth';
 
+  private isAuthenticated = new BehaviorSubject<boolean>(false);
+  authStatus$ = this.isAuthenticated.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  fakeLogin(email: string, password: string) {
+    // Simulate an API call with a delay
+    return of(true).pipe(delay(1000));
+  }
 
   login(email: string, password: string): Observable<any> {
     try {
@@ -49,11 +57,12 @@ export class AuthService {
         throw new Error(errorMessage);
       }
     }
-
-    return this.http.post(`${this.apiUrl}/login`, { email, password }).pipe(
+  
+    // Using fakeLogin for testing purposes
+    return this.fakeLogin(email, password).pipe(
       tap((response) => {
         // Handle successful login, e.g., store the user data, token, etc.
-        this.onSuccessfulLogin(response);
+        this.isAuthenticated.next(true);
       }),
       catchError((err) => {
         console.log(err);
@@ -103,5 +112,19 @@ export class AuthService {
   // Call this method to check if the user is logged in
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  logout() {
+    // Perform your logout logic here, e.g., API calls
+    // After successful logout, set isAuthenticated to false
+    this.setAuthenticated(false);
+  }
+
+  setAuthenticated(status: boolean) {
+    this.isAuthenticated.next(status);
+  }
+
+  getIsAuthenticated(): BehaviorSubject<boolean> {
+    return this.isAuthenticated;
   }
 }

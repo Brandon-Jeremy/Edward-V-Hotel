@@ -37,9 +37,9 @@
                     <li class="nav-item">
                         <a routerLink="/contact" class="nav-link">Contact</a>
                     </li>
-                    <li class="nav-item"  *ngIf="isUserLoggedIn()">
-                        <a routerLink="/user" class="nav-link">Account</a>
-                    </li>
+                    <li class="nav-item">
+                        <a (click)="navigateToAccount()" class="nav-link">Account</a>
+                      </li>          
                 </ul>     
             </nav>
         </div>

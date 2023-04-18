@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { SignUpFormComponent } from '../sign-up-form/sign-up-form.component';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export const AUTH_SERVICE = new InjectionToken<AuthService>('AuthService');
 
@@ -14,7 +16,7 @@ export const AUTH_SERVICE = new InjectionToken<AuthService>('AuthService');
 })
 export class HomeComponent implements OnInit {
 
-  constructor(@Inject(AUTH_SERVICE) private authService: AuthService, private dialog: MatDialog) { }
+  constructor(@Inject(AUTH_SERVICE) private authService: AuthService,private snackBar: MatSnackBar, private dialog: MatDialog, private router: Router) { }
 
   header: HTMLElement | null = null; // define header property
 
@@ -36,7 +38,25 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  
+  isUserLoggedIn(): boolean {
+    return this.authService.getIsAuthenticated().getValue();
+  }
+
+  navigateToAccount(): void {
+    if (this.isUserLoggedIn()) {
+      this.router.navigate(['/user']);
+    } else {
+      this.showSnackbar('Please login or register to access account');
+    }
+  }
+
+  showSnackbar(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
+  }
 
   openLoginForm(): void {
     this.dialog.open(LoginFormComponent, {
@@ -52,8 +72,5 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  isUserLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
-  }
-  
+ 
 }
