@@ -23,6 +23,7 @@ import { UserComponent } from './user/user.component';
 
 import { FooterComponent } from './footer/footer.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     SignUpFormComponent,
     RoomsComponent,
     ContactComponent,
-    UserComponent
+    UserComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
