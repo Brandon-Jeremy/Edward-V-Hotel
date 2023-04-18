@@ -1,0 +1,45 @@
+.site-footer {
+    background-color: var( --purple-solid);
+    padding: 30px 0;
+    text-align: center;
+    font-size: 14px;
+    color: white;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-nav {
+    margin-bottom: 20px;
+  }
+  
+  .footer-menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .footer-menu li {
+    margin: 0 15px;
+  }
+  
+  .footer-menu a {
+    color: whitesmoke;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    
+  }
+  
+  .footer-menu a:hover {
+    color: wheat;
+  }
+  
+  .footer-content {
+    margin-top: 20px;
+    opacity: 80%;
+  }
+  

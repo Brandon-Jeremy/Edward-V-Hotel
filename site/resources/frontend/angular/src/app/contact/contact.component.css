@@ -1,0 +1,191 @@
+.contact-content {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 120rem;
+    padding: 0 1.5rem;
+    margin: 0 auto;
+}
+
+.traveler-wrap {
+    display: none;
+}
+
+.section-head {
+    text-align: center;
+    font-size: 5rem; /* Increase the font size */
+    margin-bottom: 3.5rem;
+}
+
+.section-head .sub-heading {
+    display: block;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgba(190, 8, 8, 0.9); /* Set a more visible lighter white color */
+    margin-top: 0.5rem;
+}
+
+.contact-form {
+    width: 100%;
+    background-image: var(--gradient-color);
+    padding: 2.5rem;
+}
+
+.contact-form .input {
+    display: block;
+    background-color: transparent;
+    color: #fff;
+    font-weight: normal;
+    border: none;
+    padding-left: 0;
+    outline: none;
+    position: relative;
+    font-size: 1.5rem;
+}
+
+.contact-form .input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.bar {
+    display: block;
+    position: relative;
+}
+
+.bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--purple-light);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .5s;
+    z-index: 2; /* Make sure the purple line is above the white line */
+}
+
+.contact-form .input:focus + .bar::after {
+    transform: scaleX(1);
+}
+
+.input-group {
+    margin-bottom: 2rem; /* Add more space between input fields */
+}
+
+.btn.form-btn {
+    display: block;
+    margin: 1rem auto; /* Add top and bottom margin of 1rem and auto left and right margin */
+    text-align: center;
+}
+
+@media screen and (min-width: 768px){
+    
+    .contact-content{
+        justify-content: space-between;
+    }
+    .traveler-wrap{
+        display: block;
+        flex:0 0 45%;
+    }
+    .traveler-wrap img{
+        width: 100%;
+    }
+    .contact-form{
+        flex: 0 0 50%;
+        align-self: flex-start;
+    }
+    .input-group-wrap{
+        display:flex;
+    }
+    .input-group-wrap .input-group{
+        width: 50%;
+        margin-right: 2rem;
+    }
+    .input-group-wrap .input-group:last-child{
+        margin-right: 0;
+    }
+
+    
+}
+
+@media screen and (min-width: 1000px){
+    section:not(.booking){
+        padding: 10rem 0;
+    }
+
+    .hamburger-menu{
+        display: none;
+    }
+    .nav-list{
+        position: initial;
+        width: initial;
+        height: initial;
+        background-color: transparent;
+        flex-direction: row;
+        justify-content: initial;
+        opacity: 1;
+        transform: scale(1);
+    }
+    .nav-item:not(:last-child){
+        margin-right: 3rem;
+        margin-bottom: 0;
+    }
+    .nav-link{
+        font-size: 1.3rem;
+        font-weight: normal;
+        transition: color .5s;
+    }
+    .nav-link:hover{
+        color: var(--yellow-solid);
+    }
+    /* Hero section styles */
+    .title{
+        font-size: 12rem;
+    }
+    .subtitle{
+        font-size: 4.6rem;  
+    }
+
+    .book-form{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .book-form .input-group{
+        margin-bottom: 0;
+    }
+
+    .book-form .input-group:first-child{
+        flex: 0 0 20%
+    }
+
+    .input,
+    .options{
+        min-width: 10rem;
+    }
+
+    
+}
+
+@media screen and (min-width: 1200px){
+    .book-form .input-group:first-child{
+        flex: 0 0 30%
+    }
+
+}
