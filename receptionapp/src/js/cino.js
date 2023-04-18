@@ -9,10 +9,11 @@ fetch('test-in.json')
             <td>${checkIn.lastName}</td>
             <td>${checkIn.startDate}</td>
             <td>${checkIn.roomNo}</td>
-            <td><button class="checkin-btn">Check In</button></td>
+            <td><button class="checkin-btn" onclick = "deleteRow(this)">✔</button></td>
             `;
             tr.querySelector('.checkin-btn').addEventListener('click', () => {
-              alert(`Checked in ${checkIn.name} ${checkIn.lastName} to room ${checkIn.roomNo}`);
+                
+                
             });
             tbody.appendChild(tr);
         }
@@ -29,11 +30,17 @@ fetch('test-in.json')
             <td>${checkIn.lastName}</td>
             <td>${checkIn.startDate}</td>
             <td>${checkIn.roomNo}</td>
-            <td><button class="checkin-btn">Check Out</button></td>
+            <td><button class="checkin-btn" onclick = "deleteRow(this)">↳</button></td>
             `;
             tr.querySelector('.checkin-btn').addEventListener('click', () => {
+                
               alert(`Checked in ${checkIn.name} ${checkIn.lastName} to room ${checkIn.roomNo}`);
             });
             tbody.appendChild(tr);
         }
     });
+
+function deleteRow(button) {
+    let row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+}
