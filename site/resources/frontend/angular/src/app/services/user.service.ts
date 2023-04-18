@@ -7,7 +7,7 @@ import { NonNullAssert } from '@angular/compiler';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'your_laravel_api_base_url'; // Replace with your Laravel API URL
+  private apiUrl = 'http://localhost:4000/api'; // Replace with your Laravel API URL
 
   constructor(private http: HttpClient) { }
 
@@ -24,7 +24,7 @@ export class UserService {
   }
 
   logout(): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/logout`, {}); // Update the endpoint as needed
+    return this.http.post<any>(`${this.apiUrl}/logout`, {});
   }
 
   giftRewards(rewardData: any): Observable<any> { // Replace 'any' with your reward model/interface if necessary
