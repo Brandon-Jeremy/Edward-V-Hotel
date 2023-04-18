@@ -39,7 +39,7 @@ const userSignUpSchema = z.object({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl = 'http://localhost:4200/auth';
 
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   authStatus$ = this.isAuthenticated.asObservable();
