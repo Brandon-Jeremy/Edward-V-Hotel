@@ -11,7 +11,7 @@ use App\Models\WalkInUser;
 use App\Models\Rooms;
 
 //Used for emailing
-use App\Mail\MyCustomEmail;
+use App\Mail\RequestFeedback;
 use Illuminate\Support\Facades\Mail;
 
 class WalkInBookingController extends Controller
@@ -381,7 +381,7 @@ class WalkInBookingController extends Controller
             ->update(['status' => 'dirty']);
 
             if(!empty($email)){
-                Mail::to($email)->send(new MyCustomEmail);
+                Mail::to($email)->send(new RequestFeedback);
             }
 
             return response()->json([
