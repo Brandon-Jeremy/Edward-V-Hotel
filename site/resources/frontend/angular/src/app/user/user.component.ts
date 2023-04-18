@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service'; 
-import { Router } from '@angular/router'; // Add this import
-//import { MatSnackBar } from '@angular/material/snack-bar'; // Add this import
+import { Router } from '@angular/router'; 
+import { MatSnackBar } from '@angular/material/snack-bar'; 
 
 @Component({
   selector: 'app-user',
@@ -16,8 +16,8 @@ export class UserComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private router: Router, // Inject Router here
-    //private snackBar: MatSnackBar // Inject MatSnackBar here
+    private router: Router, 
+    private snackBar: MatSnackBar 
   ) {}
 
   ngOnInit(): void {
@@ -63,7 +63,7 @@ export class UserComponent implements OnInit {
     this.userService.logout().subscribe(
       (response) => {
         // Display a success message
-        console.log('Logout successful'); // Replace this with a proper user-friendly message
+        this.showSnackbar('Logout successful');
 
         // Update the AuthService state
         this.authService.logout();
@@ -76,6 +76,15 @@ export class UserComponent implements OnInit {
       }
     );
   }
+
+  showSnackbar(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
+  }
+
   
 
   giftRewards(){

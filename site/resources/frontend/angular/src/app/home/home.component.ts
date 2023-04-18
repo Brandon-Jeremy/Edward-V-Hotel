@@ -6,17 +6,16 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-export const AUTH_SERVICE = new InjectionToken<AuthService>('AuthService');
+//export const AUTH_SERVICE = new InjectionToken<AuthService>('AuthService');
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  providers: [{ provide: AUTH_SERVICE, useClass: AuthService }]
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
 
-  constructor(@Inject(AUTH_SERVICE) private authService: AuthService,private snackBar: MatSnackBar, private dialog: MatDialog, private router: Router) { }
+  constructor(private authService: AuthService,private snackBar: MatSnackBar, private dialog: MatDialog, private router: Router) { }
 
   header: HTMLElement | null = null; // define header property
 

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { tap, catchError, delay } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+
 import * as z from 'zod';
 
 
@@ -36,12 +39,12 @@ const userSignUpSchema = z.object({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl = 'http://localhost:4200/auth';
 
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   authStatus$ = this.isAuthenticated.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private dialog: MatDialog) {}
 
 
   login(email: string, password: string): Observable<any> {
@@ -50,6 +53,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const errorMessage = error.errors[0].message;
+        console.log(error);
+        this.showErrorDialog(errorMessage || 'An error occurred');
         throw new Error(errorMessage);
       }
     }
@@ -65,7 +70,13 @@ export class AuthService {
         throw err;
       })
     );
-}
+  }
+
+  private showErrorDialog(errorMessage: string): void {
+    this.dialog.open(ErrorDialogComponent, {
+      data: { errorMessage },
+    });
+  }
 
 
   fakeLogin(email: string, password: string): Observable<any> {
@@ -100,6 +111,8 @@ export class AuthService {
     } catch (error) {
       if (error instanceof z.ZodError) {
         const errorMessage = error.errors[0].message;
+        console.log(error);
+        this.showErrorDialog(errorMessage || 'An error occurred');
         throw new Error(errorMessage);
       } else {
         throw error;
