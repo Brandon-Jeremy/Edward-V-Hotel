@@ -16,6 +16,10 @@ const lastNameSchema = z.string().regex(nameRegex, { message: 'Last name must co
 const digitsRegex = /^\d+$/;
 const numberSchema = z.string().regex(digitsRegex, { message: 'Please enter a valid phone number' });
 const confirmPasswordSchema = z.string().min(8, { message: 'Confirm password must be at least 8 characters long' });
+const dobSchema = z.string().refine((value) => {
+  const date = new Date(value);
+  return !isNaN(date.getTime());
+}, { message: 'Please enter a valid date of birth (YYYY-MM-DD)' });
 
 const userLoginSchema = z.object({
   email: emailSchema,
@@ -27,11 +31,12 @@ const userSignUpSchema = z.object({
   password: passwordSchema,
   firstName: firstNameSchema,
   lastName: lastNameSchema,
+  dob: dobSchema,
   number: numberSchema,
   confirmPassword: confirmPasswordSchema,
-  }).refine(
-    (data) => data.password === data.confirmPassword,
-    { message: 'Passwords do not match' }
+}).refine(
+  (data) => data.password === data.confirmPassword,
+  { message: 'Passwords do not match' }
 );
 
 
@@ -39,7 +44,7 @@ const userSignUpSchema = z.object({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:4200/auth';
+  private apiUrl = 'http://localhost:4200/api';
 
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   authStatus$ = this.isAuthenticated.asObservable();
@@ -59,7 +64,7 @@ export class AuthService {
       }
     }
 
-    return this.http.post(`${this.apiUrl}/login`, { email, password }).pipe(
+    return this.http.post(`${this.apiUrl}/login-user`, { email, password }).pipe(
       tap((response) => {
         // Handle successful login, e.g., store the user data, token, etc.
         this.onSuccessfulLogin(response);
@@ -105,9 +110,6 @@ export class AuthService {
   signUp(email: string, password: string, firstName: string, lastName: string, number: string, confirmPassword: string): Observable<any> {
     try {
       userSignUpSchema.parse({ email, password, firstName, lastName, number, confirmPassword });
-      if (password !== confirmPassword) {
-        throw new Error('Password and confirm password do not match');
-      }
     } catch (error) {
       if (error instanceof z.ZodError) {
         const errorMessage = error.errors[0].message;
@@ -118,7 +120,7 @@ export class AuthService {
         throw error;
       }
     }
-
+  
     return this.http.post(`${this.apiUrl}/signup`, { email, password, firstName, lastName, number }).pipe(
       catchError((err) => {
         console.log(err);
@@ -126,6 +128,7 @@ export class AuthService {
       })
     );
   }
+  
 
 
   onSuccessfulLogin(response: any): void {

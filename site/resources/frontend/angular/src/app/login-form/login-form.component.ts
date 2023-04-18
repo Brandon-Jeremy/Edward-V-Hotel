@@ -31,7 +31,7 @@ export class LoginFormComponent implements OnInit {
       password: this.password
     };
   
-    this.authService.fakeLogin(loginData.email,loginData.password).subscribe(
+    this.authService.login(loginData.email,loginData.password).subscribe(
       (response) => {
         // Handle successful login, e.g., store the user data, token, etc.
         this.authService.setAuthenticated(true);
