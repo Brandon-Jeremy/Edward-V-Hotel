@@ -10,6 +10,10 @@ use Illuminate\Support\Str;
 use App\Models\WalkInUser;
 use App\Models\Rooms;
 
+//Used for emailing
+use App\Mail\MyCustomEmail;
+use Illuminate\Support\Facades\Mail;
+
 class WalkInBookingController extends Controller
 {
     public function addUser(Request $request){
@@ -337,6 +341,12 @@ class WalkInBookingController extends Controller
         ->whereIn('activity', ['active', 'pending'])
         ->first();
 
+        if(empty($reservations)){
+            return response()->json([
+                "Error" => "No reservation found"
+            ]);
+        }
+
 
         //Find the user_id
         $userid = $reservations->user_id;
@@ -354,6 +364,13 @@ class WalkInBookingController extends Controller
         }  
         // var_dump($reservations);
 
+        $getemail = DB::table('users')
+        ->select('email')
+        ->where('id',$userid)
+        ->first();
+
+        $email = $getemail->email;
+
         if ($reservations && $reservations->activity === 'active') {
             DB::table('reservation')
             ->where('id', $id)
@@ -362,6 +379,10 @@ class WalkInBookingController extends Controller
             DB::table('room')
             ->where('id',$roomId)
             ->update(['status' => 'dirty']);
+
+            if(!empty($email)){
+                Mail::to($email)->send(new MyCustomEmail);
+            }
 
             return response()->json([
                 'success' => true,

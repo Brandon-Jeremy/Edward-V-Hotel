@@ -16,7 +16,9 @@
         tr:nth-child(even){background-color: #f2f2f2}
         
         th {
-            background-color: #4CAF50;
+            background-color: #954caf;
+            /* #4CAF50 for green */
+            /* #954caf for purple */
             color: white;
         }
     </style>
