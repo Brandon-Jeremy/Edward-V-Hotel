@@ -21,7 +21,7 @@ export class SignUpFormComponent {
   constructor(private authService: AuthService, private http: HttpClient) {}
 
   onSignUp(): void {
-      const apiUrl = 'http://localhost:4000/api/register-user'; // Replace with your API endpoint
+      const apiUrl = 'http://localhost:4200/api/register-user'; // Replace with your API endpoint
 
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
