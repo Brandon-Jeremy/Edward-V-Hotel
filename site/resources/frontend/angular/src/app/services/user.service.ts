@@ -7,7 +7,7 @@ import { NonNullAssert } from '@angular/compiler';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:4000/api'; // Replace with your Laravel API URL
+  private apiUrl = 'http://localhost:4200/api'; // Replace with your Laravel API URL
 
   constructor(private http: HttpClient) { }
 
