@@ -98,6 +98,9 @@ td:nth-child(5) {
     background-color: #ddd;
   }
 
+#availablerooms {
+  display: none;
+}
 body {
     background-color: rgba(228, 229, 230 , 1);
 }
