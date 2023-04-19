@@ -1,4 +1,4 @@
-fetch('test-in.json')
+fetch('http://127.0.0.1:8000/api/get-reserved')
     .then(response => response.json())
     .then(checkIns => {
         const tbody = document.querySelector('#checkins');
@@ -19,7 +19,7 @@ fetch('test-in.json')
         }
     });
 
-fetch('test-in.json')
+fetch('http://127.0.0.1:8000/api/show-checkout')
     .then(response => response.json())
     .then(checkIns => {
         const tbody = document.querySelector('#checkouts');
