@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,15 +10,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-  @ViewChild('loginForm') loginForm!: NgForm;
   @ViewChild('templateRef') templateRef!: ElementRef;
+  loginForm!: FormGroup;
+  emailError = '';
+  passwordError = '';
 
-  email = '';
-  password = '';
-
-  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    });
   }
 
   openForm(): void {
@@ -26,16 +29,19 @@ export class LoginFormComponent implements OnInit {
   }
   
   onSubmit(): void {
-    const loginData = {
-      email: this.email,
-      password: this.password
-    };
-  
-    this.authService.login(loginData.email,loginData.password).subscribe(
+    if (this.loginForm.invalid) {
+      this.emailError = this.loginForm.controls['email'].errors?.['required'] ? 'Email is required' : 'Invalid email address';
+      this.passwordError = this.loginForm.controls['password'].errors?.['required'] ? 'Password is required' : 'Password must be at least 8 characters long';
+      return;
+    }
+
+    const loginData = this.loginForm.value;
+    
+    this.authService.login(loginData.email, loginData.password).subscribe(
       (response) => {
         // Handle successful login, e.g., store the user data, token, etc.
         this.authService.setAuthenticated(true);
-        this.clearForm();
+        this.loginForm.reset();
         this.showSnackbar('Logged in successfully');
       },
       (error) => {
@@ -51,14 +57,4 @@ export class LoginFormComponent implements OnInit {
       verticalPosition: 'top',
     });
   }
-  
-
-  clearForm(): void {
-    this.email = '';
-    this.password = '';
-  }
-
-  
-
 }
-
