@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Mail\RequestFeedback;
 use App\Mail\EmailToAllBookedCustomers;
+use App\Mail\EmailToAllCustomers;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 
@@ -54,6 +55,35 @@ class EmailController extends Controller
             }
         }
         
+        return response()->json([
+            "Success" => true,
+            "Message" => $messages
+        ]);
+    }
+
+    public function emailAll(Request $request){
+        $messages = $request->message;
+
+        $mailData = [
+            "message" => $messages
+        ];
+
+        $users = DB::table('users')
+        ->select('email')
+        ->where('email','!=', NULL)
+        ->get();
+
+        $emails = $users->pluck('email')->toArray();
+
+        // return response()->json([
+        //     $emails
+        // ]);
+    
+        foreach ($emails as $email) {
+            // echo $email;
+            Mail::to($email)->send(new EmailToAllCustomers($mailData));
+        }
+
         return response()->json([
             "Success" => true,
             "Message" => $messages
