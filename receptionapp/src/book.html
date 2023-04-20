@@ -15,26 +15,26 @@
           <button class = "buttons" id = "menubutton" onclick = "window.location.href = 'index.html'"> Menu </button>
         </nav>
     </header>
-
+    
     <form class = "forms" style="margin-top: 90px;" id = "formroomtype">
-        <label for = "roomtype">
-            Room Type:
-        </label>
+        
         <select id = "roomtype" name = "roomtype" >
+            <option disabled selected> Room Type </option>
             <option value = "single"> Single </option>
             <option value = "double"> Double </option>
             <option value = "suite"> Suite </option>
         </select>
         <br>
+        
+        <input type = "checkbox" id = "view" name = "view">
         <label for = "view">
             View
         </label>
-        <input type = "checkbox" id = "view" name = "view">
         <br>
-        <input type = "submit" value = "Search">
+        <button type = "submit"> Search </button>
     </form>
     <br><br><br><br>
-    <form class = "forms" id = "availablerooms">
+    <form class = "formst" id = "availablerooms">
         <!--<table>
             <thead>
                 <tr>

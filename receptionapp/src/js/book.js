@@ -11,7 +11,7 @@ fetch('test-avrooms.json')
       html += `<tr><td>${room.number}</td><td>${room.price}</td><td><input type="checkbox" name="room" value="${room.number}"></td></tr>`;
     });
     
-    html += '</tbody></table><input type = "submit" value = "OK">';
+    html += '</tbody></table><br><input type = "submit" value = "OK">';
     roomsElement.innerHTML = html;
   })
   .catch(error => console.error(error));
@@ -22,7 +22,7 @@ let form = document.getElementById("formroomtype");
 let resultDiv = document.getElementById("availablerooms");
 
 form.addEventListener("submit", function(event) {
-	event.preventDefault(); // prevent the form from submitting
-	form.style.display = "none"; // hide the form
-	resultDiv.style.display = "block"; // show the new content
+	event.preventDefault(); 
+	form.style.display = "none"; 
+	resultDiv.style.display = "block";
 });

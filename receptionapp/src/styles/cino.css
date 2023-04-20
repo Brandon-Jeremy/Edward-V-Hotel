@@ -101,6 +101,55 @@ td:nth-child(5) {
 #availablerooms {
   display: none;
 }
+
+.forms {
+  font-size: 120%;
+  background-color: crimson;
+  margin:auto;
+  width: 35%;
+  height: 40%;
+  position: absolute; 
+  top: 40%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  text-align: center;
+  
+}
+.forms label {
+  margin: auto;
+  display: inline-block;
+  color: white;
+}
+.forms select {
+  width: 80%;
+  background-color: rgba(104, 11, 30, 0.629);
+  display: inline-block;
+  margin: auto;
+  margin-top:10%;
+  margin-bottom:5%;
+  height: 40px;
+  color: white;
+  font-size: 90%;
+}
+.forms button {
+  display:inline-block;
+  margin: auto;
+  margin-top: 10%;
+  width: 45%;
+  height: 30px;
+  font-size: 110%;
+  background-color: white;
+  color:crimson;
+  border: 2px solid white;
+  transition: 0.2s;
+}
+.forms button:hover {
+  width: 47%;
+  height: 33px;
+  margin-top: 9.8%;
+}
+
+
 body {
     background-color: rgba(228, 229, 230 , 1);
 }
