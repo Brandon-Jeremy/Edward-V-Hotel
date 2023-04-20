@@ -29,6 +29,7 @@ export class LoginFormComponent implements OnInit {
   
   onSubmit(): void {
     this.resetError();
+    
     if(!this.isEmail(this.email)){
       this.emailError = "Invalid email format";
       return;
@@ -48,7 +49,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   private isEmail(str: string) {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     // ^[^\s@]+@(?:(gmail|hotmail|outlook))\.[^\s@]+$
     return emailPattern.test(str);
   }
