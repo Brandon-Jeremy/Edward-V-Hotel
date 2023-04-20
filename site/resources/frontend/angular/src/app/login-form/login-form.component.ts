@@ -41,7 +41,6 @@ export class LoginFormComponent implements OnInit {
     
     this.authService.login(loginData.email, loginData.password).subscribe(
       (response) => {
-        // Handle successful login, e.g., store the user data, token, etc.
         this.authService.setAuthenticated(true);
         this.clearForm();
         this.showSnackbar('Logged in successfully');

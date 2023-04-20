@@ -38,7 +38,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     RoomsComponent,
     ContactComponent,
     UserComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +48,8 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule,
     MatButtonModule,
     MatSnackBarModule,
     MatInputModule,

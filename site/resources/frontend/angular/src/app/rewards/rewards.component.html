@@ -1,0 +1,16 @@
+<div class="rewards-wrapper">
+    <h3>Rewards</h3>
+    <p>Available rewards: {{ user.rewards }}</p>
+    <button (click)="toggleRewardsMenu()" class="rewards-menu-btn">Rewards Menu</button>
+  
+    <div class="rewards-menu" [ngClass]="{ 'open': rewardsMenuOpen }">
+      <ul>
+        <li><button (click)="displayRewards()">Display Rewards</button></li>
+        <li><button (click)="openRewardsCatalogue()">Rewards Catalogue</button></li>
+        <li><button (click)="useRewards()">Use Rewards</button></li>
+        <li><button (click)="giftPoints()">Gift Points</button></li>
+        <li><button (click)="redeemGiftPoints()">Redeem Gift Points</button></li>
+      </ul>
+    </div>
+  </div>
+  
