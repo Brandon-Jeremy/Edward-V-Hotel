@@ -24,6 +24,9 @@ import { UserComponent } from './user/user.component';
 import { FooterComponent } from './footer/footer.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { EditReservationComponent } from './edit-reservation/edit-reservation.component';
+import { RewardsComponent } from './rewards/rewards.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     RoomsComponent,
     ContactComponent,
     UserComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    EditReservationComponent,
+    RewardsComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
+    ReactiveFormsModule,
     FormsModule,
     MatSnackBarModule,
     MatInputModule,

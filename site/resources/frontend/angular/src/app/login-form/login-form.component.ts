@@ -30,10 +30,9 @@ export class LoginFormComponent implements OnInit {
       email: this.email,
       password: this.password
     };
-  
-    this.authService.login(loginData.email,loginData.password).subscribe(
+
+    this.authService.fakeLogin(loginData.email, loginData.password).subscribe(
       (response) => {
-        // Handle successful login, e.g., store the user data, token, etc.
         this.authService.setAuthenticated(true);
         this.clearForm();
         this.showSnackbar('Logged in successfully');
@@ -51,14 +50,9 @@ export class LoginFormComponent implements OnInit {
       verticalPosition: 'top',
     });
   }
-  
 
   clearForm(): void {
     this.email = '';
     this.password = '';
   }
-
-  
-
 }
-

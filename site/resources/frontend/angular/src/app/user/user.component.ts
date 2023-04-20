@@ -11,7 +11,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
-  user: any; // Replace 'any' with your user model/interface
+  
+  user = {
+    email: 'john.doe@example.com',
+    phone: '555-555-1234',
+    password: 'password123',
+    reservations: [ {
+      room: 'Deluxe Room',
+      time: new Date(),
+      // Add other properties as needed
+    },
+    ], // Add this line
+  };
+
+  isModalOpen: boolean = false;
+  activeModal: string | null = null;
 
   constructor(
     private authService: AuthService,
@@ -19,6 +33,16 @@ export class UserComponent implements OnInit {
     private router: Router, 
     private snackBar: MatSnackBar 
   ) {}
+
+  openModal(modalId: string): void {
+    this.isModalOpen = true;
+    this.activeModal = modalId;
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
+    this.activeModal = null;
+  }
 
   ngOnInit(): void {
     this.getUserData();
@@ -46,16 +70,16 @@ export class UserComponent implements OnInit {
     );
   }
 
-  deleteAccount() {
-    this.userService.deleteAccount(this.user.id).subscribe(
-      (response) => {
-        // Handle successful deletion, e.g., navigate to another page
-      },
-      (error) => {
-        // Handle error, e.g., display an error message
-      }
-    );
-  }
+  // deleteAccount() {
+  //   this.userService.deleteAccount(this.user.id).subscribe(
+  //     (response) => {
+  //       // Handle successful deletion, e.g., navigate to another page
+  //     },
+  //     (error) => {
+  //       // Handle error, e.g., display an error message
+  //     }
+  //   );
+  // }
 
   // Add other methods to call UserService functions as needed
 
@@ -85,9 +109,20 @@ export class UserComponent implements OnInit {
     });
   }
 
-  
+  updateAccount(): void {
+    // Implement your logic to update the user account here
+    console.log('Account updated:', this.user);
+    this.closeModal();
+  }
 
   giftRewards(){
 
   }
+
+  openEditReservationModal(reservation: any): void {
+    // Implement your logic to open a modal window for editing reservations
+    console.log('Editing reservation:', reservation);
+  }
+
+  
 }

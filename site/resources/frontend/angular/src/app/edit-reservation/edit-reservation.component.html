@@ -1,0 +1,20 @@
+<div class="edit-reservation-container">
+    <h3>Edit Reservation</h3>
+    <form [formGroup]="editReservationForm" (ngSubmit)="onSubmit()">
+      <label>
+        Room:
+        <select formControlName="room">
+          <option *ngFor="let room of rooms" [value]="room">{{ room }}</option>
+        </select>
+      </label>
+      <br />
+      <label>
+        Time:
+        <input type="datetime-local" formControlName="time" />
+      </label>
+      <br />
+      <button type="submit" [disabled]="editReservationForm.invalid">Save Changes</button>
+      <button type="button" (click)="onCancel()">Cancel</button>
+    </form>
+  </div>
+  

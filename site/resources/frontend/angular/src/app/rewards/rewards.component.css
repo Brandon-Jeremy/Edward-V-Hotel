@@ -1,0 +1,58 @@
+.rewards-wrapper {
+    background-color: rgba(128, 0, 128, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h3 {
+    color: #800080;
+    margin-bottom: 15px;
+  }
+  
+  .rewards-menu-btn {
+    background-color: #800080;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .rewards-menu-btn:hover {
+    background-color: #660066;
+  }
+  
+  .rewards-menu {
+    display: none;
+    margin-top: 20px;
+  }
+  
+  .rewards-menu.open {
+    display: block;
+  }
+  
+  .rewards-menu ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .rewards-menu li {
+    margin-bottom: 10px;
+  }
+  
+  .rewards-menu button {
+    background-color: #800080;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .rewards-menu button:hover {
+    background-color: #660066;
+  }
+  
