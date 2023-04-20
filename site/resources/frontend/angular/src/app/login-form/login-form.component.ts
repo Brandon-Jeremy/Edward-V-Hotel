@@ -29,6 +29,8 @@ export class LoginFormComponent implements OnInit {
   }
   
   onSubmit(): void {
+    this.emailError = '';
+    this.passwordError = '';
     if (this.loginForm.invalid) {
       this.emailError = this.loginForm.controls['email'].errors?.['required'] ? 'Email is required' : 'Invalid email address';
       this.passwordError = this.loginForm.controls['password'].errors?.['required'] ? 'Password is required' : 'Password must be at least 8 characters long';
@@ -41,7 +43,7 @@ export class LoginFormComponent implements OnInit {
       (response) => {
         // Handle successful login, e.g., store the user data, token, etc.
         this.authService.setAuthenticated(true);
-        this.loginForm.reset();
+        this.clearForm();
         this.showSnackbar('Logged in successfully');
       },
       (error) => {
@@ -56,5 +58,11 @@ export class LoginFormComponent implements OnInit {
       horizontalPosition: 'right',
       verticalPosition: 'top',
     });
+  }
+
+  clearForm(): void {
+    this.loginForm.reset();
+    this.emailError = '';
+    this.passwordError = '';
   }
 }
