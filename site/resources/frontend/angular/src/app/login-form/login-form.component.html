@@ -1,13 +1,19 @@
 <div class="container">
   <h2 class="center">Hotel Name</h2>
   <p class="center welcome">Welcome</p>
-  <form class="popup" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+  <form class="popup" #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
     <mat-form-field>
-      <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
+      <input matInput placeholder="Email" name="email">
     </mat-form-field>
+    <div *ngIf="emailError" class="error">
+      {{ emailError }}
+    </div>
     <mat-form-field>
-      <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password" required>
+      <input matInput placeholder="Password" name="password" type="password">
     </mat-form-field>
-    <button class="popup-button" mat-raised-button color="primary" type="submit" (click)="onSubmit()">Login</button>
+    <div *ngIf="passwordError" class="error">
+      {{ passwordError }}
+    </div>
+    <button class="popup-button" mat-raised-button color="primary" type="submit">Login</button>
   </form>
 </div>
