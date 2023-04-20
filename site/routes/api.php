@@ -12,6 +12,8 @@ use App\Http\Controllers\FinancesController;
 use App\Http\Controllers\ReceptionAuthController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\RoomInfoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -80,3 +82,6 @@ Route::post('/email-all',[EmailController::class,'emailAll'])->name('email-all')
 
 //PDF Export
 Route::post('/generate-pdf',[ExportController::class,'generatePDF'])->name('generate-pdf');
+
+//Room Information Website
+Route::get('/room-info',[RoomInfoController::class,'roomInfo'])->name('room-info');
