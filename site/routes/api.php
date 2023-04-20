@@ -73,7 +73,9 @@ Route::post('/set-clean',[HousekeepingController::class,'setClean'])->name('set-
 Route::post('/financial-data',[FinancesController::class,'computeFinances'])->name('financial-data');
 Route::post('/occupancy-data',[FinancesController::class,'occupancyData'])->name('occupancy-data');
 
+//Send emails
 Route::post('/test-email',[EmailController::class,'testEmail'])->name('test-email');
+Route::post('/email-current',[EmailController::class,'emailCurrent'])->name('email-current');
 
 //PDF Export
 Route::post('/generate-pdf',[ExportController::class,'generatePDF'])->name('generate-pdf');
