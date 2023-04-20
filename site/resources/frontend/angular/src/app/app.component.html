@@ -6,6 +6,10 @@
 </div>
 
 <!-- for components on different pages -->
-<div *ngIf="router.url === '/forgot-password' || router.url === '/user'"> s
+<div *ngIf="router.url === '/forgot-password' || router.url === '/user'">
     <router-outlet></router-outlet>
 </div>
+
+<div *ngIf="isLoggedIn && router.url === '/user'">
+    <router-outlet></router-outlet>
+</div>  

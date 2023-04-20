@@ -7,21 +7,42 @@
     <mat-form-field>
       <input matInput placeholder="First name" required [(ngModel)]="firstName" name="firstName">
     </mat-form-field>
+    <div *ngIf="firstNameError" class="error">
+      {{ firstNameError }}
+    </div>
     <mat-form-field>
       <input matInput placeholder="Last name" required [(ngModel)]="lastName" name="lastName">
     </mat-form-field>
+    <div *ngIf="lastNameError" class="error">
+      {{ lastNameError }}
+    </div>
     <mat-form-field>
       <input matInput placeholder="Date of Birth" type="date" required [(ngModel)]="dob" name="dob">
     </mat-form-field>
+    <div *ngIf="dobError" class="error">
+      {{ dobError }}
+    </div>
     <mat-form-field>
       <input matInput placeholder="Email" type="email" required [(ngModel)]="email" name="email">
     </mat-form-field>
+    <div *ngIf="emailError" class="error">
+      {{ emailError }}
+    </div>
+    <mat-form-field>
+      <input matInput placeholder="Phone Number" required [(ngModel)]="phoneNum" name="phoneNum">
+    </mat-form-field>
+    <div *ngIf="phoneNumError" class="error">
+      {{ phoneNumError }}
+    </div>
     <mat-form-field>
       <input matInput placeholder="Password" type="password" required [(ngModel)]="password" name="password">
     </mat-form-field>
+    <div *ngIf="passwordError" class="error">
+      {{ passwordError }}
+    </div>
     <mat-form-field>
-      <input matInput placeholder="Phone Number" type="number" required [(ngModel)]="phoneNum" name="phoneNum">
+      <input matInput placeholder="Confirm Password" type="password" required [(ngModel)]="confirmpassword" name="confirmPassword">
     </mat-form-field>
-    <button class="popup-button" mat-raised-button color="primary" type="submit" (click)="onSignUp()">Sign Up</button>
+    <button class="popup-button" mat-raised-button color="primary" type="submit">Sign Up</button>
   </form>
 </div>

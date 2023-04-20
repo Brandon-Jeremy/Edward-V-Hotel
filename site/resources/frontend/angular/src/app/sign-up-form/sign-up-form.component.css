@@ -30,3 +30,8 @@
 .popup-button {
   align-self: center;
 }
+
+.error{
+  color: red;
+  font-size: 12px;
+}

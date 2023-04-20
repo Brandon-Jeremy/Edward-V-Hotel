@@ -1,27 +1,26 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-  @ViewChild('templateRef') templateRef!: ElementRef;
-  loginForm!: FormGroup;
-  emailError = '';
-  passwordError = '';
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
+  @ViewChild('templateRef') templateRef!: ElementRef;
+
+
+  email : string = '';
+  password : string = '';
+  emailError : string = '';
+  passwordError : string = '';
+  credentials: any = [];
+
+  constructor(private authService: AuthService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
-    });
+
   }
 
   openForm(): void {
@@ -29,26 +28,29 @@ export class LoginFormComponent implements OnInit {
   }
   
   onSubmit(): void {
-    this.emailError = '';
-    this.passwordError = '';
-    if (this.loginForm.invalid) {
-      this.emailError = this.loginForm.controls['email'].errors?.['required'] ? 'Email is required' : 'Invalid email address';
-      this.passwordError = this.loginForm.controls['password'].errors?.['required'] ? 'Password is required' : 'Password must be at least 8 characters long';
+    this.resetError();
+    if(!this.isEmail(this.email)){
+      this.emailError = "Invalid email format";
       return;
     }
-
-    const loginData = this.loginForm.value;
     
-    this.authService.login(loginData.email, loginData.password).subscribe(
+    this.authService.login(this.email, this.password).subscribe(
       (response) => {
-        this.authService.setAuthenticated(true);
+        this.credentials = response
+        console.log(this.credentials);
         this.clearForm();
-        this.showSnackbar('Logged in successfully');
+        this.showSnackbar('Logged in successfull');
       },
       (error) => {
         // Handle login error, e.g., display an error message
       }
     );
+  }
+
+  private isEmail(str: string) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+    // ^[^\s@]+@(?:(gmail|hotmail|outlook))\.[^\s@]+$
+    return emailPattern.test(str);
   }
 
   showSnackbar(message: string): void {
@@ -59,9 +61,14 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  clearForm(): void {
-    this.loginForm.reset();
+  resetError(){
     this.emailError = '';
     this.passwordError = '';
+  }
+
+  clearForm(): void {
+    this.resetError();
+    this.email = '';
+    this.password = '';
   }
 }
