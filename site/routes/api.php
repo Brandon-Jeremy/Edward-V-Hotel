@@ -79,6 +79,7 @@ Route::post('/occupancy-data',[FinancesController::class,'occupancyData'])->name
 Route::post('/test-email',[EmailController::class,'testEmail'])->name('test-email');
 Route::post('/email-current',[EmailController::class,'emailCurrent'])->name('email-current');
 Route::post('/email-all',[EmailController::class,'emailAll'])->name('email-all');
+Route::post('/send-mail-to-hotel',[EmailController::class,'sendEmailToHotel'])->name('send-mail-to-hotel');
 
 //PDF Export
 Route::post('/generate-pdf',[ExportController::class,'generatePDF'])->name('generate-pdf');

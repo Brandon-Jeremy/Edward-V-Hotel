@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Mail\RequestFeedback;
 use App\Mail\EmailToAllBookedCustomers;
 use App\Mail\EmailToAllCustomers;
+use App\Mail\FeedbackOrInquiry;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 
@@ -15,14 +16,18 @@ class EmailController extends Controller
      * This can be used as a direct email sender. 
      * 2 birds with 1 stone kinda api
      */
-    public function testEmail(Request $request){
+    public function sendEmailToHotel(Request $request){
         $userEmail = $request->email;
+        $userMessage = $request->message;
 
-        // return response()->json([
-        //     "Email" => $userEmail
-        // ]);
+        $hotel_email = 'brandonnader1@gmail.com';
 
-        Mail::to($userEmail)->send(new RequestFeedback);
+        $mailData = [
+            "message" => $userMessage,
+            "email" => $userEmail
+        ];
+
+        Mail::to($hotel_email)->send(new FeedbackOrInquiry($mailData));
     }
 
     public function emailCurrent(Request $request) {
