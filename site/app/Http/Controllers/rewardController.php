@@ -69,4 +69,23 @@ class rewardController extends Controller
         ]);
     }
 
+    public function calculatePoints(Request $request){
+        $email = $request->email;
+
+        $user = DB::table('users')
+        ->where('email',$email)
+        ->first();
+
+        if(empty($user)){
+            return response()->json([
+                "Error" => "No user found"
+            ]);
+        }
+        $points = $user->points;
+
+        return response()->json([
+            "Points" => $points
+        ]);
+    }
+
 }
