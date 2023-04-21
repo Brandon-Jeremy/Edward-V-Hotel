@@ -13,6 +13,8 @@ use App\Http\Controllers\ReceptionAuthController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\RoomInfoController;
+use App\Http\Controllers\GiftcardController;
+
 
 
 /*
@@ -89,3 +91,5 @@ Route::get('/room-info',[RoomInfoController::class,'roomInfo'])->name('room-info
 Route::post('/room-availability',[RoomInfoController::class,'roomAvailability'])->name('room-availability');
 
 Route::post('/view-reservations',[OnlineReservationController::class,'viewReservations'])->name('view-reservations');
+
+Route::post('/create-giftcard',[GiftcardController::class,'createGiftcard'])->name('create-giftcard');
