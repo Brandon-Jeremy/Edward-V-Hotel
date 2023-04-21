@@ -110,9 +110,46 @@ class WalkInBookingController extends Controller
         ->where('room_number', $room_number)
         ->first();
 
+        //TODO: Date range issue if someone books for overlapping times THIS CODE THAT IS COMMENTED MIGHT WORK
+                // $existing_reservation = DB::table('reservation')
+                // ->where('date_from', '<', $date_to)
+                // ->where('date_to', '>', $date_from)
+                // ->where('room_id', $room->id)
+                // ->where('activity', 'active')
+                // ->first();
+
+                // if (empty($existing_reservation)) {
+                // // If reservation is not found in the table, add it
+                // $reservation_id = DB::table('reservation')->insertGetId([
+                //     'date_from' => $date_from,
+                //     'date_to' => $date_to,
+                //     'room_id' => $room->id,
+                //     'user_id' => $user_id,
+                //     'user_type' => $user_type,
+                //     'activity' => $activity
+                // ]);
+
+                // // Update the room status to booked
+                // DB::table('room')
+                //     ->where('id', $room->id)
+                //     ->update(['status' => 'busy']);
+
+                // // Return the success message
+                // return response()->json([
+                //     'success' => true,
+                //     'message' => 'Reservation added successfully.',
+                //     'reservation_id' => $reservation_id
+                // ]);
+                // } else {
+                // // If reservation already exists, return an error message
+                // return response()->json([
+                //     'success' => false,
+                //     'error' => 'The room is not available for the selected dates.'
+                // ]);
+                // }
         $reservation = DB::table('reservation')
-        ->where('date_from', $date_from)
-        ->where('date_to', $date_to)
+        ->where('date_from','>=', $date_from)
+        ->where('date_to','<=', $date_to)
         ->where('room_id', $room->id)
         ->where('user_id', $user_id)
         ->where('user_type', $user_type)
