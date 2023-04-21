@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\GiftcardCreated;
+
+
 class GiftcardController extends Controller
 {
     public function createGiftcard(Request $request){
@@ -66,6 +70,13 @@ class GiftcardController extends Controller
             'giftcard_id' => $giftcard_id
         ]);
 
+        $mailData = [
+            'value' => $value,
+            'token' => $token
+        ];
+
+        Mail::to($email)->send(new GiftcardCreated($mailData));
+        
 
         return response()->json([
             "success" => true,
