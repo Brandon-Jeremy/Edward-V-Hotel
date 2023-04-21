@@ -36,7 +36,7 @@ class RoomInfoController extends Controller
         foreach($room_id as $id){
             $overlappingReservations = DB::table('reservation')
                 ->where('room_id',$id)
-                ->where('activity','active')
+                ->where('activity','!=','inactive')
                 ->where(function($query) use ($date_from, $date_to){
                     $query->whereBetween('date_from', [$date_from, $date_to])
                           ->orWhereBetween('date_to', [$date_from, $date_to])
