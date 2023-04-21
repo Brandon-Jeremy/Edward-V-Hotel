@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Reward;
 use App\Models\User;
 use App\Models\Redeem;
+use App\Mail\RewardReceived;
+
 
 use Illuminate\Support\Facades\DB;
 
@@ -25,12 +27,20 @@ class rewardController extends Controller
         $reward = Reward::find($request->id);
         //Find the user from the registered user table
         $email = $request->email;
+        $recipientemail = $request->recipient ?? $email;
         $user = User::where('email', $email)->first();
+        $recipient = User::where('email',$recipientemail)->first();
 
         if (!$user) {
             return response()->json([
                 "success" => false,
                 "message" => "User not found",
+            ]);
+        }
+        if(!$recipient){
+            return response()->json([
+                "success" => false,
+                "message" => "Recipient not found",
             ]);
         }
 
@@ -48,10 +58,11 @@ class rewardController extends Controller
         //Create a redeem record and update the redeems table
         $redeem = new Redeem;
         $redeem->reward_id=$reward->id;
-        $redeem->user_id=$user->id;
+        $redeem->user_id=$recipient->id;
         $redeem->redeemed=false;
         $redeem->save();
 
+        Mail::to($user_email)->send(new RewardReceived);
         // Return success response
         return response()->json([
             "success" => true
