@@ -93,5 +93,6 @@ Route::post('/room-availability',[RoomInfoController::class,'roomAvailability'])
 Route::post('/view-reservations',[OnlineReservationController::class,'viewReservations'])->name('view-reservations');
 
 //Giftcards
-Route::post('/create-giftcard',[GiftcardController::class,'createGiftcard'])->name('create-giftcard');
+// Route::post('/create-giftcard',[GiftcardController::class,'createGiftcard'])->name('create-giftcard');
 Route::post('/purchase_giftcard',[GiftcardController::class,'purchaseGiftcard'])->name('purchase-giftcard');
+Route::post('/redeem-giftcard',[GiftcardController::class,'redeemGiftcard'])->name('redeem-giftcard');

@@ -33,7 +33,7 @@ class GiftcardController extends Controller
         $user_points = $user->points;
         $value = $request->value;
 
-        if($user_points<$value*3){
+        if($user_points<$value){
             return response([
                 "Error" => "Insufficient points"
             ]);
@@ -85,6 +85,61 @@ class GiftcardController extends Controller
         ]);
 
         
+    }
+
+    public function redeemGiftcard(Request $request){
+        $email = $request->email;
+        $giftcardtoken = $request->giftcardtoken;
+
+        $user = DB::table('users')
+        ->where('email',$email)
+        ->first();
+
+        if(empty($user)){
+            return response()->json([
+                "Error" => "User not found"
+            ]);
+        }
+
+        $giftcode_found = DB::table('giftcode')
+        ->where('token',$giftcardtoken)
+        ->first();
+
+        if(empty($giftcode_found)){
+            return response()->json([
+                "success" => false,
+                "Error" => "Giftcard not found"
+            ]);
+        }
+        $is_Redeemed = true;
+        if($giftcode_found->isRedeemed == true){
+            return response()->json([
+                "success" => false,
+                "Error" => "Giftcard has already been redeemed"
+            ]);
+        }
+
+        $update_giftcard = DB::table('giftcode')
+        ->where('token',$giftcardtoken)
+        ->update([
+            'updated_at' => Carbon::now(),
+            'isRedeemed' => $is_Redeemed
+        ]);
+
+        $giftcard_value = $giftcode_found->value;
+
+        $points = $user->points;
+        $new_points = $points+$giftcard_value;
+        $updated_user = DB::table('users')
+        ->where('email',$email)
+        ->update([
+            'updated_at' => Carbon::now(),
+            'points' => $new_points
+        ]);
+
+        return response()->json([
+            'success' => true
+        ]);
     }
 
 }
