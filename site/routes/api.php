@@ -86,3 +86,5 @@ Route::post('/generate-pdf',[ExportController::class,'generatePDF'])->name('gene
 //Room Information Website
 Route::get('/room-info',[RoomInfoController::class,'roomInfo'])->name('room-info');
 Route::post('/room-availability',[RoomInfoController::class,'roomAvailability'])->name('room-availability');
+
+Route::post('/view-reservations',[OnlineReservationController::class,'viewReservations'])->name('view-reservations');
