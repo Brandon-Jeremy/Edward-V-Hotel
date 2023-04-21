@@ -123,7 +123,8 @@ class GiftcardController extends Controller
         ->where('token',$giftcardtoken)
         ->update([
             'updated_at' => Carbon::now(),
-            'isRedeemed' => $is_Redeemed
+            'isRedeemed' => $is_Redeemed,
+            'redeemed_by' => $user->id
         ]);
 
         $giftcard_value = $giftcode_found->value;
