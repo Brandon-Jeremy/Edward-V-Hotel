@@ -67,6 +67,7 @@ class WalkInBookingController extends Controller
         
     }
 
+    //TODO: Maybe also add a date to see if the guest can be fit in between reservations
     public function fetchAvailable(Request $request){
         $roomtype = $request->roomtype;
         $view = $request->view;
@@ -110,6 +111,7 @@ class WalkInBookingController extends Controller
         ->where('room_number', $room_number)
         ->first();
 
+        //TODO: LOOK AT THIS BJ! IT MIGHT HAVE TO BE UNCOMMENTED
         //TODO: Date range issue if someone books for overlapping times THIS CODE THAT IS COMMENTED MIGHT WORK
                 // $existing_reservation = DB::table('reservation')
                 // ->where('date_from', '<', $date_to)
@@ -428,6 +430,7 @@ class WalkInBookingController extends Controller
             ]);
         }
         elseif($reservations && $reservations->activity === 'pending'){
+            //TODO: Add email when room is set to available to guests in waiting list
             DB::table('reservation')
             ->where('id', $id)
             ->update(['activity' => 'inactive']);
