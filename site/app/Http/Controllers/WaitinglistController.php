@@ -23,6 +23,16 @@ class WaitinglistController extends Controller
             ]);
         }
 
+        $found = DB::table('waitinglist')
+        ->where('user_id',$user_id->id)
+        ->first();
+
+        if(!empty($found)){
+            return response()->json([
+                "error" => "Guest already in waiting list"
+            ]);
+        }
+
         DB::table('waitinglist')->insert([
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
