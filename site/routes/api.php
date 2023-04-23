@@ -14,6 +14,7 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\RoomInfoController;
 use App\Http\Controllers\GiftcardController;
+use App\Http\Controllers\WaitinglistController;
 
 
 
@@ -97,3 +98,7 @@ Route::post('/view-reservations',[OnlineReservationController::class,'viewReserv
 // Route::post('/create-giftcard',[GiftcardController::class,'createGiftcard'])->name('create-giftcard');
 Route::post('/purchase_giftcard',[GiftcardController::class,'purchaseGiftcard'])->name('purchase-giftcard');
 Route::post('/redeem-giftcard',[GiftcardController::class,'redeemGiftcard'])->name('redeem-giftcard');
+
+//Waitinglist
+
+Route::post('/add-waitinglist',[WaitinglistController::class,'addtoWaitinglist'])->name('add-waitinglist');
