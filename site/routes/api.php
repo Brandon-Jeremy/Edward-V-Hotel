@@ -97,3 +97,15 @@ Route::post('/view-reservations',[OnlineReservationController::class,'viewReserv
 // Route::post('/create-giftcard',[GiftcardController::class,'createGiftcard'])->name('create-giftcard');
 Route::post('/purchase_giftcard',[GiftcardController::class,'purchaseGiftcard'])->name('purchase-giftcard');
 Route::post('/redeem-giftcard',[GiftcardController::class,'redeemGiftcard'])->name('redeem-giftcard');
+
+//JWT Auth
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+], function ($router) {
+    Route::post('/login', [CustomAuthController::class, 'login']);
+    Route::post('/register', [CustomAuthController::class, 'register']);
+    Route::post('/logout', [CustomAuthController::class, 'logout']);
+    Route::post('/refresh', [CustomAuthController::class, 'refresh']);
+    Route::get('/user-profile', [CustomAuthController::class, 'userProfile']);    
+});
