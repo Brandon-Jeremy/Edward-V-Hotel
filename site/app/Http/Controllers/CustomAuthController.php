@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers; //
 
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; //
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth; //
+use Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 use Illuminate\Support\Facades\Hash;
@@ -39,96 +39,41 @@ class CustomAuthController extends Controller
     //     ]);
     // }
 
-
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    }
-
-    // $validator = Validator::make($request->all(), [
-    //     'first_name' => 'required|string|between:2,100',
-    //     'last_name' => 'required|string|between:2,100',
-    //     'phone_num' => 'required|string|between:2,100',
-    //     'email' => 'required|string|email|max:100|unique:users',
-    //     'password' => 'required|string|confirmed|min:6',
-    // ]);
-    // if($validator->fails()){
-    //     return response()->json($validator->errors()->toJson(), 400);
-    // }
-    // $user = User::create(array_merge(
-    //             $validator->validated(),
-    //             ['password' => bcrypt($request->password)]
-    //         ));
-    // return response()->json([
-    //     'message' => 'User successfully registered',
-    //     'user' => $user
-    // ], 201);
-
-
     public function registerUser(Request $request){
+        try{
+            $user=new User;
+            $user->first_name=$request->first_name;
+            $user->last_name=$request->last_name;
+            $user->dob=$request->dob;
+            // $user->nationality=NULL;
+            $user->email=$request->email;
+            $user->phone_num=$request->phone_num;
+            $pass=$request->password;
+            $user->password=hash("sha256",$pass);
+            $user->points=0;
+            $user->email_created_at=Carbon::now();
+            $user->email_verified_at=NULL;
+            $user->details=NULL;
 
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|string|between:2,100',
-            'last_name' => 'required|string|between:2,100',
-            'phone_num' => 'required|string|between:2,100',
-            'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|min:6',
-            'points' => 0,
-            'details' => NULL,
-        ]);
+            // Generate a random token of size 10
+            $token = Str::random(10);
+            $user->token = $token;
+            $user->token_expiration=NULL;
 
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            $user->save();
         }
-
-        $user = User::create(array_merge(
-            $validator->validated(),
-            ['password' => bcrypt($request->password)]
-        ));
-
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
-
-        // try{
-        //     $user=new User;
-        //     $user->first_name=$request->first_name;
-        //     $user->last_name=$request->last_name;
-        //     $user->dob=$request->dob;
-        //     // $user->nationality=NULL;
-        //     $user->email=$request->email;
-        //     $user->phone_num=$request->phone_num;
-        //     $pass=$request->password;
-        //     $user->password=hash("sha256",$pass);
-        //     $user->points=0;
-        //     $user->email_created_at=Carbon::now();
-        //     $user->email_verified_at=NULL;
-        //     $user->details=NULL;
-
-        //     // Generate a random token of size 10
-        //     $token = Str::random(10);
-        //     $user->token = $token;
-        //     $user->token_expiration=NULL;
-
-        //     $user->save();
-        // }
-        // catch (\Exception $e) {
-        //     // Code to handle the exception goes here
-        //     return response()->json(['error' => $e->getMessage()], 500);
-        //     // return response()->json([
-        //     //     "success" => false
-        //     // ]);
-        // }
+        catch (\Exception $e) {
+            // Code to handle the exception goes here
+            return response()->json(['error' => $e->getMessage()], 500);
+            // return response()->json([
+            //     "success" => false
+            // ]);
+        }
         
 
-        // return response()->json([
-        //     "success" => true
-        // ]);
+        return response()->json([
+            "success" => true
+        ]);
     }
 
     use AuthenticatesUsers, ThrottlesLogins;
@@ -213,20 +158,37 @@ class CustomAuthController extends Controller
             ]);
         }
     }
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    }
 
+    /**
+     * Get a JWT via given credentials.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request){
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
         ]);
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
         if (! $token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+
         return $this->createNewToken($token);
     }
+
     /**
      * Register a User.
      *
@@ -234,25 +196,40 @@ class CustomAuthController extends Controller
      */
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
+            'first_name' => 'required|string|between:2,100',
+            'last_name' => 'required|string|between:2,100',
+            'dob' => 'required|date|date_format:Y-m-d|before:-18 years',
             'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|confirmed|min:6',
+            'phone_num' => 'required|regex:/^(\+?\d{1,3}[- ]?)?\d{7,}$/|unique:users',
+            'password' => 'required|string|min:6',
         ]);
+    
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
-        $user = User::create(array_merge(
-                    $validator->validated(),
-                    ['password' => bcrypt($request->password)],
-                    ['token' => Str::random(40)],
-                    ['token_expiration' => now()->addDays(7)]
-                ));
+    
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'dob' => $request->dob,
+            'email' => $request->email,
+            'phone_num' => $request->phone_num,
+            'password' => bcrypt($request->password),
+            'points' => 0, // Set the default value for the points field
+            'email_created_at' => Carbon::now(),
+            'email_verified_at' => Carbon::now(),
+            'details' => NULL,
+        ]);
+    
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user
         ], 201);
     }
     
+    
+
+
     /**
      * Log the user out (Invalidate the token).
      *
@@ -260,8 +237,10 @@ class CustomAuthController extends Controller
      */
     public function logout() {
         auth()->logout();
+
         return response()->json(['message' => 'User successfully signed out']);
     }
+
     /**
      * Refresh a token.
      *
@@ -270,6 +249,7 @@ class CustomAuthController extends Controller
     public function refresh() {
         return $this->createNewToken(auth()->refresh());
     }
+
     /**
      * Get the authenticated User.
      *
@@ -278,6 +258,7 @@ class CustomAuthController extends Controller
     public function userProfile() {
         return response()->json(auth()->user());
     }
+
     /**
      * Get the token array structure.
      *
@@ -289,7 +270,7 @@ class CustomAuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60 * 24, // Change this line
+            'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user()
         ]);
     }
