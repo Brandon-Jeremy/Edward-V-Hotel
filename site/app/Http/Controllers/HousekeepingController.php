@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WaitingListNotification;
 
 class HousekeepingController extends Controller
 {
@@ -47,6 +49,26 @@ class HousekeepingController extends Controller
         DB::table('room')
             ->where('id', $roomid)
             ->update(['status' => 'available']);
+
+        //Get all users to email once room is available
+        $users = DB::table('waitinglist')
+        ->get();
+
+        $user_id = $users->pluck('user_id')->toArray();
+
+        foreach($user_id as $user_id){
+            $email = DB::table('users')
+            ->select('email')
+            ->where('id',$user_id)
+            ->first();
+
+            if(!empty($email)){
+                Mail::to($email->email)->send(new WaitingListNotification);
+                DB::table('waitinglist')->where('user_id', $user_id)->delete();
+            }
+            
+        }
+
 
         return response()->json([
             'success' => true,

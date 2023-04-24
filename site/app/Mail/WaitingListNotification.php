@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class WaitingListNotificataion extends Mailable
+class WaitingListNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
