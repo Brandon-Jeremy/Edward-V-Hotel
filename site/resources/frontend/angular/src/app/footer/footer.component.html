@@ -4,11 +4,10 @@
     <div class="container">
       <nav class="footer-nav">
         <ul class="footer-menu">
-          <li><a routerLink="/home">Home</a></li>
-          <li><a routerLink="/about">About</a></li>
-          <li><a routerLink="/book">Reservation</a></li>
-          <li><a routerLink="/rooms">Rooms</a></li>
-          <li><a routerLink="/contact">Contact</a></li>
+          <li><button (click)="scrollToTop()">Home</button></li>
+          <li><button (click)="scrollToSection('#reservation')">Reservations</button></li>
+          <li><button (click)="scrollToSection('#rooms')">Rooms</button></li>
+          <li><button (click)="scrollToSection('#contact')">Contact</button></li>
         </ul>
       </nav>
       <div class="footer-content">
