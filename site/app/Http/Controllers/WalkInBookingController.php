@@ -13,6 +13,8 @@ use App\Models\Rooms;
 //Used for emailing
 use App\Mail\RequestFeedback;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\WaitingListNotification;
+
 
 class WalkInBookingController extends Controller
 {
@@ -367,6 +369,7 @@ class WalkInBookingController extends Controller
         $checkOuts = DB::table('reservation')
             ->select('room_id','activity','id')
             ->where('date_to', $date)
+            ->where('activity','!=','inactive')
             ->get();
     
         $roomIds = $checkOuts->pluck('room_id')->toArray();
@@ -472,6 +475,25 @@ class WalkInBookingController extends Controller
             DB::table('room')
             ->where('id',$roomId)
             ->update(['status' => 'available']);
+
+            //Get all users to email once room is available
+            $users = DB::table('waitinglist')
+            ->get();
+
+            $user_id = $users->pluck('user_id')->toArray();
+
+            foreach($user_id as $user_id){
+                $email = DB::table('users')
+                ->select('email')
+                ->where('id',$user_id)
+                ->first();
+
+                if(!empty($email)){
+                    Mail::to($email->email)->send(new WaitingListNotification);
+                    DB::table('waitinglist')->where('user_id', $user_id)->delete();
+                }
+                
+            }            
 
             return response()->json([
                 'success' => true,
