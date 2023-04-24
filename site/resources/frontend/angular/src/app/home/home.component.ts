@@ -56,17 +56,31 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  scrollToSection(sectionId: string) {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      const top = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }
+  
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  
   openLoginForm(): void {
     this.dialog.open(LoginFormComponent, {
+      disableClose: true,
       width: '600px', // Adjust the width
-      height: '700px', // Adjust the height
+      height: '500px', // Adjust the height
     });
   }
 
   openSignUpForm(): void {
     this.dialog.open(SignUpFormComponent, {
+      disableClose: true,
       width: '600px', // Adjust the width
-      height: '700px', // Adjust the height
+      height: '800px', // Adjust the height
     });
   }
 

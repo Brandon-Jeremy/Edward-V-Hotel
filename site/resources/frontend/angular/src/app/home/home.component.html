@@ -23,19 +23,24 @@
                 </div>
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a routerLink="/home" class="nav-link">Home</a>
+                        <!-- <a routerLink="#home" class="nav-link">Home</a> -->
+                        <button (click)="scrollToTop()">Home</button>
+                    </li>
+                    <!-- <li class="nav-item">
+                         <a routerLink="#about" class="nav-link">About</a>
+                        <button (click)="scrollToSection('#about')">About</button>
+                    </li> -->
+                    <li class="nav-item">
+                        <!-- <a routerLink="#book" class="nav-link">Reservations</a> -->
+                        <button (click)="scrollToSection('#reservation')">Reservations</button>
                     </li>
                     <li class="nav-item">
-                        <a routerLink="/about" class="nav-link">About</a>
+                        <!-- <a routerLink="#rooms" class="nav-link">Rooms</a> -->
+                        <button (click)="scrollToSection('#rooms-section')">Rooms</button>
                     </li>
                     <li class="nav-item">
-                        <a routerLink="/rooms" class="nav-link">Rooms</a>
-                    </li>
-                    <li class="nav-item">
-                        <a routerLink="/reservation" class="nav-link">Reservations</a>
-                    </li>
-                    <li class="nav-item">
-                        <a routerLink="/contact" class="nav-link">Contact</a>
+                        <!-- <a routerLink="#contact" class="nav-link">Contact</a> -->
+                        <button (click)="scrollToSection('#contact')">Contact</button>
                     </li>
                     <li class="nav-item" *ngIf="isUserLoggedIn()">
                         <a (click)="navigateToAccount()" class="nav-link">Account</a>
