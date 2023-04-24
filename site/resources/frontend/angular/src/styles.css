@@ -20,7 +20,10 @@
     --dark-color: #2d2c2c;
     --purple-solid: #350a4f;
     --purple-transparent: rgba(53, 10, 79, .7);
+    --brown-solid: #2e2626;
+    --brown-transparent: rgba(46, 38, 38, .7);
     --purple-transparent-alt: rgba(53, 10, 79, .5);
+    --brown-transparent-alt: rgba(46, 38, 38, .5);
     --purple-light: #8f50fb;
     --yellow-solid: #fa9e2c;
     --gradient-color: linear-gradient(to right, var(--yellow-solid), var(--purple-light));

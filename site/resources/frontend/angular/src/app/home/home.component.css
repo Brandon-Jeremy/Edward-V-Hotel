@@ -8,11 +8,13 @@
     top: 0;
     left: 0;
     background-color: var(--purple-transparent);
+    /* background-color: var(--brown-transparent); */
     z-index: 999;
 }
 
 .header.active{
     background-color: var(--purple-solid);
+    /* background-color: var(--brown-solid); */
 }
 
 /* Styles- nav */
@@ -111,6 +113,7 @@
     width: inherit;
     height: inherit;
     background-color: var(--purple-transparent-alt);
+    /* background-color: var(--brown-transparent-alt); */
     z-index: -1;
 }
 

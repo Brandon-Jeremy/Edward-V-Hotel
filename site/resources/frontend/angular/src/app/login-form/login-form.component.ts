@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SignUpFormComponent } from '../sign-up-form/sign-up-form.component';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -17,7 +19,7 @@ export class LoginFormComponent implements OnInit {
   passwordError : string = '';
   credentials: any = [];
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar) { }
+  constructor(private authService: AuthService, private snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -72,4 +74,12 @@ export class LoginFormComponent implements OnInit {
     this.email = '';
     this.password = '';
   }
+
+  openSignUpForm(): void {
+    this.dialog.open(SignUpFormComponent, {
+      width: '600px', // Adjust the width
+      height: '700px', // Adjust the height
+    });
+  }
+
 }

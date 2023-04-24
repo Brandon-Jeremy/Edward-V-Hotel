@@ -15,5 +15,9 @@
       {{ passwordError }}
     </div>
     <button class="popup-button" mat-raised-button color="primary" type="submit">Login</button>
+    <div class = "routes" >
+      <a (click)="openSignUpForm()">Sign Up</a>
+      <a routerLink="/forgot-password">Forgot Password</a>
+    </div>
   </form>
 </div>
