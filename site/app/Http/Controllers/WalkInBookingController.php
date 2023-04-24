@@ -67,27 +67,62 @@ class WalkInBookingController extends Controller
         
     }
 
-    //TODO: Maybe also add a date to see if the guest can be fit in between reservations
+    // public function fetchAvailable(Request $request){
+    //     $roomtype = $request->roomtype;
+    //     $view = $request->view;
+    //     $status = "available";
+
+    //     $result = DB::table('room')->select('type','floor','room_number','view')
+    //         ->where('type', $roomtype)
+    //         ->where('status', $status)
+    //         ->where('view',$view)
+    //         ->get();
+
+    //     $prices = DB::table('room_prices')->select('price','capacity')
+    //         ->where('view', $view)
+    //         ->where('type', $roomtype)
+    //         ->get();
+
+    //     $availableRooms = $result->merge($prices);
+
+    //     return response()->json($availableRooms);
+    // }
+
     public function fetchAvailable(Request $request){
         $roomtype = $request->roomtype;
         $view = $request->view;
-        $status = "available";
-
+        // $status = "busy";
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+    
         $result = DB::table('room')->select('type','floor','room_number','view')
             ->where('type', $roomtype)
-            ->where('status', $status)
+            // ->where('status', '!=', $status)
             ->where('view',$view)
+            ->whereNotIn('id', function($query) use ($date_from, $date_to) {
+                $query->select('room_id')
+                    ->from('reservation')
+                    ->where(function($q) use ($date_from, $date_to) {
+                        $q->whereBetween('date_from', [$date_from, $date_to])
+                          ->orWhereBetween('date_to', [$date_from, $date_to])
+                          ->orWhere(function($q) use ($date_from, $date_to) {
+                                $q->where('date_from', '<=', $date_from)
+                                  ->where('date_to', '>=', $date_to);
+                          });
+                    });
+            })
             ->get();
-
+    
         $prices = DB::table('room_prices')->select('price','capacity')
             ->where('view', $view)
             ->where('type', $roomtype)
             ->get();
-
+    
         $availableRooms = $result->merge($prices);
-
+    
         return response()->json($availableRooms);
     }
+    
         
 
     public function bookRoom(Request $request){
@@ -310,8 +345,6 @@ class WalkInBookingController extends Controller
         DB::table('room')
         ->where('id', $roomid->id)
         ->update(['status' => 'busy']);
-
-        //TODO: Change pending to active as well
 
         DB::table('reservation')
         ->where('activity','pending')
