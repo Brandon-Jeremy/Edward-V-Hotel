@@ -108,7 +108,7 @@ class CustomAuthController extends Controller
 
     public function getEmail(Request $request){
         $email = $request->email;
-        $record = DB::table('registered_users')->where('email', $email)->first();
+        $record = DB::table('users')->where('email', $email)->first();
 
         if (is_null($record)) {
             return response()->json([
@@ -133,7 +133,7 @@ class CustomAuthController extends Controller
         //If the password is the same as the one in the DB, return failure otherwise return success
         $email = $request->email;
         $newPassword = hash("sha256",$request->password);
-        $password = DB::table('registered_users')->where('email', $email)->value('password');
+        $password = DB::table('users')->where('email', $email)->value('password');
         if ($password == $newPassword){
             return response()->json([
                 "success" => false
@@ -144,7 +144,7 @@ class CustomAuthController extends Controller
                 'password' => $newPassword,
                 'updated_at' => Carbon::now(),
             ];
-            DB::table('registered_users')->where('email',$email)->update($newData);
+            DB::table('users')->where('email',$email)->update($newData);
             
             return response()->json([
                 "success" => true
