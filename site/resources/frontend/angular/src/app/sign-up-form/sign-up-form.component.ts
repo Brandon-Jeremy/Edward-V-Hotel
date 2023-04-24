@@ -150,10 +150,12 @@ export class SignUpFormComponent {
   }
 
   closePopup(){
+    //close login form before opening signup form
     this.dialog.closeAll();
   }
 
   openLoginForm(): void {
+    this.closePopup();
     this.dialog.open(LoginFormComponent, {
       disableClose: true,
       width: '600px', // Adjust the width
