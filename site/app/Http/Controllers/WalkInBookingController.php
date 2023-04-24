@@ -359,7 +359,7 @@ class WalkInBookingController extends Controller
 
     /**
      * Check out guest from user.
-     * Set room activity to inactive after checkout.
+     * Set room activity to inactive after checkout in reservation.
      * Set room status to dirty if the activity was set as available.
      * Set room status to available if the activity was set as pending.
      *
@@ -368,8 +368,8 @@ class WalkInBookingController extends Controller
      */
     public function checkOut(Request $request){
         //TODO: Ask this, should app send me roomid or table id?
-        //TODO: Override checkout
 
+        $override = $request->override;
         $roomId = $request->roomid;
         $id = $request->id; //reservation id
 
@@ -395,7 +395,7 @@ class WalkInBookingController extends Controller
             ->where('paid', 0)
             ->get();
 
-        if ($additionalCharges->count() > 0) {
+        if ($additionalCharges->count() > 0 && !$override) {
             // There are unpaid additional charges for the given room & guest
             return response()->json([
                 "Error" => "Outstanding charges unpaid"
