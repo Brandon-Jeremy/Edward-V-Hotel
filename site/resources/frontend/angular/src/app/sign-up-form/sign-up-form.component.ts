@@ -1,8 +1,9 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component} from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { LoginFormComponent } from '../login-form/login-form.component';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -18,8 +19,6 @@ export class SignUpFormComponent {
   confirmpassword: string = '';
   phoneNum: string = '';
   credentials: any = [];
-
-  @Output() closePopup = new EventEmitter<void>();
   
   passwordError: string = '';
   firstNameError: string = '';
@@ -148,5 +147,17 @@ export class SignUpFormComponent {
     this.lastName = '';
     this.phoneNum = '';
     this.dob = new Date();
+  }
+
+  closePopup(){
+    this.dialog.closeAll();
+  }
+
+  openLoginForm(): void {
+    this.dialog.open(LoginFormComponent, {
+      disableClose: true,
+      width: '600px', // Adjust the width
+      height: '500px', // Adjust the height
+    });
   }
 }

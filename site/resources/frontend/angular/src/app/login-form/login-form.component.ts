@@ -76,10 +76,16 @@ export class LoginFormComponent implements OnInit {
   }
 
   openSignUpForm(): void {
+    this.dialog.closeAll();//close login form before opening signup form
     this.dialog.open(SignUpFormComponent, {
+      disableClose: true,
       width: '600px', // Adjust the width
       height: '700px', // Adjust the height
     });
+  }
+
+  closePopup(){
+    this.dialog.closeAll();
   }
 
 }

@@ -1,23 +1,35 @@
-<div class="container">
-  <h2 class="center">Hotel Name</h2>
-  <p class="center welcome">Welcome</p>
-  <form class="popup" #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
-    <mat-form-field>
-      <input matInput placeholder="Email" name="email">
-    </mat-form-field>
-    <div *ngIf="emailError" class="error">
-      {{ emailError }}
+<html lang="en">
+  <mat-dialog-content>
+    <button mat-icon-button class="close-button" (click)="closePopup()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-dialog-content>
+  <div class="container">
+    <div class="header">
+      <h2 class="center">Hotel Name</h2>
+      <p class="center welcome">Welcome</p>
     </div>
-    <mat-form-field>
-      <input matInput placeholder="Password" name="password" type="password">
-    </mat-form-field>
-    <div *ngIf="passwordError" class="error">
-      {{ passwordError }}
-    </div>
-    <button class="popup-button" mat-raised-button color="primary" type="submit">Login</button>
-    <div class = "routes" >
-      <a (click)="openSignUpForm()">Sign Up</a>
-      <a routerLink="/forgot-password">Forgot Password</a>
-    </div>
-  </form>
-</div>
+    <form class="popup" #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+      <mat-form-field>
+        <input matInput placeholder="Email" name="email">
+      </mat-form-field>
+      <div *ngIf="emailError" class="error">
+        {{ emailError }}
+      </div>
+      <mat-form-field>
+        <input matInput placeholder="Password" name="password" type="password">
+      </mat-form-field>
+      <div *ngIf="passwordError" class="error">
+        {{ passwordError }}
+      </div>
+      <button class="popup-button" mat-raised-button color="primary" type="submit">Login</button>
+      <div class="routes">
+        <span>Don't have an account? </span><a (click)="openSignUpForm()">Sign Up</a>
+      </div>
+      <div class="routes">
+        <a routerLink="/forgot-password">Forgot Password</a>
+      </div>
+      
+    </form>
+  </div>
+</html>
