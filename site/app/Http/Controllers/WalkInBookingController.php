@@ -102,6 +102,7 @@ class WalkInBookingController extends Controller
             ->whereNotIn('id', function($query) use ($date_from, $date_to) {
                 $query->select('room_id')
                     ->from('reservation')
+                    ->where('activity','!=','inactive')
                     ->where(function($q) use ($date_from, $date_to) {
                         $q->whereBetween('date_from', [$date_from, $date_to])
                           ->orWhereBetween('date_to', [$date_from, $date_to])
