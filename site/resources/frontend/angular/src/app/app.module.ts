@@ -6,9 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from './services/auth.service';
@@ -52,7 +55,9 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     ReactiveFormsModule,
     FormsModule,
     MatButtonModule,
-    MatIconModule, 
+    MatIconModule,
+    MatDatepickerModule,
+    MatFormFieldModule, 
     MatSnackBarModule,
     MatInputModule,
     RouterModule.forRoot([]),

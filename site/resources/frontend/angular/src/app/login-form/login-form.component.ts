@@ -3,15 +3,26 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SignUpFormComponent } from '../sign-up-form/sign-up-form.component';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent {
 
   @ViewChild('templateRef') templateRef!: ElementRef;
-
 
   email : string = '';
   password : string = '';
@@ -21,9 +32,11 @@ export class LoginFormComponent implements OnInit {
 
   constructor(private authService: AuthService, private snackBar: MatSnackBar, private dialog: MatDialog) { }
 
-  ngOnInit(): void {
+  matcher = new MyErrorStateMatcher();
+  
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
-  }
+  passwordFormControl =  new FormControl('',[Validators.required])
 
   openForm(): void {
     this.templateRef.nativeElement.style.display = 'block';
@@ -32,8 +45,19 @@ export class LoginFormComponent implements OnInit {
   onSubmit(): void {
     this.resetError();
     
-    if(!this.isEmail(this.email)){
+    //email validation
+    if (this.emailFormControl.hasError('required')){
+      this.emailError = "Email is required";
+      return;
+    }
+    if(this.emailFormControl.hasError('email')){
       this.emailError = "Invalid email format";
+      return;
+    }
+
+    //password validation
+    if (this.passwordFormControl.hasError('required')){
+      this.passwordError = "Password is required";
       return;
     }
     
