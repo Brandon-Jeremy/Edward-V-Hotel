@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles/cino.css">
 </head>
 <body>
     <header>
@@ -13,14 +14,17 @@
           <button class = "buttons" id = "menubutton" onclick = "window.location.href = 'index.html'"> Menu </button>
         </nav>
     </header>
-
-    <form id = "contact">
+    
+    <form class = "forms" id = "contact">
         <select id = "receiver" name = "receiver">
             <option disabled selected>TO</option>
             <option value = "visitors"> Current Visitors </option>
             <option value = "allusers"> All Users </option>
         </select>
+        <br>
         <textarea placeholder="E-mail"></textarea>
+        <br>
+        <button type = "submit"> SEND </button>
     </form>
 </body>
 </html>
