@@ -67,7 +67,24 @@ header {
     color: crimson;
     background-color: white;
 }
+.tables button {
+    width:6%;
+    height: 30px;
+    font-size: 120%;
+    border: 2px solid crimson;
+    color: crimson;
+    background-color: white;
+    transition: 0.1s;
+    margin-top:20px;
+    margin-left: 47%;
+    transition: 0.2s;
+}
 
+.tables button:hover {
+    border: 2px solid crimson;
+    color: white;
+    background-color: crimson;
+}
 th:nth-child(1),
 td:nth-child(1) {
   width: 30%;
@@ -101,26 +118,33 @@ td:nth-child(5) {
 #availablerooms {
   display: none;
 }
+#user {
+  display:none;
+}
 
 .forms {
   font-size: 120%;
   background-color: crimson;
   margin:auto;
   width: 35%;
-  height: 40%;
+  padding: 40px;
   position: absolute; 
   top: 40%; 
   left: 50%; 
   transform: translate(-50%, -50%);
   text-align: center;
-  
+  margin-top: 90px;
 }
-.forms label {
+.forms .viewlabel {
   margin: auto;
   display: inline-block;
   color: white;
 }
-.forms select {
+.datelabel{
+  display:inline-block;
+  color: white;
+}
+.forms select , .forms input[type=text] , .forms input[type=date] , .forms input[type=tel] {
   width: 80%;
   background-color: rgba(104, 11, 30, 0.629);
   display: inline-block;
