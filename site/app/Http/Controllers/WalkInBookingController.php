@@ -467,7 +467,6 @@ class WalkInBookingController extends Controller
             ]);
         }
         elseif($reservations && $reservations->activity === 'pending'){
-            //TODO: Add email when room is set to available to guests in waiting list
             DB::table('reservation')
             ->where('id', $id)
             ->update(['activity' => 'inactive']);

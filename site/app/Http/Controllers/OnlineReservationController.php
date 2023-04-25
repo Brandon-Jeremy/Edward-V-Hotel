@@ -5,14 +5,68 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ReservationConfirmation;
+
 
 
 class OnlineReservationController extends Controller
 {
 
-    public function create()
+    public function createReservation(Request $request)
     {
-        // Code to show create reservation form
+        $email = $request->email;
+        $user = DB::table('users')
+        ->where('email',$email)
+        ->first();
+
+        if (empty($user)){
+            return response()->json([
+                "error" => "User does not exist"
+            ]);
+        }
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+
+        $room_id = $request->roomid;
+        $user_id = $user->id;
+
+        //Reservation info
+        $activity = 'pending';
+        $user_type = 'Online';
+
+        $reservation_id = DB::table('reservation')->insertGetId([
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'date_from' => $date_from,
+            'date_to' => $date_to,
+            'room_id' => $room_id,
+            'user_id' => $user_id,
+            'user_type' => $user_type,
+            'activity' => $activity
+        ]);
+
+        $mailData = [
+            'datefrm' => $date_from,
+            'dateto' => $request->date_to,
+            'id' => $reservation_id
+        ];
+
+        DB::table('room')
+        ->where('id',$room_id)
+        ->update([
+            'status' => 'reserved'
+        ]);
+
+        Mail::to($email)->send(new ReservationConfirmation($mailData));
+
+        return response()->json([
+            "success" => true,
+            "reservation_id" => $reservation_id
+        ]);
+
     }
 
     public function store(Request $request)

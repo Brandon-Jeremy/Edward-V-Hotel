@@ -100,5 +100,7 @@ Route::post('/purchase_giftcard',[GiftcardController::class,'purchaseGiftcard'])
 Route::post('/redeem-giftcard',[GiftcardController::class,'redeemGiftcard'])->name('redeem-giftcard');
 
 //Waitinglist
-
 Route::post('/add-waitinglist',[WaitinglistController::class,'addtoWaitinglist'])->name('add-waitinglist');
+
+//Online Reservations
+Route::post('/create-reservation',[OnlineReservationController::class,'createReservation'])->name('create-reservation');

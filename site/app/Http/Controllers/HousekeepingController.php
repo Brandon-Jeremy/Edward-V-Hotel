@@ -44,7 +44,6 @@ class HousekeepingController extends Controller
      * @return JSONResponse Success after the function is complete
      */
     public function setClean(Request $request){
-        //TODO: Send an email to guests when the room is set to clean/available
         $roomid = $request->id;
         DB::table('room')
             ->where('id', $roomid)
