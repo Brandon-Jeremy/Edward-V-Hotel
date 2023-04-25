@@ -130,6 +130,26 @@ class OnlineReservationController extends Controller
             ]);
         }
 
+        $type = DB::table('room')
+        ->where('id',$roomid)
+        ->first();
+
+        $price = DB::table('room_prices')
+        ->where('type',$type->type)
+        ->where('view',$type->view)
+        ->first();
+
+        $price = $price->price;
+
+        $old_points = $user->points;
+        $new_points = $old_points-($price/4);
+
+        $updated_user = DB::table('users')
+        ->where('id',$user->id)
+        ->update([
+            'points' => $new_points
+        ]);
+
         $reservation = DB::table('reservation')
         ->where('user_id',$user->id)
         ->where('room_id',$roomid)
