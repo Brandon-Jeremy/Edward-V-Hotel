@@ -104,3 +104,4 @@ Route::post('/add-waitinglist',[WaitinglistController::class,'addtoWaitinglist']
 
 //Online Reservations
 Route::post('/create-reservation',[OnlineReservationController::class,'createReservation'])->name('create-reservation');
+Route::post('/cancel-reservation',[OnlineReservationController::class,'cancelReservation'])->name('cancel-reservation');

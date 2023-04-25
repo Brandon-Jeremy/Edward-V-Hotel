@@ -9,6 +9,7 @@ use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReservationConfirmation;
+use App\Mail\WaitingListNotification;
 
 
 
@@ -84,9 +85,83 @@ class OnlineReservationController extends Controller
         // Code to update the reservation
     }
 
-    public function destroy($id)
+    public function cancelReservation(Request $request)
     {
-        // Code to delete the reservation
+        $email = $request->email;
+        $roomid = $request->room_id;
+
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+
+        $user = DB::table('users')
+        ->where('email',$email)
+        ->first();
+
+        if(empty($user)){
+            return response()->json([
+                'error' => 'User does not exist'
+            ]);
+        }
+
+        $reservation = DB::table('reservation')
+        ->where('user_id',$user->id)
+        ->where('room_id',$roomid)
+        ->where('date_from',$date_from)
+        ->where('date_to',$date_to)
+        ->where('activity','pending')
+        ->first();
+
+        if(empty($reservation)){
+            return response()->json([
+                'error' => 'Reservation does not exist'
+            ]);
+        }
+
+        DB::table('reservation')
+        ->where('user_id',$user->id)
+        ->where('room_id',$roomid)
+        ->where('date_from',$date_from)
+        ->where('date_to',$date_to)
+        ->where('activity','pending')
+        ->delete();
+
+        $existing_reservation = DB::table('reservation')
+                                ->where('room_id',$roomid)
+                                ->where('activity','pending')
+                                ->first();
+
+        if(empty($existing_reservation)){
+            DB::table('room')
+            ->where('id',$roomid)
+            ->update([
+                'status' => 'available'
+            ]);
+
+            //Get all users to email once room is available
+            $users = DB::table('waitinglist')
+            ->get();
+
+            $user_id = $users->pluck('user_id')->toArray();
+
+            foreach($user_id as $user_id){
+                $email = DB::table('users')
+                ->select('email')
+                ->where('id',$user_id)
+                ->first();
+
+                if(!empty($email)){
+                    Mail::to($email->email)->send(new WaitingListNotification);
+                    DB::table('waitinglist')->where('user_id', $user_id)->delete();
+                }
+                
+            }
+        }
+
+        return response()->json([
+            'success' => true
+        ]);
+
+
     }
 
     public function viewReservations(Request $request){
