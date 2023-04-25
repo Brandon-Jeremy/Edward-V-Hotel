@@ -1,4 +1,4 @@
-.site-footer {
+  .site-footer {
     background-color: var( --purple-solid);
     padding: 30px 0;
     text-align: center;
@@ -27,14 +27,15 @@
     margin: 0 15px;
   }
   
-  .footer-menu a {
+  .footer-menu button {
+    background: none;
+    border: none;
     color: whitesmoke;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
-    
   }
   
-  .footer-menu a:hover {
+  .footer-menu button:hover {
     color: wheat;
   }
   
@@ -42,4 +43,13 @@
     margin-top: 20px;
     opacity: 80%;
   }
+
+  .nav-list button{
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    color: white;
+}
   
