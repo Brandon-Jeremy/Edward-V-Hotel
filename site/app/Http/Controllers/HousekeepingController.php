@@ -45,6 +45,23 @@ class HousekeepingController extends Controller
      */
     public function setClean(Request $request){
         $roomid = $request->id;
+
+        $reservation = DB::table('reservation')
+        ->where('room_id',$roomid)
+        ->where('activity','pending')
+        ->first();
+
+        if(!empty($reservation)){
+            DB::table('room')
+            ->where('id', $roomid)
+            ->update(['status' => 'reserved']);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'cleaned and set as reserved'
+            ]);
+        }
+
         DB::table('room')
             ->where('id', $roomid)
             ->update(['status' => 'available']);
@@ -71,7 +88,7 @@ class HousekeepingController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Room cleaned'
+            'message' => 'Room cleaned & email sent'
         ]);
     }
 }
