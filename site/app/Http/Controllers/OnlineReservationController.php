@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReservationConfirmation;
 use App\Mail\WaitingListNotification;
+use App\Mail\PointsNotification;
 
 
 
@@ -33,6 +34,32 @@ class OnlineReservationController extends Controller
 
         $room_id = $request->roomid;
         $user_id = $user->id;
+
+        $type = DB::table('room')
+        ->where('id',$room_id)
+        ->first();
+
+        $price = DB::table('room_prices')
+        ->where('type',$type->type)
+        ->where('view',$type->view)
+        ->first();
+
+        $price = $price->price;
+
+        $old_points = $user->points;
+        $new_points = $old_points+($price/4);
+
+        $updated_user = DB::table('users')
+        ->where('id',$user_id)
+        ->update([
+            'points' => $new_points
+        ]);
+
+        $pointsmailData = [
+            'points' => $new_points
+        ];
+
+        Mail::to($email)->send(new PointsNotification($pointsmailData));
 
         //Reservation info
         $activity = 'pending';
