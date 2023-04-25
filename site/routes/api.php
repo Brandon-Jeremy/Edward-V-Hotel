@@ -51,6 +51,7 @@ Route::post('/change-pass/{token}',[CustomAuthController::class,'changePass'])->
 Route::get('/get-rewards',[rewardController::class,'getRewards'])->name('get-rewards');
 Route::post('/purchase-reward',[rewardController::class,'purchaseReward'])->name('purchase-reward');
 Route::post('/calculate-points',[rewardController::class,'calculatePoints'])->name('calculate-points');
+Route::post('/user-rewards',[rewardController::class,'userRewards'])->name('user-rewards');
  
 Route::post('/create-reservation',[OnlineReservationController::class,'createReservation'])->name('create-reservation');
 

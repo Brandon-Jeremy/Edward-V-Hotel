@@ -88,4 +88,54 @@ class rewardController extends Controller
         ]);
     }
 
+    public function userRewards(Request $request){
+        $email = $request->email;
+        $redeemed = false;
+
+
+        $user = DB::table('users')
+        ->where('email',$email)
+        ->first();
+
+        if(empty($user)){
+            return response()->json([
+                'error' => 'User does not exist'
+            ]);
+        }
+
+        $rewards = DB::table('redeems')
+        ->where('user_id',$user->id)
+        ->where('redeemed',$redeemed)
+        ->get();
+
+        $rewards_array = $rewards->pluck('reward_id','id')->toArray();
+
+
+        $reward_list = [];
+
+        foreach($rewards_array as $redeem_table_id => $reward_id){
+            $real_reward = DB::table('reward')
+                ->where('id', $reward_id)
+                ->first();
+        
+            $reward_item = $real_reward->item;
+            $reward_details = $real_reward->details;
+            $reward_img = $real_reward->img_path;
+        
+            $reward_item_array = [
+                'redeem_id' => $redeem_table_id,
+                'reward_id' => $reward_id,
+                'name' => $reward_item,
+                'details' => $reward_details,
+                'image_path' => $reward_img
+            ];
+            array_push($reward_list, $reward_item_array);
+        }
+
+        return response()->json([
+            'rewards' => $reward_list
+        ]);
+
+    }
+
 }
