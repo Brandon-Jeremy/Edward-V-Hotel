@@ -1,27 +1,59 @@
-<div class="container">
-  <div class="header">
-    <h2 class="center">Hotel Name</h2>
-    <p class="center welcome">Welcome</p>
+<html lang="en">
+  <mat-dialog-content>
+    <button mat-icon-button class="close-button" (click)="closePopup()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-dialog-content>
+  <div class="container">
+    <div class="header">
+      <h2 class="center">Hotel Name</h2>
+      <p class="center welcome">Welcome</p>
+    </div>
+    <form class="popup" #signUpForm="ngForm" (ngSubmit)="onSignUp()">
+      <mat-form-field>
+        <input matInput placeholder="First name" required [(ngModel)]="firstName" name="firstName">
+      </mat-form-field>
+      <div *ngIf="firstNameError" class="error">
+        {{ firstNameError }}
+      </div>
+      <mat-form-field>
+        <input matInput placeholder="Last name" required [(ngModel)]="lastName" name="lastName">
+      </mat-form-field>
+      <div *ngIf="lastNameError" class="error">
+        {{ lastNameError }}
+      </div>
+      <mat-form-field>
+        <input matInput placeholder="Date of Birth" type="date" required [(ngModel)]="dob" name="dob">
+      </mat-form-field>
+      <div *ngIf="dobError" class="error">
+        {{ dobError }}
+      </div>
+      <mat-form-field>
+        <input matInput placeholder="Email" type="email" required [(ngModel)]="email" name="email">
+      </mat-form-field>
+      <div *ngIf="emailError" class="error">
+        {{ emailError }}
+      </div>
+      <mat-form-field>
+        <input matInput placeholder="Phone Number" required [(ngModel)]="phoneNum" name="phoneNum">
+      </mat-form-field>
+      <div *ngIf="phoneNumError" class="error">
+        {{ phoneNumError }}
+      </div>
+      <mat-form-field>
+        <input matInput placeholder="Password" type="password" required [(ngModel)]="password" name="password">
+      </mat-form-field>
+      <div *ngIf="passwordError" class="error">
+        {{ passwordError }}
+      </div>
+      <mat-form-field>
+        <input matInput placeholder="Confirm Password" type="password" required [(ngModel)]="confirmpassword" name="confirmPassword">
+      </mat-form-field>
+      <button class="popup-button" mat-raised-button color="primary" type="submit">Sign Up</button>
+      <div class="routes">
+        <span>Already have an account? </span><a (click)="openLoginForm()">Login</a>
+      </div>
+    </form>
   </div>
-  <form class="popup">
-    <mat-form-field>
-      <input matInput placeholder="First name" required>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Last name" required>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Email" type="email" required>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Password" type="password" required>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Number" type="numeber" required>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Confirm Password" type="password" required>
-    </mat-form-field>
-    <button class="popup-button" mat-raised-button color="primary" type="submit">Sign Up</button>
-  </form>
-</div>
+  
+</html>

@@ -8,6 +8,29 @@
   box-sizing: border-box;
 }
 
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.routes {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  margin-top: 10px;
+}
+
+.routes a {
+  color: #8f50fb;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.routes a:hover {
+  text-decoration: underline;
+}
+
 .center {
   text-align: center;
 }
@@ -29,4 +52,9 @@
 
 .popup-button {
   align-self: center;
+}
+
+.error{
+  color: red;
+  font-size: 12px;
 }
