@@ -11,9 +11,11 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from './auth.guard';
 
+
 //might be used later
 // import { AboutComponent } from './about/about.component';
-// import { ReservationComponent } from './reservation/reservation.component';
+import { ReservationMenuComponent } from './reservation-menu/reservation-menu.component';
+//import { Path } from 'arktype/dist/types/utils/paths';
 
 
 
@@ -29,7 +31,8 @@ const routes: Routes = [
   {path:"contact", component:ContactComponent},
   {path:"rewards", component:RewardComponent},
   {path:"user", component: UserComponent, canActivate: [AuthGuard] },
-  {path:"forgot-password", component:ForgotPasswordComponent}
+  {path:"forgot-password", component:ForgotPasswordComponent},
+  {path: "reservation-menu", component:ReservationMenuComponent},
 ];
 
 @NgModule({
