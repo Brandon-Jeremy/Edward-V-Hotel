@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class EditUserInfoComponent {
   editForm!: FormGroup;
-
+  user: any = {};
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
