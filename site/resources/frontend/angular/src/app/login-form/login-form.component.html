@@ -10,7 +10,8 @@
   </div>
   <div class="form-container">
     <form class="popup" #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
-      <mat-form-field class="example-full-width">
+
+      <mat-form-field>
         <mat-label>Email</mat-label>
         <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
           placeholder="Ex. name@example.com">
@@ -18,14 +19,21 @@
           {{ emailError }}
         </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
-          placeholder="Password">
+
+   
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'">
         <mat-error *ngIf="passwordError">
           {{ passwordError }}
         </mat-error>
-      </mat-form-field> 
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
       <button class="popup-button" mat-raised-button color="primary" type="submit">Login</button>
+      
     </form>
   </div>
   <div class="routes">
@@ -35,3 +43,14 @@
     <a (click)="closePopup()" routerLink="/forgot-password">Forgot Password</a>
   </div>  
 </html>
+
+
+
+
+   <!-- <mat-form-field>
+        <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
+          placeholder="Password">
+        <mat-error *ngIf="passwordError">
+          {{ passwordError }}
+        </mat-error>
+      </mat-form-field> -->
