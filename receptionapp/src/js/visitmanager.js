@@ -18,7 +18,6 @@ fetch('test-visit.json')
                 selected_id = visit.room_no;
                 document.getElementById("allvisits").style.display = "none";
                 document.getElementById("visitmanager").style.display = "block";
-                alert(`Checked in ${visit.name} ${visit.lastname} to room ${visit.room_no}`);
             });
             tbody.appendChild(tr);
         }
