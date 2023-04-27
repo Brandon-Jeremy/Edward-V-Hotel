@@ -61,7 +61,7 @@ export class LoginFormComponent {
       return;
     }
     
-    this.authService.login(this.email, this.password).subscribe(
+    this.authService.fakeLogin(this.email, this.password).subscribe(
       (response) => {
         this.credentials = response
         console.log(this.credentials);

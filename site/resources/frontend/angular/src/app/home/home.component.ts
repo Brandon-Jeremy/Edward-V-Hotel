@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
   }
 
   navigateToAccount(): void {
-    if (this.isUserLoggedIn()) {
+    if (this.isUserLoggedIn() == true) {
       this.router.navigate(['/user']);
     } else {
       this.showSnackbar('Please login or register to access account');
