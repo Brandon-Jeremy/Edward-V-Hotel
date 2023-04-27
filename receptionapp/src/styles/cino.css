@@ -173,7 +173,9 @@ td:nth-child(5) {
   margin-top: 9.8%;
 }
 
-
+#visitmanager {
+  display: none;
+}
 body {
     background-color: rgba(228, 229, 230 , 1);
 }

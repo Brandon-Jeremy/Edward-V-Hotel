@@ -49,7 +49,7 @@ header {
 }
 
 .credentialsbox {
-    background-color: rgba(0 , 0 , 0 , 0.5);
+    background-color: rgb(81, 5, 20);
     backdrop-filter: blur(20px);
     position: relative;
     width: 540px;
@@ -62,7 +62,7 @@ header {
 
 .credentialsboxreg {
     height:640px;
-    margin-top: 120px;
+    margin-top: 70px;
     padding-top:30px;
 }
 .credentialsbox form {
@@ -113,8 +113,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url("../img/lebanon-harissa-jounieh-keserwan-sea-nature-wal-10-24-2017-8-29-34-pm-l.jpg");
-    /*background-color: crimson;*/
+    background-color: crimson;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

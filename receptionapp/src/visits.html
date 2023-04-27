@@ -13,7 +13,7 @@
         <button class = "buttons" id = "menubutton" onclick = "window.location.href = 'index.html'"> Menu </button>
       </nav>
     </header>
-    <div class="tables">
+    <div class="tables" id = "allvisits">
       <table id = "visits">
         <thead>
           <tr>
@@ -31,6 +31,20 @@
     <br>
     <br><br>
     <br>
-    <button id = "ay">OKAY</button>
+    <div id = "visitmanager">
+      <form id = "extend stay" class = "formmanager">
+        <input type = "date" name = "new_to">
+        <button type = "submit"> Extend Stay </button>
+      </form>
+      <form>
+        <select id = "add_service" name = "add_service">
+          <option selected disabled>Room Service</option>
+          <option value = "cleaning">Cleaning</option>
+          <option value = "breakfast">Breakfast to Door</option>
+          <option value = "dinner">Dinner To Door</option>
+        </select>
+      </form>
+
+    </div>
   </body>
 </html>

@@ -16,18 +16,21 @@ fetch('test-visit.json')
             `;
             tr.querySelector('.selector-btn').addEventListener('click', () => {
                 selected_id = visit.room_no;
+                document.getElementById("allvisits").style.display = "none";
+                document.getElementById("visitmanager").style.display = "block";
                 alert(`Checked in ${visit.name} ${visit.lastname} to room ${visit.room_no}`);
             });
             tbody.appendChild(tr);
         }
     });
-    document.addEventListener('DOMContentLoaded', () => {
+    
+document.addEventListener('DOMContentLoaded', () => {
         // Get the button element from the DOM
-        const myButton = document.getElementById('ay');
+    const myButton = document.getElementById('ay');
 
         // Add a click event listener to the button
-        myButton.addEventListener('click', () => {
-          // This code will execute when the button is clicked
-          console.log(`'${selected_id}`);
-        });
-      });
+    myButton.addEventListener('click', () => {
+        // This code will execute when the button is clicked
+        console.log(`'${selected_id}`);
+    });
+});
