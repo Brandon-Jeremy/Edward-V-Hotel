@@ -164,4 +164,9 @@ export class AuthService {
   getIsAuthenticated(): BehaviorSubject<boolean> {
     return this.isAuthenticated;
   }
+
+  //for testing 
+  trulyAuthenticatted(): boolean {
+    return true;
+  }
 }

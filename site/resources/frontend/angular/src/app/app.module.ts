@@ -11,10 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from './services/auth.service';
-
+import { MatIconModule } from '@angular/material/icon';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { BookingComponent } from './booking/booking.component';
 import { RoomsComponent } from './rooms/rooms.component';
@@ -42,8 +42,11 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatIconModule,
     HttpClientModule,
     FormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     BrowserModule,
     BrowserAnimationsModule,
