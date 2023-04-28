@@ -24,12 +24,8 @@ fetch('test-visit.json')
     });
     
 document.addEventListener('DOMContentLoaded', () => {
-        // Get the button element from the DOM
     const myButton = document.getElementById('ay');
-
-        // Add a click event listener to the button
     myButton.addEventListener('click', () => {
-        // This code will execute when the button is clicked
         console.log(`'${selected_id}`);
     });
 });
