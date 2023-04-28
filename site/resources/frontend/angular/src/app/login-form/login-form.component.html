@@ -22,7 +22,7 @@
 
     <mat-form-field>
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" required [(ngModel)]="password" name="password">
+      <input type="password" matInput [formControl]="passwordFormControl" matInput [type]="hide ? 'password' : 'text'" required [(ngModel)]="password" name="password">
       <mat-error *ngIf="passwordError">
         {{ passwordError }}
       </mat-error>
