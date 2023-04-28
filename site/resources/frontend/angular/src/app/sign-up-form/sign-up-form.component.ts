@@ -1,14 +1,16 @@
 import { Component} from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
-import { LoginFormComponent } from '../login-form/login-form.component';
+import { LoginFormComponent, MyErrorStateMatcher } from '../login-form/login-form.component';
+import { FormControl, Validators } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-sign-up-form',
   templateUrl: './sign-up-form.component.html',
-  styleUrls: ['./sign-up-form.component.css']
+  styleUrls: ['./sign-up-form.component.css'],
 })
 export class SignUpFormComponent {
   firstName: string = '';
@@ -27,9 +29,23 @@ export class SignUpFormComponent {
   dobError: string = '';
   phoneNumError: string = '';
 
-  constructor(private authService: AuthService, private http: HttpClient, private dialog: MatDialog) {}
+  constructor(private authService: AuthService, private dialog: MatDialog) { }
 
-  onSignUp(): void {
+  hide = true;
+  
+  matcher = new MyErrorStateMatcher();
+  
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
+  onSubmit(): void {
+    console.log(this.firstName);
+    console.log(this.lastName);
+    console.log(this.dob);
+    console.log(this.email);
+    console.log(this.phoneNum);
+    console.log(this.password);
+    console.log(this.confirmpassword);
+
     this.resetError();
 
     if(this.firstName.length <= 0 || this.lastName.length <= 0 || this.email.length <= 0 || this.password.length <= 0 || this.phoneNum.length <= 0 || !this.dob){
@@ -74,12 +90,9 @@ export class SignUpFormComponent {
       return;
     }
     else if(this.confirmpassword != this.password){
-      this.showErrorDialog("Password and confirm Password do not match");
+      this.passwordError = "Password and confirm Password do not match";
       return;
     }
-
-    // const dobString = this.dob.toDateString();
-    // console.log(dobString);
 
     this.authService.signUp(this.email, this.password, this.firstName, this.lastName, 'dobString', this.phoneNum).subscribe(
       (response) => {
@@ -101,7 +114,7 @@ export class SignUpFormComponent {
   }
 
   private isPassword(str: string){
-    // Password should contain atleast 1 upper 1 lower 1 digit and 1 specail
+    // Password should contain atleast 1 upper 1 lower 1 digit and 1 special character
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]+$/;
     return passwordPattern.test(str);
   }
@@ -121,6 +134,12 @@ export class SignUpFormComponent {
     // Check if date is valid and is not in the future
     const now = new Date();
     return date instanceof Date && !isNaN(date.getTime()) && date <= now;
+  }
+
+  dateFilter = (date: Date) => {
+    const currentDate = new Date();
+    const minDate = new Date(currentDate.setFullYear(currentDate.getFullYear() - 200));
+    return date >= minDate && date <= currentDate;
   }
 
   private showErrorDialog(errorMessage: string): void {

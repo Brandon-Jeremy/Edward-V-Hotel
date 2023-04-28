@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -62,7 +63,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     MatInputModule,
     RouterModule.forRoot([]),
   ],
-  providers: [AuthService],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-US' },AuthService],
   bootstrap: [AppComponent],
   entryComponents: [LoginFormComponent, SignUpFormComponent]
 })
