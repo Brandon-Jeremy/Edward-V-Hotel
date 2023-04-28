@@ -59,7 +59,8 @@ export class UserComponent implements OnInit {
   onViewEditReservations() {
     // Redirect the user to the reservations page
     // This functionality is not implemented in this code example
-    this.router.navigate(["/reservation-menu"])
+    sessionStorage.setItem('isNavigationAllowed', 'true');
+    this.router.navigate(['/reservation-menu']);
   }
 
   onDeleteAccount() {

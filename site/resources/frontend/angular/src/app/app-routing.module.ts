@@ -10,6 +10,7 @@ import { RewardComponent } from './reward/reward.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from './auth.guard';
+import { ReservationRouteGuard } from './reservation-route.guard';
 
 
 //might be used later
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path:"user", component: UserComponent, canActivate: [AuthGuard] },
   {path:"forgot-password", component:ForgotPasswordComponent},
   {path: "reservation-menu", component:ReservationMenuComponent},
+  { path: 'reservation-menu', component: ReservationMenuComponent, canActivate: [ReservationRouteGuard] },
 ];
 
 @NgModule({

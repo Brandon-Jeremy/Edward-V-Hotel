@@ -20,7 +20,7 @@ import { BookingComponent } from './booking/booking.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { ContactComponent } from './contact/contact.component';
 import { UserComponent } from './user/user.component';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FooterComponent } from './footer/footer.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
@@ -61,6 +61,11 @@ import { ReservationMenuComponent } from './reservation-menu/reservation-menu.co
     MatSnackBarModule,
     MatInputModule,
     RouterModule.forRoot([]),
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
