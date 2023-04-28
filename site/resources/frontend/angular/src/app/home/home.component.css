@@ -82,6 +82,11 @@
     color: white;
 }
 
+.nav-list button:hover{
+    cursor: pointer;
+    color: wheat;
+}
+
 .menu-open .nav-list{
     opacity: 1;
     transform: scale(1);

@@ -37,6 +37,7 @@
   
   .footer-menu button:hover {
     color: wheat;
+    cursor: pointer;
   }
   
   .footer-content {
