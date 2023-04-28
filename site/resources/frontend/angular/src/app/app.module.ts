@@ -30,6 +30,7 @@ import { UserComponent } from './user/user.component';
 import { FooterComponent } from './footer/footer.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { AvailableRoomsComponent } from './available-rooms/available-rooms.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     ContactComponent,
     UserComponent,
     ErrorDialogComponent,
+    AvailableRoomsComponent,
   ],
   imports: [
     BrowserModule,
