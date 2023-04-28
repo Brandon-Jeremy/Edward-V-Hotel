@@ -1,53 +1,52 @@
-<html lang="en">
-  <mat-dialog-content>
-    <button mat-icon-button class="close-button" (click)="closePopup()">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-dialog-content>
-  <div class="header">
-    <h2 class="center">Welcome</h2>
-    <p class="center welcome">Edward V Hotel</p>
-  </div>
-  <div class="form-container">
-    <form class="popup" #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+<mat-dialog-content>
+  <button mat-icon-button class="close-button" (click)="closePopup()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-dialog-content>
+<div class="header">
+  <h2 class="center">Welcome</h2>
+  <p class="center welcome">Edward V Hotel</p>
+</div>
+<div class="form-container">
+  <form class="popup" #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
 
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-          placeholder="Ex. name@example.com">
-        <mat-error *ngIf="emailFormControl.hasError('email') || emailFormControl.hasError('required')">
-          {{ emailError }}
-        </mat-error>
-      </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" required [(ngModel)]="email" name="email"
+        placeholder="Ex. name@example.com">
+      <mat-error *ngIf="emailFormControl.hasError('email') || emailFormControl.hasError('required')">
+        {{ emailError }}
+      </mat-error>
+    </mat-form-field>
 
-   
-      <mat-form-field appearance="fill">
-        <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'">
-        <mat-error *ngIf="passwordError">
-          {{ passwordError }}
-        </mat-error>
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
 
-      <button class="popup-button" mat-raised-button color="primary" type="submit">Login</button>
-      
-    </form>
-  </div>
-  <div class="routes">
-    <span>Don't have an account? </span><a (click)="openSignUpForm()">Sign Up</a>
-  </div>
-  <div class="routes">
-    <a (click)="closePopup()" routerLink="/forgot-password">Forgot Password</a>
-  </div>  
-</html>
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" required [(ngModel)]="password" name="password">
+      <mat-error *ngIf="passwordError">
+        {{ passwordError }}
+      </mat-error>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
 
+    <button class="popup-button" mat-raised-button color="primary" type="submit">Login</button>
+
+  </form>
+</div>
+<div class="routes">
+  <span>Don't have an account? </span><a (click)="openSignUpForm()">Sign Up</a>
+</div>
+<div class="routes">
+  <a (click)="closePopup()" routerLink="/forgot-password">Forgot Password</a>
+</div>
 
 
 
-   <!-- <mat-form-field>
+
+<!-- <mat-form-field>
         <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher"
           placeholder="Password">
         <mat-error *ngIf="passwordError">

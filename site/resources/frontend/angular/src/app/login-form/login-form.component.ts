@@ -44,6 +44,9 @@ export class LoginFormComponent {
   }
   
   onSubmit(): void {
+    console.log(this.email);
+    console.log(this.password);
+
     this.resetError();
     
     //email validation
