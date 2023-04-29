@@ -16,6 +16,7 @@ class CreateOnlineUsersTable extends Migration
         Schema::create('online_users', function (Blueprint $table) {
             //Table important
             $table->id();
+            $table->timestamps();
             //User important
             $table->string('first_name');
             $table->string('last_name');
@@ -23,10 +24,13 @@ class CreateOnlineUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone_num')->unique();
             $table->string('password');
-            $table->string('billing_address');
-            $table->string('passport_id')->unique();
+
+            $table->integer('points');
+
             $table->rememberToken();
+            $table->timestamp('email_created_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('details')->nullable();
         });
     }
 

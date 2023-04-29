@@ -21,14 +21,38 @@
     text-transform: uppercase;
     color: #fff;
     font-weight: bold;
-  }
-  .input {
-    height: 55px;
-    padding: 10px;
+    margin-bottom: 1rem;
+    font-family: Roman;
+}
+
+.input,
+.options{
+    outline: none;
     border: none;
+    width: 100%;
+    min-height: 4rem;
+    padding: 1rem;
+    font-weight: bold;
+    color: #a5a5a5;
+    letter-spacing: 2px;
+    font-family: Abareto;
+    resize: none;
+
+}
+
+select {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #f1f1f1;
-  }
+    padding: 8px;
+}
+
+select option {
+    font-family: Abareto;
+    color: #333;
+    font-size: 12px;
+}
+  
 
 ::placeholder{
     color: inherit;
