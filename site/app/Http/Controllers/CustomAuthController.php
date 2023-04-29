@@ -16,6 +16,10 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
  * Run `npm install && npm run dev` to compile the frontend assets. 
 */
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyAccount;
+
+
 class CustomAuthController extends Controller
 {
     //Not needed. Not a server rendered site.
@@ -40,7 +44,19 @@ class CustomAuthController extends Controller
             $user->dob=$request->dob;
             // $user->nationality=NULL;
             $user->email=$request->email;
+
+            // Validate email using regex
+            if(!preg_match("/^[a-zA-Z0-9+_.-]+@(?:(gmail)|(hotmail)|(outlook)|(duck)|(pm))\.(?:(com))$/", $user->email)) {
+                return response()->json(['error' => 'Invalid email format'], 400);
+            }
+
             $user->phone_num=$request->phone_num;
+
+            // Validate phone number using regex
+            if(!preg_match("/^[\d]{7,}$/", $user->phone_num)) {
+                return response()->json(['error' => 'Invalid phone number format'], 400);
+            }
+
             $pass=$request->password;
             $user->password=hash("sha256",$pass);
             $user->points=0;
@@ -54,6 +70,16 @@ class CustomAuthController extends Controller
             $user->token_expiration=NULL;
 
             $user->save();
+
+            $link = "http://127.0.0.1:8000/api/";
+            $api = "validate-email/";
+            
+            $mailData = [
+                'url' => $link . $api . $token
+            ];
+
+            Mail::to($user->email)->send(new VerifyAccount($mailData));
+            
         }
         catch (\Exception $e) {
             // Code to handle the exception goes here
@@ -68,6 +94,24 @@ class CustomAuthController extends Controller
             "success" => true
         ]);
     }
+
+    public function validateEmail(Request $request, $token) {
+        // retrieve the user based on the token
+        $user = User::where('token', $token)->first();
+    
+        // check if a user was found
+        if (!$user) {
+            return response()->json(['error' => 'Invalid token'], 400);
+        }
+    
+        // update the email_verified_at field to mark the email as verified
+        $user->email_verified_at = Carbon::now();
+        $user->save();
+    
+        // return a success message
+        return response()->json(['message' => 'Email verified successfully'], 200);
+    }
+    
 
     use AuthenticatesUsers, ThrottlesLogins;
     public function loginUser(Request $request)
