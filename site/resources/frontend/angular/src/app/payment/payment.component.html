@@ -1,0 +1,25 @@
+<form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="nameOnCard">Name on Card:</label>
+        <input type="text" id="nameOnCard" class="form-control" formControlName="nameOnCard" title="Enter the name on your card">
+    </div>
+    <div class="form-group">
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" class="form-control" formControlName="cardNumber" title="Enter your card number">
+    </div>
+    <div class="form-group">
+        <label for="expirationMonth">Expiration Month:</label>
+        <input type="text" id="expirationMonth" class="form-control" formControlName="expirationMonth" title="Enter the expiration month of your card">
+    </div>
+    <div class="form-group">
+        <label for="expirationYear">Expiration Year:</label>
+        <input type="text" id="expirationYear" class="form-control" formControlName="expirationYear" title="Enter the expiration year of your card">
+    </div>
+    <div class="form-group">
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" class="form-control" formControlName="cvv" title="Enter the CVV code on your card">
+    </div>
+    <button type="submit" [disabled]="!paymentForm.valid">Submit</button>
+</form>
+
+  

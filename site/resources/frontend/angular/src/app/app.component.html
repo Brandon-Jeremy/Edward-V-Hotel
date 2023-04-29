@@ -6,6 +6,7 @@
 </div>
 
 <!-- for components on different pages -->
-<div *ngIf="router.url === '/forgot-password' || router.url === '/user' || router.url === '/reservation-menu' || router.url === '/available-rooms' ">
+<div *ngIf="router.url === '/forgot-password' || router.url === '/user' || router.url === '/reservation-menu' || router.url === '/available-rooms'
+|| router.url === '/payment' ">
     <router-outlet></router-outlet>
 </div>

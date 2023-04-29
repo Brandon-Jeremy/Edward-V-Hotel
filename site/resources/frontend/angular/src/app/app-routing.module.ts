@@ -12,6 +12,7 @@ import { UserComponent } from './user/user.component';
 import { AuthGuard } from './auth.guard';
 import { AvailableRoomsComponent } from './available-rooms/available-rooms.component';
 import { ReservationMenuComponent } from './reservation-menu/reservation-menu.component';
+import { PaymentComponent } from './payment/payment.component';
 
 //might be used later
 // import { AboutComponent } from './about/about.component';
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path:"forgot-password", component:ForgotPasswordComponent},
   {path: 'reservation-menu', component: ReservationMenuComponent, canActivate: [AuthGuard]},
   {path: 'available-rooms', component: AvailableRoomsComponent, canActivate: [AuthGuard]},
+  {path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
