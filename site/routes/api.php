@@ -44,6 +44,8 @@ Route::post('/login-user',[CustomAuthController::class,'loginUser'])->name('logi
 Route::post('/request-email',[CustomAuthController::class,'getEmail'])->name('request-email');
 Route::post('/change-password',[CustomAuthController::class,'changePassword'])->name('change-password');
 
+Route::post('/validate-email/{token}',[CustomAuthController::class,'validateEmail'])->name('validate-email');
+
 //To be done like this with token, used to send to email
 Route::post('/change-pass/{token}',[CustomAuthController::class,'changePass'])->name('change-pass');
 
