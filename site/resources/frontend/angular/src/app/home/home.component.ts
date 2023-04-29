@@ -64,16 +64,30 @@ export class HomeComponent implements OnInit {
 
   openLoginForm(): void {
     this.dialog.open(LoginFormComponent, {
-      width: '500px', // Adjust the width
-      height: '600px', // Adjust the height
+      disableClose: true,
+      width: '600px', // Adjust the width
+      height: '500px', // Adjust the height
     });
   }
 
   openSignUpForm(): void {
     this.dialog.open(SignUpFormComponent, {
-      width: '500px', // Adjust the width
-      height: '600px', // Adjust the height
+      disableClose: true,
+      width: '600px', // Adjust the width
+      height: '750px', // Adjust the height
     });
+  }
+
+  scrollToSection(sectionId: string) {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      const top = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
  

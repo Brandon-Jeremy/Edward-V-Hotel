@@ -27,14 +27,15 @@
     margin: 0 15px;
   }
   
-  .footer-menu a {
+  .footer-menu button {
+    background: none;
+    border: none;
     color: whitesmoke;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
-    
   }
   
-  .footer-menu a:hover {
+  .footer-menu button:hover {
     color: wheat;
   }
   

@@ -15,6 +15,7 @@
     background-color: var(--purple-solid);
 }
 
+
 /* Styles- nav */
 .nav{
     display: flex;
@@ -40,7 +41,6 @@
     cursor: pointer;
     position: relative;
     z-index: 1500;
-    
 }
 
 .hamburger-menu .fa-times{
@@ -74,6 +74,23 @@
 .menu-open .nav-list{
     opacity: 1;
     transform: scale(1);
+}
+
+.nav-item button{
+    margin: 10px;
+    color: white;
+    background: none;
+    border: none;
+    text-decoration: none;
+    font-size: 2rem;
+    font: optional;
+}
+
+.nav-item a{
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
+    font: optional;
 }
 
 .nav-item:not(:last-child){
@@ -115,6 +132,8 @@
 }
 
 .main-heading{
+    display: flex;
+    flex-direction: column;
     color: #fff;
     line-height: 1;
     text-shadow: 1px 1px 1rem rgba(0, 0, 0, .5);
@@ -123,6 +142,7 @@
 }
 
 .title{
+    margin-bottom: 45px;
     font-size: 4.8rem;
     text-transform: uppercase;
     letter-spacing: 3px;
