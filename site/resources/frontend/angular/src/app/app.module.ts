@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -27,6 +28,7 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { EditUserInfoComponent } from './edit-user-info/edit-user-info.component';
 import { ReservationMenuComponent } from './reservation-menu/reservation-menu.component';
 import { AvailableRoomsComponent } from './available-rooms/available-rooms.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { AvailableRoomsComponent } from './available-rooms/available-rooms.compo
     EditUserInfoComponent,
     ReservationMenuComponent,
     AvailableRoomsComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { AvailableRoomsComponent } from './available-rooms/available-rooms.compo
     ReactiveFormsModule,
     BrowserAnimationsModule,
     BrowserModule,
+    MatSelectModule,
     MatDialogModule,
     MatButtonModule,
     FormsModule,
