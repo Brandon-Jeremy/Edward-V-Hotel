@@ -282,54 +282,46 @@ class WalkInBookingController extends Controller
             ->select('room_number','floor','id')
             ->where('status', 'reserved')
             ->get();
-
-
-        // var_dump($roomInfo);die;
-        // return response()->json([
-        //     'result' => $roomInfo
-        // ]);
     
         $reservationInfo = DB::table('reservation')
             ->select('room_id', 'user_id','date_from','date_to')
             ->where('activity', 'pending')
             ->get();
-
-        // return response()->json([
-        //     'result' => $reservationInfo
-        // ]);
-        
+    
         $userInformation = DB::table('users')
             ->select('id', 'first_name','last_name')
             ->whereIn('id', $reservationInfo->pluck('user_id')->toArray())
             ->get();
-
-        // return response()->json([
-        //     'result' => $userInformation
-        // ]);
-            
-            $mergedData = $roomInfo->map(function ($room) use ($reservationInfo, $userInformation) 
-            { 
-                $reservation = $reservationInfo->firstWhere('room_id', $room->id); 
-                // var_dump($reservation);die;
-                $user = $userInformation->firstWhere('id',$reservation->user_id); 
-                
-                return [ 
-                    'room_number' => $room->room_number, 
-                    'floor' => $room->floor, 
-                    'user' => 
-                        [ 
-                            'id' => $user->id, 
-                            'first_name' => $user->first_name, 
-                            'last_name' => $user->last_name 
-                        ], 
-                            'date_from' => $reservation->date_from, 
-                            'date_to' => $reservation->date_to 
-                    ];
-            }); 
-                        
-                return $mergedData; 
-
+    
+        $mergedData = $roomInfo->map(function ($room) use ($reservationInfo, $userInformation) {
+            $reservations = $reservationInfo->where('room_id', $room->id);
+            $reservationData = [];
+    
+            foreach ($reservations as $reservation) {
+                $user = $userInformation->firstWhere('id',$reservation->user_id);
+    
+                $reservationData[] = [
+                    'room_number' => $room->room_number,
+                    'floor' => $room->floor,
+                    'user' => [
+                        'id' => $user->id,
+                        'first_name' => $user->first_name,
+                        'last_name' => $user->last_name
+                    ],
+                    'date_from' => $reservation->date_from,
+                    'date_to' => $reservation->date_to
+                ];
+            }
+    
+            return $reservationData;
+        });
+    
+        // Flatten the array to remove nested arrays
+        $mergedData = array_merge(...$mergedData);
+    
+        return $mergedData;
     }
+    
 
     public function checkIn(Request $request){
         $room_floor = $request->floor;
@@ -567,6 +559,28 @@ class WalkInBookingController extends Controller
         ->first();
 
         $userid = $user_id->user_id;
+        $date_from = $user_id->date_from;
+
+        //TODO: dates that overlap should not be allowed and warned about. NEEDS TESTING
+
+        $overlappingReservations = DB::table('reservation')
+        ->where('room_id',$roomid)
+        ->where('activity','!=','inactive')
+        ->where(function($query) use ($date_from, $date_to){
+            $query->whereBetween('date_from', [$date_from, $date_to])
+                  ->orWhereBetween('date_to', [$date_from, $date_to])
+                  ->orWhere(function($query) use ($date_from, $date_to){
+                      $query->where('date_from', '<=', $date_from)
+                            ->where('date_to', '>=', $date_to);
+                  });
+        })
+        ->count();
+
+        if($overlappingReservations!=0){
+            return response()->json([
+                'error' => "Conflicting date for selected room"
+            ]);
+        }
 
         $updated = DB::table('reservation')
         ->where('room_id',$roomid)
