@@ -25,6 +25,8 @@
     font-family: Roman;
 }
 
+
+
 .input,
 .options{
     outline: none;
@@ -37,7 +39,7 @@
     letter-spacing: 2px;
     font-family: Abareto;
     resize: none;
-
+    height: 55px;
 }
 
 select {
