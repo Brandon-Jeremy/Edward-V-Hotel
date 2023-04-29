@@ -1,14 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
 @font-face {
-    font-family: Josefin Sans;
+    font-family: 'Josefin Sans';
     src: url('../src/assets/Fonts/JosefinSans-MediumItalic.ttf');
-    font-family: Aboreto;
+    font-family: 'Aboreto';
     src: url('../src/assets/Fonts/Aboreto-Regular.ttf');
-    font-family: Roman;
+    font-family: 'Roman';
     src:url(../src/assets/Fonts/LuxuriousRoman-Regular.ttf);
-    font-family: Tapestry;
+    font-family: 'Tapestry';
     src:url(../src/assets/Fonts/Tapestry-Regular.ttf);
+    font-family: 'Rakkas';
+    src:url(../src/assets/Fonts/Rakkas-Regular.ttf);
+    
 }
 *,
 *,
@@ -43,7 +46,7 @@ html {
 }
 
 body{
-    font-family: 'Josefin Sans';
+    /* font-family: 'Josefin Sans'; */
     font-size: 1.6rem;
     color: var(--dark-color);
 }
@@ -62,7 +65,10 @@ section{
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0; 
+    /* font-family: Roboto, "Helvetica Neue", sans-serif;  */
+}
 
 mat-form-field {
     width: 100%;
@@ -91,7 +97,7 @@ form .popup{
     border-radius: 10rem;
     display: inline-flex;
     align-items: center;
-    font-family: 'Josefin Sans';
+    font-family: 'Roman';
 }
 
 .btn:hover{

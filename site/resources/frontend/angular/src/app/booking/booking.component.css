@@ -15,6 +15,7 @@
     color: #fff;
     font-weight: bold;
     margin-bottom: 1rem;
+    font-family: Roman;
 }
 
 .input,
@@ -27,11 +28,24 @@
     font-weight: bold;
     color: #a5a5a5;
     letter-spacing: 2px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: Abareto;
     resize: none;
 
 }
 
+select {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+select option {
+    font-family: Abareto;
+    color: #333;
+    font-size: 12px;
+}
+  
 
 ::placeholder{
     color: inherit;

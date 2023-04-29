@@ -20,12 +20,30 @@
     margin-bottom: 3.5rem;
 }
 
-.section-head .sub-heading {
+/* .section-head .sub-heading {
     display: block;
     font-style: italic;
     font-size: 1.2rem;
     color: rgba(190, 8, 8, 0.9); /* Set a more visible lighter white color */
-    margin-top: 0.5rem;
+    /* margin-top: 0.5rem; */
+/* }  */
+
+.heading{
+    
+    margin: 10px;
+    display: block;
+    font-size: 5rem;
+    text-transform: uppercase;
+    font-family: 'Aboreto';
+}
+
+.sub-heading{
+    font-size: 2.1rem;
+    /* font-family: 'Courgette', cursive; */
+    font-weight: 300;
+    color: #a5a5a5;
+    font-family: Tapestry;
+    margin-top: 15px;
 }
 
 .contact-form {
@@ -92,6 +110,10 @@
     display: block;
     margin: 1rem auto; /* Add top and bottom margin of 1rem and auto left and right margin */
     text-align: center;
+}
+
+.input{
+    font-family: Josefin Sans;
 }
 
 @media screen and (min-width: 768px){

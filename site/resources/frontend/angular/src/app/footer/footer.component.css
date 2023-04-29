@@ -12,7 +12,7 @@
   }
   
   .footer-nav {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   .footer-menu {
@@ -33,15 +33,19 @@
     color: whitesmoke;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
+    font-family: Tapestry;
+    font-size: 1.5rem;
   }
   
   .footer-menu button:hover {
-    color: wheat;
+    color: bisque;
     cursor: pointer;
   }
   
   .footer-content {
-    margin-top: 20px;
+    margin-top: 15px;
     opacity: 80%;
+    font-family: Tapestry;
+    font-size: 1.7rem;
   }
   
