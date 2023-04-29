@@ -55,6 +55,7 @@ Route::get('/get-rewards',[rewardController::class,'getRewards'])->name('get-rew
 Route::post('/purchase-reward',[rewardController::class,'purchaseReward'])->name('purchase-reward');
 Route::post('/calculate-points',[rewardController::class,'calculatePoints'])->name('calculate-points');
 Route::post('/user-rewards',[rewardController::class,'userRewards'])->name('user-rewards');
+Route::post('/use-reward',[rewardController::class,'useReward'])->name('use-reward');
  
 Route::post('/create-reservation',[OnlineReservationController::class,'createReservation'])->name('create-reservation');
 

@@ -8,7 +8,9 @@ use App\Models\Reward;
 use App\Models\User;
 use App\Models\Redeem;
 use App\Mail\RewardReceived;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\RewardRedeemed;
 
 
 use Illuminate\Support\Facades\DB;
@@ -141,6 +143,67 @@ class rewardController extends Controller
         return response()->json([
             'rewards' => $reward_list
         ]);
+
+    }
+    
+    /**
+     * @param User_email to validate that he/she owns the item
+     * @param redeem_id id in table (autoincrement and unique)
+     * @param date_from to pickup (assuming reward is only for airport pickup)
+     */
+    public function useReward(Request $request){
+        $date_from = $request->date_from;
+        $email = $request->email;
+        $redeem_id = $request->redeem_id;
+        
+        $user = DB::table('users')
+        ->where('email',$email)
+        ->first();
+
+        if(empty($user)){
+            return response()->json([
+                'error' => 'User does not exist'
+            ]);
+        }
+
+        $redeemed = DB::table('redeems')
+        ->where('user_id',$user->id)
+        ->where('redeemed',0)
+        ->where('id',$redeem_id)
+        ->first();
+
+        if(empty($redeemed)){
+            return response()->json([
+                'error' => 'Reward does not exist or has already been redeemed'
+            ]);
+        }
+
+        $first_name = $user->first_name;
+        $last_name = $user->last_name;
+        $setRedeemed = 1;
+
+        $mailData = [
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'date_from' => $date_from
+        ];
+
+        $hotel_email = 'brandonnader1@gmail.com';
+
+        Mail::to($hotel_email)->send(new RewardRedeemed($mailData));
+
+        DB::table('redeems')
+        ->where('user_id',$user->id)
+        ->where('id',$redeem_id)
+        ->where('redeemed',0)
+        ->update([
+            'redeemed' => 1
+        ]);
+
+        return response()->json([
+            'success' => true
+        ]);
+
 
     }
 
