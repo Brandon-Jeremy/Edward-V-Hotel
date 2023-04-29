@@ -8,6 +8,7 @@ use App\Models\Reward;
 use App\Models\User;
 use App\Models\Redeem;
 use App\Mail\RewardReceived;
+use Illuminate\Support\Facades\Mail;
 
 
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,11 @@ class rewardController extends Controller
         return response()->json($rewards);
     }
 
+    /**
+     * @param id which represents the reward ID
+     * @param email user that is purchasing the reward
+     * @param recipient recipient that is recieving the email (optional)
+     */
     public function purchaseReward(Request $request){
         //Expected request input is the rewardID and the user's email
         //The user's email is expected to be valid since he must be logged in 
@@ -62,7 +68,7 @@ class rewardController extends Controller
         $redeem->redeemed=false;
         $redeem->save();
 
-        Mail::to($user_email)->send(new RewardReceived);
+        Mail::to($recipientemail)->send(new RewardReceived);
         // Return success response
         return response()->json([
             "success" => true
