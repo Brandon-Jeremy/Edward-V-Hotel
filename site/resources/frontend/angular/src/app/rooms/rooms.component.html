@@ -1,5 +1,13 @@
 <!doctype html>
 <html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title</title>
+</head>
+
+<body>
     <section id="rooms" class="rooms">
         <div class="conatiner">
             <h5 class="section-head">
@@ -19,11 +27,11 @@
                             <i class="fas fa-star rating"></i>
                             <i class="fas fa-star-half rating"></i>
                         </div> -->
-                        <a href="#" class="btn btn-gradient">Book Now
+                        <button (click)="navigateToPayment()" class="btn btn-gradient">Book Now
                             <span class="dots">
                                 <i class="fas fa-ellipsis-h"></i>
                             </span>
-                        </a>
+                        </button>
                     </div>
                     <div class="grid-item featured-hotels">
                         <img src="assets/angular/images/hotel_the_enchanted_garden.jpg" alt="" class="hotel-image">
@@ -36,11 +44,11 @@
                             <i class="fas fa-star rating"></i>
                             <i class="fas fa-star rating"></i>
                         </div> -->
-                        <a href="#" class="btn btn-gradient">Book Now
+                        <button (click)="navigateToPayment()" class="btn btn-gradient">Book Now
                             <span class="dots">
                                 <i class="fas fa-ellipsis-h"></i>
                             </span>
-                        </a>
+                        </button>
                     </div>
                     <div class="grid-item featured-hotels">
                         <img src="assets/angular/images/hotel_the_paradise.jpg" alt="" class="hotel-image">
@@ -53,14 +61,16 @@
                             <i class="fas fa-star rating"></i>
                             <i class="fas fa-star-half rating"></i>
                         </div> -->
-                        <a href="#" class="btn btn-gradient">Book Now
+                        <button (click)="navigateToPayment()" class="btn btn-gradient">Book Now
                             <span class="dots">
                                 <i class="fas fa-ellipsis-h"></i>
                             </span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+</body>
+
 </html>
