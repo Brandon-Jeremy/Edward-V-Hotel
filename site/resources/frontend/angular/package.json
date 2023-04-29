@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
     "arktype": "^1.0.11-alpha",
+    "axios": "^1.4.0",
     "istanbul-lib-report": "^3.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
