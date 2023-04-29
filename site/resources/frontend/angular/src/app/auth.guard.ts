@@ -11,9 +11,13 @@ import { AuthService } from './services/auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
+  canSearchForRoomsVar = true;
+
+  canSearchForRooms(): boolean {
+    return this.canSearchForRoomsVar
+  }
+  
   canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
   ): Observable<boolean> {
     return this.authService.authStatus$.pipe(
       take(1),

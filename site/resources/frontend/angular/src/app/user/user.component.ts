@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-import { ReservationRouteGuard } from '../reservation-route.guard'; 
+import { AuthGuard } from '../auth.guard';
 
 @Component({
   selector: 'app-user',
@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   userForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router,
-    private reservationGuard: ReservationRouteGuard) { }
+    private authGuard:AuthGuard) { }
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
@@ -59,7 +59,7 @@ export class UserComponent implements OnInit {
   }
 
   onViewEditReservations(): void {
-    if (this.reservationGuard.canActivate()) {
+    if (this.authGuard.canActivate()) {
       this.router.navigateByUrl('/reservation-menu');
     }
   }

@@ -10,7 +10,6 @@ import { RewardComponent } from './reward/reward.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from './auth.guard';
-import { ReservationRouteGuard } from './reservation-route.guard';
 import { AvailableRoomsComponent } from './available-rooms/available-rooms.component';
 import { ReservationMenuComponent } from './reservation-menu/reservation-menu.component';
 
@@ -32,7 +31,7 @@ const routes: Routes = [
   {path:"rewards", component:RewardComponent},
   {path:"user", component: UserComponent, canActivate: [AuthGuard] },
   {path:"forgot-password", component:ForgotPasswordComponent},
-  {path: 'reservation-menu', component: ReservationMenuComponent, canActivate: [ReservationRouteGuard]},
+  {path: 'reservation-menu', component: ReservationMenuComponent, canActivate: [AuthGuard]},
   {path: 'available-rooms', component: AvailableRoomsComponent, canActivate: [AuthGuard]},
 ];
 

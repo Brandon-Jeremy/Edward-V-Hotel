@@ -1,5 +1,10 @@
 <!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Booking</title>
+      </head>
     <section id="reservation" class="booking">
         <div class="container">
             <form action="" class="book-form">
@@ -17,7 +22,7 @@
                 </div>
                 <div class="input-group">
                     <label for="room-type" class="input-label">Room Type</label>
-                    <select name="options" id="room-types">
+                    <select name="options" id="room-types" title="Select Room Type">
                         <!-- <option value="0">Choose</option> -->
                         <option value="0">Single</option>
                         <option value="1">Double</option>
@@ -26,13 +31,13 @@
                 </div>
                 <div class="input-group">
                     <label for="view" class="input-label">View</label>
-                    <select name="options" id="view">
+                    <select name="options" id="view" title="Select View">
                         <!-- <option value="0">Choose</option> -->
                         <option value="1">Beach</option>
                         <option value="2">City</option>
                     </select>
                 </div>
-                <button type="submit" class="btn form-btn btn-purple">Search
+                <button (click)="searchForRooms()" type="submit" class="btn form-btn btn-purple">Search
                     <span class="dots"><i class="fas fa-ellipsis-h"></i> </span>
                 </button>
             </form>
