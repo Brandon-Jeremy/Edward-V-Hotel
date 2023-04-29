@@ -6,7 +6,7 @@
 </div>
 
 <!-- for components on different pages -->
-<div *ngIf="router.url === '/forgot-password'">
+<div *ngIf="router.url === '/forgot-password' || router.url === '/available-rooms' ">
     <router-outlet></router-outlet>
 </div>
 
