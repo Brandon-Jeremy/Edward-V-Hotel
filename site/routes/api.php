@@ -15,6 +15,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\RoomInfoController;
 use App\Http\Controllers\GiftcardController;
 use App\Http\Controllers\WaitinglistController;
+use App\Http\Controllers\ProfileController;
 
 
 
@@ -111,3 +112,6 @@ Route::post('/add-waitinglist',[WaitinglistController::class,'addtoWaitinglist']
 Route::post('/create-reservation',[OnlineReservationController::class,'createReservation'])->name('create-reservation');
 Route::post('/cancel-reservation',[OnlineReservationController::class,'cancelReservation'])->name('cancel-reservation');
 Route::post('/edit-reservation',[OnlineReservationController::class,'editReservation'])->name('edit-reservation');
+
+//Profile management
+Route::post('/delete-account',[ProfileController::class,'deleteAccount'])->name('delete-account');
