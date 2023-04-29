@@ -45,13 +45,14 @@ p {
 }
 
 .routes a {
-  color: #8f50fb;
+  color: var(--purple-transparent);
   font-weight: bold;
   text-decoration: none;
 }
 
 .routes a:hover {
-  text-decoration: underline;
+  color: var(--purple-transparent-alt);
+  cursor: pointer;
 }
 
 .routes-login{
@@ -77,8 +78,19 @@ p {
   margin-bottom: 20px;
 }
 
-.popup-button {
-  align-self: center;
+.submit-btn {
+  background-color: var(--purple-transparent);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: var(--purple-transparent-alt);
 }
 
 .error{

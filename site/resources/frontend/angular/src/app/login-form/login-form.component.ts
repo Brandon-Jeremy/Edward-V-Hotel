@@ -79,12 +79,6 @@ export class LoginFormComponent {
     );
   }
 
-  private isEmail(str: string) {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // ^[^\s@]+@(?:(gmail|hotmail|outlook))\.[^\s@]+$
-    return emailPattern.test(str);
-  }
-
   showSnackbar(message: string): void {
     this.snackBar.open(message, 'Close', {
       duration: 3000,

@@ -8,7 +8,7 @@
   <p class="center welcome">Edward V Hotel</p>
 </div>
 <div class="form-container">
-  <form class="popup" #signUpForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  <form class="popup" #signUpForm="ngForm" (ngSubmit)="onSubmit()">
 
     <mat-form-field>
       <input matInput placeholder="First name" required [(ngModel)]="firstName" name="firstName">
@@ -50,11 +50,11 @@
     <mat-form-field>
       <mat-label>Enter your password</mat-label>
       <input matInput [type]="hideP ? 'password' : 'text'" required [(ngModel)]="password" name="password"
-      placeholder="Password">
+        placeholder="Password">
       <mat-error *ngIf="passwordError">
         {{ passwordError }}
       </mat-error>
-      <button mat-icon-button matSuffix (click)="hideP = !hideP" [attr.aria-label]="'Hide password'"
+      <button mat-icon-button matSuffix type="button" (click)="hideP = !hideP" [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hideP">
         <mat-icon>{{hideP ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
@@ -62,18 +62,18 @@
 
     <mat-form-field>
       <mat-label>Confirm password</mat-label>
-      <input matInput [type]="hideCP ? 'password' : 'text'" required [(ngModel)]="confirmpassword" name="confirmPassword"
-      placeholder="Confirm Password">
+      <input matInput [type]="hideCP ? 'password' : 'text'" required [(ngModel)]="confirmpassword"
+        name="confirmPassword" placeholder="Confirm Password">
       <mat-error *ngIf="passwordError">
         {{ passwordError }}
       </mat-error>
-      <button mat-icon-button matSuffix (click)="hideCP = !hideCP" [attr.aria-label]="'Hide password'"
+      <button mat-icon-button matSuffix type="button" (click)="hideCP = !hideCP" [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hideCP">
         <mat-icon>{{hideCP ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
 
-    <button class="popup-button" mat-raised-button color="primary" type="submit">Sign Up</button>
+    <button class="submit-btn" type="submit">Sign Up</button>
 
   </form>
 </div>

@@ -8,7 +8,7 @@
   <p class="center welcome">Edward V Hotel</p>
 </div>
 <div class="form-container">
-  <form class="popup" #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  <form class="popup" #loginForm="ngForm" (ngSubmit)="onSubmit()">
 
     <mat-form-field>
       <mat-label>Email</mat-label>
@@ -27,13 +27,13 @@
       <mat-error *ngIf="passwordError">
         {{ passwordError }}
       </mat-error>
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+      <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
 
-    <button class="popup-button" mat-raised-button color="primary" type="submit">Login</button>
+    <button class="submit-btn" type="submit">Login</button>
 
   </form>
 </div>
