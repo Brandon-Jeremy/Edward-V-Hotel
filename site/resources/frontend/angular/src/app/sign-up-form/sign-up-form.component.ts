@@ -3,7 +3,8 @@ import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
-import { LoginFormComponent } from '../login-form/login-form.component';
+import { LoginFormComponent, MyErrorStateMatcher } from '../login-form/login-form.component';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -11,6 +12,14 @@ import { LoginFormComponent } from '../login-form/login-form.component';
   styleUrls: ['./sign-up-form.component.css']
 })
 export class SignUpFormComponent {
+
+  hideP = true;
+  hideCP = true;
+
+  matcher = new MyErrorStateMatcher();
+  
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
   firstName: string = '';
   lastName: string = '';
   dob: Date = new Date();
@@ -29,7 +38,7 @@ export class SignUpFormComponent {
 
   constructor(private authService: AuthService, private http: HttpClient, private dialog: MatDialog) {}
 
-  onSignUp(): void {
+  onSubmit(): void {
     this.resetError();
 
     if(this.firstName.length <= 0 || this.lastName.length <= 0 || this.email.length <= 0 || this.password.length <= 0 || this.phoneNum.length <= 0 || !this.dob){
