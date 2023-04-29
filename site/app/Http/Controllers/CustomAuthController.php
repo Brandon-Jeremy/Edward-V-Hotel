@@ -226,7 +226,8 @@ class CustomAuthController extends Controller
         } 
         else {
             return response()->json([
-                "success" => true
+                "success" => true,
+                "user_id" => $record->id
             ]);
         }
     }
