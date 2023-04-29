@@ -54,7 +54,7 @@ class GiftcardController extends Controller
             'expiration_date' => $expiration_date,
         ]);
 
-        $new_points = $user_points - $value*3;
+        $new_points = $user_points - $value;
 
         DB::table('users')
         ->where('id',$user->id)
