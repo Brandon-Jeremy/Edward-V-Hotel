@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +26,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { EditUserInfoComponent } from './edit-user-info/edit-user-info.component';
 import { ReservationMenuComponent } from './reservation-menu/reservation-menu.component';
-
+import { AvailableRoomsComponent } from './available-rooms/available-rooms.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import { ReservationMenuComponent } from './reservation-menu/reservation-menu.co
     ErrorDialogComponent,
     EditUserInfoComponent,
     ReservationMenuComponent,
+    AvailableRoomsComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,18 +55,16 @@ import { ReservationMenuComponent } from './reservation-menu/reservation-menu.co
     ReactiveFormsModule,
     BrowserAnimationsModule,
     BrowserModule,
-    BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
     FormsModule,
     MatSnackBarModule,
     MatInputModule,
-    RouterModule.forRoot([]),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    RouterModule.forRoot([]),
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

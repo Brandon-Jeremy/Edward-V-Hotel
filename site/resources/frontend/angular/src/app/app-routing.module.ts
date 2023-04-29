@@ -11,11 +11,11 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from './auth.guard';
 import { ReservationRouteGuard } from './reservation-route.guard';
-
+import { AvailableRoomsComponent } from './available-rooms/available-rooms.component';
+import { ReservationMenuComponent } from './reservation-menu/reservation-menu.component';
 
 //might be used later
 // import { AboutComponent } from './about/about.component';
-import { ReservationMenuComponent } from './reservation-menu/reservation-menu.component';
 //import { Path } from 'arktype/dist/types/utils/paths';
 
 
@@ -23,7 +23,6 @@ import { ReservationMenuComponent } from './reservation-menu/reservation-menu.co
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   //{path: '**', redirectTo: '' }, // redirect to home if the requested URL doesn't match any path
   {path:"login", component: LoginFormComponent },
   {path:"signup", component: SignUpFormComponent },
@@ -34,6 +33,7 @@ const routes: Routes = [
   {path:"user", component: UserComponent, canActivate: [AuthGuard] },
   {path:"forgot-password", component:ForgotPasswordComponent},
   {path: 'reservation-menu', component: ReservationMenuComponent, canActivate: [ReservationRouteGuard]},
+  {path: 'available-rooms', component: AvailableRoomsComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
