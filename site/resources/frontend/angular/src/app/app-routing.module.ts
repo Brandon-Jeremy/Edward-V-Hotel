@@ -33,8 +33,7 @@ const routes: Routes = [
   {path:"rewards", component:RewardComponent},
   {path:"user", component: UserComponent, canActivate: [AuthGuard] },
   {path:"forgot-password", component:ForgotPasswordComponent},
-  {path: "reservation-menu", component:ReservationMenuComponent},
-  { path: 'reservation-menu', component: ReservationMenuComponent, canActivate: [ReservationRouteGuard] },
+  {path: 'reservation-menu', component: ReservationMenuComponent, canActivate: [ReservationRouteGuard]},
 ];
 
 @NgModule({

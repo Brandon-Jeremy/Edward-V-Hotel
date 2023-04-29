@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { ReservationRouteGuard } from '../reservation-route.guard'; 
 
 @Component({
   selector: 'app-user',
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 export class UserComponent implements OnInit {
   userForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router,
+    private reservationGuard: ReservationRouteGuard) { }
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
@@ -56,11 +58,10 @@ export class UserComponent implements OnInit {
     }
   }
 
-  onViewEditReservations() {
-    // Redirect the user to the reservations page
-    // This functionality is not implemented in this code example
-    sessionStorage.setItem('isNavigationAllowed', 'true');
-    this.router.navigate(['/reservation-menu']);
+  onViewEditReservations(): void {
+    if (this.reservationGuard.canActivate()) {
+      this.router.navigateByUrl('/reservation-menu');
+    }
   }
 
   onDeleteAccount() {

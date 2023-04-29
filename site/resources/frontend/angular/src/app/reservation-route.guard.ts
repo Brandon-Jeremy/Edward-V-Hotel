@@ -1,29 +1,24 @@
-// src/app/auth.guard.ts
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> {
-    return this.authService.authStatus$.pipe(
-      take(1),
-      map((isLoggedIn: boolean) => {
-        if (!isLoggedIn) {
-          this.router.navigate(['/home']);
-          return false;
-        }
-        return true;
-      })
-    );
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ReservationRouteGuard implements CanActivate {
+  constructor(private router: Router, private authService: AuthService) {}
+
+  canActivate() {
+    // Implement your guard logic here
+    const isLoggedIn =  this.authService.isLoggedIn();// check if user is logged in
+    if (isLoggedIn) {
+      return true;
+    } else {
+      this.router.navigate(['/home']);
+      return false;
+    }
   }
+  
 }
