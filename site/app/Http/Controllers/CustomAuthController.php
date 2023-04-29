@@ -18,6 +18,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyAccount;
+use App\Mail\OTPVerification;
 
 
 class CustomAuthController extends Controller
@@ -136,6 +137,36 @@ class CustomAuthController extends Controller
         if ($user) {
             // Clear rate limiting
             $this->clearLoginAttempts($request);
+
+            $otp =  Str::random(6);
+            
+            // Individual variable for each digit
+            $d1 = substr($otp, 0, 1);
+            $d2 = substr($otp, 1, 1);
+            $d3 = substr($otp, 2, 1);
+            $d4 = substr($otp, 3, 1);
+            $d5 = substr($otp, 4, 1);
+            $d6 = substr($otp, 5, 1);
+
+            $mailData = [
+                'first' => $d1,
+                'second' => $d2,
+                'third' => $d3,
+                'fourth' => $d4,
+                'fifth' => $d5,
+                'sixth' => $d6
+            ];
+
+            Mail::to($request->email)->send(new OTPVerification($mailData));
+
+            $otp_expiration = Carbon::now()->add(5, 'minutes');
+
+            // Update the user's row in the database
+            $user->otp = $otp;
+            $user->otp_expiration = $otp_expiration;
+            $user->save();
+
+
             return response()->json([
                 "success" => true,
             ]);
