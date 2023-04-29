@@ -1,6 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { tap, delay } from 'rxjs/operators';
+import { tap, delay, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   authStatus$ = this.isAuthenticated.asObservable();
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
     const requestBody = {
@@ -72,6 +73,30 @@ export class AuthService {
     );
   }
 
+  signUp(email: string, password: string, first_name: string, last_name: string, dob: String, phone_num: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+    const body = { email, password, first_name, last_name, dob, phone_num };
+
+    return this.http.post(this.signupUrl, JSON.stringify(body), { headers }).pipe(
+      tap(response => {
+        this.onSuccessfulSignUp(response);
+      }),
+      catchError(error => {
+        console.error(error);
+        return of(false);
+      })
+    );
+  }
+
+  onSuccessfulSignUp(response: any): void {
+    const token = response.access_token;
+    const userData = response.user;
+    localStorage.setItem('authToken', token);
+    localStorage.setItem('userData', JSON.stringify(userData));
+  }
 
   onSuccessfulLogin(response: any): void {
     // Store user data, token, etc., as needed
