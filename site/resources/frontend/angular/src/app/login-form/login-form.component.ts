@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,13 +14,14 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent {
+
+  hide = true;
 
   @ViewChild('templateRef') templateRef!: ElementRef;
 
@@ -43,6 +44,9 @@ export class LoginFormComponent {
   }
   
   onSubmit(): void {
+    console.log(this.email);
+    console.log(this.password);
+
     this.resetError();
     
     //email validation
@@ -61,7 +65,8 @@ export class LoginFormComponent {
       return;
     }
     
-    this.authService.fakeLogin(this.email, this.password).subscribe(
+    //this.authService.login(this.email, this.password).subscribe(
+    this.authService.fakeLogin(this.email, this.password).subscribe(  
       (response) => {
         this.credentials = response
         console.log(this.credentials);
@@ -104,7 +109,7 @@ export class LoginFormComponent {
     this.dialog.open(SignUpFormComponent, {
       disableClose: true,
       width: '600px', // Adjust the width
-      height: '700px', // Adjust the height
+      height: '750px', // Adjust the height
     });
   }
 
