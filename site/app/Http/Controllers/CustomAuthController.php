@@ -180,6 +180,40 @@ class CustomAuthController extends Controller
         }
     }
 
+    public function validateOTP(Request $request){
+        $email = $request->email;
+        $otp = $request->otp;
+    
+        $user = DB::table('users')
+            ->where('email',$email)
+            ->first();
+
+        if(empty($user)){
+            return response()->json([
+                'success' => false,
+                'error' => 'user does not exist'
+            ]);
+        }
+    
+        $otp_from_db = $user->otp;
+        $expiration_date = $user->otp_expiration;
+    
+        if ($otp === $otp_from_db && time() <= strtotime($expiration_date)) {
+            // OTP is valid and not expired
+            $user_id = $user->id;
+            // perform additional actions here
+            return response()->json([
+                'success' => true,
+                'user_id' => $user_id
+            ]);
+        } else {
+            // OTP is invalid or expired
+            return response()->json([
+                'success' => 'false',
+                'message' => 'otp invalid or expired'
+            ]);
+        }
+    }
 
     public function getEmail(Request $request){
         $email = $request->email;
