@@ -3,6 +3,12 @@
     "development"
   ],
   "hints": {
-    "axe/forms": "off"
+    "axe/forms": "off",
+    "axe/language": [
+      "default",
+      {
+        "html-has-lang": "off"
+      }
+    ]
   }
 }
