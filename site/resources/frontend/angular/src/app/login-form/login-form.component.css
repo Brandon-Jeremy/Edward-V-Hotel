@@ -23,6 +23,10 @@
   text-decoration: none;
 }
 
+.routes-signup{
+  margin-left: 7px;
+}
+
 .routes a:hover {
   cursor: pointer;
   text-decoration: underline;
