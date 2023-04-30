@@ -14,7 +14,7 @@
       <mat-label>Email</mat-label>
       <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" required
         [(ngModel)]="email" name="email" placeholder="Ex. name@example.com">
-      <mat-error *ngIf="emailFormControl.hasError('email') || emailFormControl.hasError('required')">
+      <mat-error *ngIf="emailError">
         {{ emailError }}
       </mat-error>
     </mat-form-field>

@@ -11,40 +11,47 @@
   <form class="popup" #signUpForm="ngForm" (ngSubmit)="onSubmit()">
 
     <mat-form-field>
-      <input matInput placeholder="First name" required [(ngModel)]="firstName" name="firstName">
+      <mat-label>First Name</mat-label>
+      <input type="name" matInput [formControl]="firstNameFormControl" [errorStateMatcher]="matcher" required
+        [(ngModel)]="firstName" name="firstName" placeholder="Ex. Brandon">
       <mat-error *ngIf="firstNameError" class="error">
         {{ firstNameError }}
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Last name" required [(ngModel)]="lastName" name="lastName">
+      <mat-label>Last Name</mat-label>
+      <input type="name" matInput [formControl]="lastNameFormControl" [errorStateMatcher]="matcher" required
+        [(ngModel)]="lastName" name="lastName" placeholder="Ex. Nader">
       <mat-error *ngIf="lastNameError" class="error">
         {{ lastNameError }}
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Date of Birth" [formControl]="dob" name="dob">
+      <mat-label>Date of birth</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" [formControl]="dobFormControl"
+        [errorStateMatcher]="matcher" name="dob">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="dobError" class="error">
         {{ dobError }}
       </mat-error>
     </mat-form-field>
-    
 
     <mat-form-field>
       <mat-label>Email</mat-label>
       <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" required
         [(ngModel)]="email" name="email" placeholder="Ex. name@example.com">
-      <mat-error *ngIf="emailFormControl.hasError('email') || emailFormControl.hasError('required')">
+      <mat-error *ngIf="emailError">
         {{ emailError }}
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Phone Number" required [(ngModel)]="phoneNum" name="phoneNum">
+      <mat-label>Phone Number</mat-label>
+      <input matInput placeholder="** *** ***" [formControl]="phoneNumFormControl" [errorStateMatcher]="matcher"
+        required [(ngModel)]="phoneNum" name="phoneNum">
       <mat-error *ngIf="phoneNumError" class="error">
         {{ phoneNumError }}
       </mat-error>
@@ -52,8 +59,8 @@
 
     <mat-form-field>
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hideP ? 'password' : 'text'" required [(ngModel)]="password" name="password"
-        placeholder="Password">
+      <input matInput [type]="hideP ? 'password' : 'text'" [formControl]="passwordFormControl"
+        [errorStateMatcher]="matcher" required [(ngModel)]="password" name="password" placeholder="Password">
       <mat-error *ngIf="passwordError">
         {{ passwordError }}
       </mat-error>
@@ -65,10 +72,11 @@
 
     <mat-form-field>
       <mat-label>Confirm password</mat-label>
-      <input matInput [type]="hideCP ? 'password' : 'text'" required [(ngModel)]="confirmpassword"
-        name="confirmPassword" placeholder="Confirm Password">
-      <mat-error *ngIf="passwordError">
-        {{ passwordError }}
+      <input matInput [type]="hideCP ? 'password' : 'text'" [formControl]="passwordFormControl"
+        [errorStateMatcher]="matcher" required [(ngModel)]="confirmpassword" name="confirmPassword"
+        placeholder="Confirm Password">
+      <mat-error *ngIf="confirmPasswordError">
+        {{ confirmPasswordError }}
       </mat-error>
       <button mat-icon-button matSuffix type="button" (click)="hideCP = !hideCP" [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hideCP">
