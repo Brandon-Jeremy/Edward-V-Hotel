@@ -60,4 +60,25 @@ The backend also manages financial reports in a neatly formatted PDF to display 
 # Email Notifications
 Users can send emails to the hotel to inquire about it or any questions left unanswered. The system sends emails to the users for reasons such as bookings, rewards milestones, One-time passwords, gift card codes, and other reasons.
 
-
+- Verify Account
+  ![Verify Account](https://media.discordapp.net/attachments/1102221189973278842/1102256169944358993/image.png?width=632&height=701)
+- One Time Password
+  ![One Time Password](https://media.discordapp.net/attachments/1102221189973278842/1102259093730754663/image.png?width=522&height=701)
+- Waiting List
+  ![Waiting List Notification](https://media.discordapp.net/attachments/1102221189973278842/1102256469346361424/image.png?width=533&height=701)
+- Reward Notification
+  ![Reward Notification](https://media.discordapp.net/attachments/1102221189973278842/1102256669007806554/image.png?width=561&height=701)
+- Reservation Notification
+  ![Reservation Notification](https://media.discordapp.net/attachments/1102221189973278842/1102257059942109274/image.png?width=561&height=701)
+- Point Milestone
+  ![Points Milestone](https://media.discordapp.net/attachments/1102221189973278842/1102257515506442330/image.png?width=582&height=701)
+- Message to Guests
+  ![Message to Guest](https://media.discordapp.net/attachments/1102221189973278842/1102257731630534718/image.png?width=606&height=701)
+- Giftcode Creation
+  ![Giftcode Generation](https://media.discordapp.net/attachments/1102221189973278842/1102258082085609542/image.png?width=583&height=701)
+- Reward Redeemed
+  ![Reward Redemption](https://media.discordapp.net/attachments/1102221189973278842/1102258256765796402/image.png?width=647&height=701)
+- Message from Hotel Guest
+  ![Message from Hotel Guest](https://media.discordapp.net/attachments/1102221189973278842/1102258430909108224/image.png?width=618&height=701)
+- Provide Feedback
+  ![Provide Feedback](https://media.discordapp.net/attachments/1102221189973278842/1102258546269237329/image.png?width=545&height=701)
