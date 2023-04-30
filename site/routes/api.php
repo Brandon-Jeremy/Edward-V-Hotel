@@ -115,3 +115,4 @@ Route::post('/edit-reservation',[OnlineReservationController::class,'editReserva
 
 //Profile management
 Route::post('/delete-account',[ProfileController::class,'deleteAccount'])->name('delete-account');
+Route::post('/edit-account',[ProfileController::class,'editAccount'])->name('edit-account');
