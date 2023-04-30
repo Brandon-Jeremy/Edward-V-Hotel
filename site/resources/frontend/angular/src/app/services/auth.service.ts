@@ -7,8 +7,8 @@ import { tap, delay, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private loginUrl = 'http://localhost:4200/api/login-user';
-  private signupUrl = 'http://localhost:4200/api/register-user';
+  private loginUrl = 'http://localhost:8000/api/login-user';
+  private signupUrl = 'http://localhost:8000/api/register-user';
 
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   authStatus$ = this.isAuthenticated.asObservable();
