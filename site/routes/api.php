@@ -15,6 +15,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\RoomInfoController;
 use App\Http\Controllers\GiftcardController;
 use App\Http\Controllers\WaitinglistController;
+use App\Http\Controllers\ProfileController;
 
 
 
@@ -45,6 +46,7 @@ Route::post('/request-email',[CustomAuthController::class,'getEmail'])->name('re
 Route::post('/change-password',[CustomAuthController::class,'changePassword'])->name('change-password');
 
 Route::post('/validate-email/{token}',[CustomAuthController::class,'validateEmail'])->name('validate-email');
+Route::post('/validate-otp',[CustomAuthController::class,'validateOTP'])->name('validate-otp');
 
 //To be done like this with token, used to send to email
 Route::post('/change-pass/{token}',[CustomAuthController::class,'changePass'])->name('change-pass');
@@ -54,6 +56,7 @@ Route::get('/get-rewards',[rewardController::class,'getRewards'])->name('get-rew
 Route::post('/purchase-reward',[rewardController::class,'purchaseReward'])->name('purchase-reward');
 Route::post('/calculate-points',[rewardController::class,'calculatePoints'])->name('calculate-points');
 Route::post('/user-rewards',[rewardController::class,'userRewards'])->name('user-rewards');
+Route::post('/use-reward',[rewardController::class,'useReward'])->name('use-reward');
  
 Route::post('/create-reservation',[OnlineReservationController::class,'createReservation'])->name('create-reservation');
 
@@ -108,3 +111,7 @@ Route::post('/add-waitinglist',[WaitinglistController::class,'addtoWaitinglist']
 //Online Reservations
 Route::post('/create-reservation',[OnlineReservationController::class,'createReservation'])->name('create-reservation');
 Route::post('/cancel-reservation',[OnlineReservationController::class,'cancelReservation'])->name('cancel-reservation');
+Route::post('/edit-reservation',[OnlineReservationController::class,'editReservation'])->name('edit-reservation');
+
+//Profile management
+Route::post('/delete-account',[ProfileController::class,'deleteAccount'])->name('delete-account');

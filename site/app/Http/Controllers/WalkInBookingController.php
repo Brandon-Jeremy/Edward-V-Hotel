@@ -634,8 +634,6 @@ class WalkInBookingController extends Controller
 =======
         $date_from = $user_id->date_from;
 
-        //TODO: dates that overlap should not be allowed and warned about. NEEDS TESTING
-
         $overlappingReservations = DB::table('reservation')
         ->where('room_id',$roomid)
         ->where('activity','!=','inactive')

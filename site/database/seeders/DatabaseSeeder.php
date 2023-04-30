@@ -92,5 +92,24 @@ class DatabaseSeeder extends Seeder
             'password' => $employee_password,
             'special_access' => false,
         ]);
+
+        // DB::table('reward')->insert([
+        //     [
+        //         'created_at' => Carbon::now(),
+        //         'updated_at' => Carbon::now(),
+        //         'price' => 200,
+        //         'item' => 'Single room Reward',
+        //         'details' => '1 free night at a single room without a view',
+        //         'img_path' => '/test1.png'
+        //     ],
+        //     [
+        //         'created_at' => Carbon::now(),
+        //         'updated_at' => Carbon::now(),
+        //         'price' => 300,
+        //         'item' => 'Double room Reward',
+        //         'details' => '1 free night at a double room without a view',
+        //         'img_path' => '/test2.png'
+        //     ]
+        // ]);
     }
 }

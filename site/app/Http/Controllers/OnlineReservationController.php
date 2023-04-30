@@ -102,9 +102,50 @@ class OnlineReservationController extends Controller
         // Code to store the reservation
     }
 
-    public function edit($id)
-    {
-        // Code to show edit reservation form
+    public function editReservation(Request $request){
+        $reservation_id = $request->reservation_id;
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+
+        $room_id = DB::table('reservation')
+        ->where('id',$reservation_id)
+        ->first();
+
+        $room_id = $room_id->room_id;
+
+        $overlappingReservations = DB::table('reservation')
+                ->where('room_id',$room_id)
+                ->where('activity','!=','inactive')
+                ->where(function($query) use ($date_from, $date_to){
+                    $query->whereBetween('date_from', [$date_from, $date_to])
+                          ->orWhereBetween('date_to', [$date_from, $date_to])
+                          ->orWhere(function($query) use ($date_from, $date_to){
+                              $query->where('date_from', '<=', $date_from)
+                                    ->where('date_to', '>=', $date_to);
+                          });
+                })
+                ->count();
+        
+        if($overlappingReservations==0){
+            DB::table('reservation')
+            ->where('id',$reservation_id)
+            ->update([
+                'updated_at' => Carbon::now(),
+                'date_from' => $date_from,
+                'date_to' => $date_to
+            ]);
+
+            return response()->json([
+                'success' => true
+            ]);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'error' => 'Room already booked between these days'
+            ]);
+        }
+
     }
 
     public function update(Request $request, $id)
@@ -142,7 +183,7 @@ class OnlineReservationController extends Controller
         $price = $price->price;
 
         $old_points = $user->points;
-        $new_points = $old_points-($price/4);
+        $new_points = $old_points-($price);
 
         $updated_user = DB::table('users')
         ->where('id',$user->id)
@@ -227,7 +268,7 @@ class OnlineReservationController extends Controller
         $user = $user->id;
     
         $reservations = DB::table('reservation')
-            ->select('date_from','date_to','room_id')
+            ->select('date_from','date_to','room_id','id')
             ->where('activity','pending')
             ->where('user_id',$user)
             ->get();
@@ -235,6 +276,7 @@ class OnlineReservationController extends Controller
         $reservation_info = [];
     
         foreach($reservations as $reservation){
+
             $rooms = DB::table('room')
                 ->select('type','view')
                 ->where('id',$reservation->room_id)
@@ -242,13 +284,16 @@ class OnlineReservationController extends Controller
     
             $room_type = $rooms->type;
             $room_view = $rooms->view;
+            $room_id = $reservation->room_id;
     
             // Add the reservation information to the $reservation_info array
             array_push($reservation_info, [
                 'date_from' => $reservation->date_from,
                 'date_to' => $reservation->date_to,
                 'room_type' => $room_type,
-                'room_view' => $room_view
+                'room_view' => $room_view,
+                'room_id' => $room_id,
+                'reservation_id' => $reservation->id
             ]);
         }
     
