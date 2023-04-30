@@ -3,12 +3,8 @@ body {
   height: 100%;
 }
 
-body {
-  background-color: #400479;
-
-}
 h1 {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Roman;
   font-size: 32px;
 }
 
@@ -16,7 +12,8 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  margin: auto;
+  height: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
