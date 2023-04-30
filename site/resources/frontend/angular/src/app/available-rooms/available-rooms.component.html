@@ -1,23 +1,28 @@
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Available Rooms</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Rooms</title>
 </head>
 
 <body>
-    <header>
-        <h1>Available Rooms</h1>
-    </header>
-    <div id="room-container">
-        <div *ngFor="let room of rooms" class="room-box">
-            <img src="{{ room.image }}" alt="{{ room.name }}">
-            <h2>Room type: {{ room.name }}</h2>
-            <h5> View: {{ room.view }}</h5>
-            <p> Descirption: {{ room.description }}</p>
-            <button>Book Now</button>
-        </div>
+  <header>
+    <h1>Available Rooms</h1>
+  </header>
+  <div id="room-container">
+    <div *ngFor="let room of rooms" class="room-box">
+      <img src="{{ room.image }}" alt="{{ room.name }}">
+      <h2>Room type: {{ room.name }}</h2>
+      <h5> View: {{ room.view }}</h5>
+      <p> Descirption: {{ room.description }}</p>
+      <button>Book Now</button>
     </div>
+  </div>
 </body>
+
+</html>
+
 
 
 <!-- <!DOCTYPE html>

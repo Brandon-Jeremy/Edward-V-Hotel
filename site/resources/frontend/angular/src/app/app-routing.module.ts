@@ -14,12 +14,6 @@ import { AvailableRoomsComponent } from './available-rooms/available-rooms.compo
 import { ReservationMenuComponent } from './reservation-menu/reservation-menu.component';
 import { PaymentComponent } from './payment/payment.component';
 
-//might be used later
-// import { AboutComponent } from './about/about.component';
-//import { Path } from 'arktype/dist/types/utils/paths';
-
-
-
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
@@ -39,6 +33,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
