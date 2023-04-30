@@ -54,11 +54,7 @@ class GiftcardController extends Controller
             'expiration_date' => $expiration_date,
         ]);
 
-<<<<<<< HEAD
-        $new_points = $user_points - $value*3;
-=======
         $new_points = $user_points - $value;
->>>>>>> back-and-front
 
         DB::table('users')
         ->where('id',$user->id)

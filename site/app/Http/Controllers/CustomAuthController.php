@@ -16,13 +16,10 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
  * Run `npm install && npm run dev` to compile the frontend assets. 
 */
 
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyAccount;
 
 
->>>>>>> back-and-front
 class CustomAuthController extends Controller
 {
     //Not needed. Not a server rendered site.
@@ -47,9 +44,6 @@ class CustomAuthController extends Controller
             $user->dob=$request->dob;
             // $user->nationality=NULL;
             $user->email=$request->email;
-<<<<<<< HEAD
-            $user->phone_num=$request->phone_num;
-=======
 
             // Validate email using regex
             if(!preg_match("/^[a-zA-Z0-9+_.-]+@(?:(gmail)|(hotmail)|(outlook)|(duck)|(pm))\.(?:(com))$/", $user->email)) {
@@ -63,7 +57,6 @@ class CustomAuthController extends Controller
                 return response()->json(['error' => 'Invalid phone number format'], 400);
             }
 
->>>>>>> back-and-front
             $pass=$request->password;
             $user->password=hash("sha256",$pass);
             $user->points=0;
@@ -77,8 +70,6 @@ class CustomAuthController extends Controller
             $user->token_expiration=NULL;
 
             $user->save();
-<<<<<<< HEAD
-=======
 
             $link = "http://127.0.0.1:8000/api/";
             $api = "validate-email/";
@@ -89,7 +80,6 @@ class CustomAuthController extends Controller
 
             Mail::to($user->email)->send(new VerifyAccount($mailData));
             
->>>>>>> back-and-front
         }
         catch (\Exception $e) {
             // Code to handle the exception goes here
@@ -105,8 +95,6 @@ class CustomAuthController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
-=======
     public function validateEmail(Request $request, $token) {
         // retrieve the user based on the token
         $user = User::where('token', $token)->first();
@@ -125,7 +113,6 @@ class CustomAuthController extends Controller
     }
     
 
->>>>>>> back-and-front
     use AuthenticatesUsers, ThrottlesLogins;
     public function loginUser(Request $request)
     {
@@ -190,8 +177,6 @@ class CustomAuthController extends Controller
         //If the password is the same as the one in the DB, return failure otherwise return success
         $email = $request->email;
         $newPassword = hash("sha256",$request->password);
-<<<<<<< HEAD
-=======
 
         $found = DB::table('users')
         ->where('email',$email)
@@ -203,7 +188,6 @@ class CustomAuthController extends Controller
             ]);
         }
 
->>>>>>> back-and-front
         $password = DB::table('users')->where('email', $email)->value('password');
         if ($password == $newPassword){
             return response()->json([
