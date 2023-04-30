@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 import { LoginFormComponent, MyErrorStateMatcher } from '../login-form/login-form.component';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -22,12 +23,14 @@ export class SignUpFormComponent {
 
   firstName: string = '';
   lastName: string = '';
-  dob: Date = new Date();
+  //dob: Date = new Date();
   email: string = '';
   password: string = '';
   confirmpassword: string = '';
   phoneNum: string = '';
   credentials: any = [];
+
+  dob: FormControl;
   
   passwordError: string = '';
   firstNameError: string = '';
@@ -36,7 +39,12 @@ export class SignUpFormComponent {
   dobError: string = '';
   phoneNumError: string = '';
 
-  constructor(private authService: AuthService, private http: HttpClient, private dialog: MatDialog) {}
+  constructor(
+    private authService: AuthService, 
+    private http: HttpClient, 
+    private dialog: MatDialog,
+  ) {    this.dob = new FormControl();
+  }
 
   onSubmit(): void {
     this.resetError();
@@ -47,10 +55,11 @@ export class SignUpFormComponent {
     }
 
      //name validation
-     if(!this.isChar(this.firstName)){
+    if(!this.isChar(this.firstName)){
       this.firstNameError = "First Name should contain only characters";
       return;
     }
+
     if(!this.isChar(this.lastName)){
       this.lastNameError = "Last Name should contain only characters";
       return;
@@ -61,6 +70,7 @@ export class SignUpFormComponent {
     //   this.dobError = "Invalid date format"
     //   return;
     // }
+
 
     //email validation
     if(!this.isEmail(this.email)){
@@ -138,6 +148,18 @@ export class SignUpFormComponent {
     });
   }
 
+  onDateChange(event: MatDatepickerInputEvent<Date>) {
+    console.log(event.value);
+    const selectedDate = event.value;
+    const now = new Date();
+    const age = now.getFullYear() - selectedDate!.getFullYear();
+    if (age < 18) {
+      this.dobError = 'You must be at least 18 years old to register';
+    } else {
+      this.dobError = '';
+    }
+  }
+
   resetError(){
     this.emailError = '';
     this.passwordError = '';
@@ -155,7 +177,7 @@ export class SignUpFormComponent {
     this.firstName = '';
     this.lastName = '';
     this.phoneNum = '';
-    this.dob = new Date();
+    //this.dob = new Date();
   }
 
   closePopup(){

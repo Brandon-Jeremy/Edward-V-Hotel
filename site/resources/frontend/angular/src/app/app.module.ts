@@ -29,6 +29,8 @@ import { EditUserInfoComponent } from './edit-user-info/edit-user-info.component
 import { ReservationMenuComponent } from './reservation-menu/reservation-menu.component';
 import { AvailableRoomsComponent } from './available-rooms/available-rooms.component';
 import { PaymentComponent } from './payment/payment.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { PaymentComponent } from './payment/payment.component';
     PaymentComponent,
   ],
   imports: [
+    MatDatepickerModule,
+    MatNativeDateModule,
     BrowserModule,
     AppRoutingModule,
     MatIconModule,
