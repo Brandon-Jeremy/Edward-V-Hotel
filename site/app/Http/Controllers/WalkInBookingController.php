@@ -539,7 +539,7 @@ class WalkInBookingController extends Controller
         })
         ->count();
 
-        if($overlappingReservations!=0){
+        if($overlappingReservations!=1){
             return response()->json([
                 'error' => "Conflicting date for selected room"
             ]);
@@ -651,6 +651,12 @@ class WalkInBookingController extends Controller
         ->where('floor',$floor)
         ->where('status', 'busy')
         ->first();
+
+        if(empty($id)){
+            return response()->json([
+                'error' => 'That room is currently not booked or busy'
+            ]);
+        }
 
         $roomid = $id->id;
 
