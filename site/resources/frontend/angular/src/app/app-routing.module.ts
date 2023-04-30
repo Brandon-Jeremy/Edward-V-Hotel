@@ -14,31 +14,33 @@ import { AvailableRoomsComponent } from './available-rooms/available-rooms.compo
 import { ReservationMenuComponent } from './reservation-menu/reservation-menu.component';
 import { PaymentComponent } from './payment/payment.component';
 
-//might be used later
-// import { AboutComponent } from './about/about.component';
-//import { Path } from 'arktype/dist/types/utils/paths';
-
-
-
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   //{path: '**', redirectTo: '' }, // redirect to home if the requested URL doesn't match any path
-  {path:"login", component: LoginFormComponent },
-  {path:"signup", component: SignUpFormComponent },
-  {path:"book", component:BookingComponent},
-  {path:"rooms", component:RoomsComponent},
-  {path:"contact", component:ContactComponent},
-  {path:"rewards", component:RewardComponent},
-  {path:"user", component: UserComponent, canActivate: [AuthGuard] },
-  {path:"forgot-password", component:ForgotPasswordComponent},
-  {path: 'reservation-menu', component: ReservationMenuComponent, canActivate: [AuthGuard]},
-  {path: 'available-rooms', component: AvailableRoomsComponent, canActivate: [AuthGuard]},
-  {path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]}
+  { path: 'login', component: LoginFormComponent },
+  { path: 'signup', component: SignUpFormComponent },
+  { path: 'book', component: BookingComponent },
+  { path: 'rooms', component: RoomsComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'rewards', component: RewardComponent },
+  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  {
+    path: 'reservation-menu',
+    component: ReservationMenuComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'available-rooms',
+    component: AvailableRoomsComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
