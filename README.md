@@ -3,6 +3,23 @@ This is a full Hotel Management system consisting of a website written with Angu
 
 The system is composed of several different systems each of which work together to reach and meet a common goal.
 
+# Hotel Frontpage
+![Frontpage](https://cdn.discordapp.com/attachments/1102221189973278842/1102264185628405790/image.png)
+
+# Login Page
+![Login](https://cdn.discordapp.com/attachments/1102221189973278842/1102265694629933188/image.png)
+
+# User's profile
+![Profile](https://media.discordapp.net/attachments/1102221189973278842/1102268778353528852/image.png?width=1440&height=696)
+
+# Room exploration
+![Rooms](https://media.discordapp.net/attachments/1102221189973278842/1102250436234322000/image.png?width=1440&height=567)
+
+# Contact Form
+![Contact](https://cdn.discordapp.com/attachments/1102221189973278842/1102250753013329930/image.png)
+
+# Website Roaming
+![LandingPage](https://cdn.discordapp.com/attachments/1102221189973278842/1102266128488743024/lv_0_20230430190234.gif)
 
 
 The different systems consist of the following:
