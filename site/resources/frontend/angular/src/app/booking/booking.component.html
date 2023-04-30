@@ -7,14 +7,14 @@
       </head>
     <section id="reservation" class="booking">
         <div class="container">
-            <form action="" class="book-form">
+            <form action="" class="book-form" (ngSubmit)="onSearchClick()">
                 <div class="input-group">
                     <label for="check-in" class="input-label">Check-in</label>
-                    <input type="date" class="input" id="check-in">
+                    <input type="date" class="input" id="check-in" required>
                 </div>
                 <div class="input-group">
                     <label for="check-out" class="input-label">Check-out</label>
-                    <input type="date" class="input" id="check-out">
+                    <input type="date" class="input" id="check-out" required>
                 </div>
                 <div class="input-group">
                     <label for="room-type" class="input-label">Room Type</label>
@@ -39,9 +39,7 @@
                           </mat-form-field>
 
                 </div>
-                <button (click)="searchForRooms()" type="submit" class="btn form-btn btn-purple">Search
-                    <!-- <span class="dots"><i class="fas fa-ellipsis-h"></i> </span> -->
-                </button>
+                <button type="submit" class="btn form-btn btn-purple" (click)="onSearchClick()">Search</button>
             </form>
         </div>   
     </section>

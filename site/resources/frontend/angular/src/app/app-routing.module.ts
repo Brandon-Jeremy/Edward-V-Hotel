@@ -33,7 +33,7 @@ const routes: Routes = [
   {path:"user", component: UserComponent, canActivate: [AuthGuard] },
   {path:"forgot-password", component:ForgotPasswordComponent},
   {path: 'reservation-menu', component: ReservationMenuComponent, canActivate: [AuthGuard]},
-  {path: 'available-rooms', component: AvailableRoomsComponent, canActivate: [AuthGuard]},
+  {path: 'available-rooms', component: AvailableRoomsComponent},
   {path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]}
 ];
 
