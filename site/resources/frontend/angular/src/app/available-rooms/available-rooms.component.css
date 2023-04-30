@@ -3,9 +3,15 @@
     margin: 0;
     padding: 0;
   }
+
+  h1{
+    font-family: Roman;
+    margin-top: 20px;
+
+  }
   
   body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     line-height: 1.5;
     background-color: var(--purple-transparent);
   }
@@ -46,6 +52,12 @@
     font-size: 1.2rem;
     margin-bottom: 1rem;
   }
+
+  h2, h5, p, button {
+    font-family: Tapestry;
+    font-size: 1rem;
+  }
+  
   
   button {
     background-color: var(--purple-solid);
