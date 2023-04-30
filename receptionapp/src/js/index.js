@@ -5,7 +5,8 @@ function updateTime() { // this function will get the time and date to display t
     document.getElementById("current-time").innerHTML = currentDate.toDateString();
     document.getElementById("current-date").innerHTML = currentTime;
   }
-  
-  setInterval(updateTime, 1000);
+  console.log(localStorage.getItem("special_access")); 
+setInterval(updateTime, 1000);
 
-  updateTime();
+updateTime();
+

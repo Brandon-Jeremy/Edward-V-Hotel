@@ -1,13 +1,12 @@
 const loginForm = document.querySelector('#loginform');
-console.log(loginForm);
+
 loginForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const formData = new FormData(loginForm);
-  const username = formData.get('username');
-  const password = formData.get('password');
+  const username = loginForm.elements.username.value;
+  const password = loginForm.elements.password.value;
 
-  fetch('http://127.0.0.1:8000/api/reception-login', {
+  fetch('http://localhost:8000/api/reception-login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -20,13 +19,15 @@ loginForm.addEventListener('submit', (event) => {
   .then(response => response.json())
   .then(data => {
     if (data.Error) {
-      const errorDiv = document.querySelector('#error');
-      errorDiv.innerHTML = "Username or password are wrong";
+      alert('Username or password are incorrect');
     } else {
-      window.location.href = 'index.html';
+      localStorage.setItem("special_access", data.Result.special_access);
+      window.location.href = `index.html`;
     }
   })
   .catch(error => console.error(error));
+  
+  return false;
 });
 
 
