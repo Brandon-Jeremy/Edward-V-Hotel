@@ -1,6 +1,17 @@
 # Hotel Management System
 This is a full Hotel Management system consisting of a website written with Angular Framework using HTML, CSS, and Typescript. The backend was written in PHP's framework Laravel and a reception desktop app written using Electron.JS with HTML, CSS, and JavaScript.
 
+## Course Due
+![LAU](https://img.shields.io/badge/CSC490-%23239120.svg?style=for-the-badge&logo=&logoColor=white)
+
+
+## Backend
+![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white) ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white) ![CSS3](https://img.shields.io/badge/css-%231572B6.svg?style=for-the-badge&logo=css&logoColor=white) ![HTML5](https://img.shields.io/badge/html-%23E34F26.svg?style=for-the-badge&logo=html&logoColor=white) ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+## Website
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
+## Desktop App
+![Electron.js](https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+
 The system is composed of several different systems each of which work together to reach and meet a common goal.
 
 # Hotel Frontpage
@@ -20,6 +31,9 @@ The system is composed of several different systems each of which work together 
 
 # Website Roaming
 ![LandingPage](https://cdn.discordapp.com/attachments/1102221189973278842/1102266128488743024/lv_0_20230430190234.gif)
+
+# Login Attempt
+![Login attempt](https://media.discordapp.net/attachments/1102221189973278842/1102270726649688074/lv_0_20230430192204.gif?width=862&height=485)
 
 
 The different systems consist of the following:
