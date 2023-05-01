@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My HTML Document</title>
+    <title>Contact</title>
 </head>
 
 <body>
@@ -20,24 +20,25 @@
                 <form action="" class="form contact-form">
                     <div class="input-group-wrap">
                         <div class="input-group">
-                            <input type="text" class="input" placeholder="Name">
+                            <input type="text" class="input" placeholder="Name" [(ngModel)]="name">
                             <span class="bar"></span>
                         </div>
                         <div class="input-group">
-                            <input type="email" class="input" placeholder="E-mail">
+                            <input type="email" class="input" placeholder="E-mail" [(ngModel)]="email">
                             <span class="bar"></span>
                         </div>
                     </div>
                     <div class="input-group">
-                        <input type="text" class="input" placeholder="Subject">
+                        <input type="text" class="input" placeholder="Subject" [(ngModel)]="subject">
                         <span class="bar"></span>
                     </div>
                     <div class="input-group">
-                        <textarea class="input" cols="30" rows="8" placeholder="Message"></textarea>
+                        <textarea class="input" cols="30" rows="8" placeholder="Message"
+                            [(ngModel)]="message"></textarea>
                         <span class="bar"></span>
                     </div>
-                    <button type="submit" class="btn form-btn btn-purple">Send Message
-                        <span class="dots"><i class="fas fa-ellipsis-h"></i></span>
+                    <button type="submit" (click)="onSubmit()" class="btn form-btn btn-purple">Send Message
+                        <!-- <span class="dots"><i class="fas fa-ellipsis-h"></i></span> -->
                     </button>
                 </form>
             </div>
