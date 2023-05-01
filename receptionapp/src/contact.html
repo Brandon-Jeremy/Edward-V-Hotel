@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reception</title>
+    <link rel="stylesheet" href="styles/cino.css">
+</head>
+<body>
+    <header>
+        <h1> Reserve a Room </h1>
+        <nav class = "manage">
+          <button class = "buttons" id = "menubutton" onclick = "window.location.href = 'index.html'"> Menu </button>
+        </nav>
+    </header>
+    
+    <form class = "forms" id = "contact">
+        <select id = "receiver" name = "receiver">
+            <option disabled selected>TO</option>
+            <option value = "visitors"> Current Visitors </option>
+            <option value = "allusers"> All Users </option>
+        </select>
+        <br>
+        <textarea placeholder="E-mail"></textarea>
+        <br>
+        <button type = "submit"> SEND </button>
+    </form>
+</body>
+</html>

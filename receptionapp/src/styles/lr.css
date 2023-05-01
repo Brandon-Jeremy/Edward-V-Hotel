@@ -1,0 +1,120 @@
+@font-face {
+    font-family: ibara;
+    src: url(../font/Ibarra.ttf)
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: ibara , monospace ;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+    height:70px;
+}
+
+.title {
+    font-size: 2em;
+    color: white;
+    user-select:none;
+}
+
+.login-buttons button {
+    width: 130px;
+    height: 40px;
+    background: transparent;
+    border: 3px solid white;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: white;
+    font-weight: 500;
+    margin: 10px;
+    transition: 0.2s;
+}
+
+.login-buttons button:hover {
+    background-color: white;
+    color: black;
+}
+
+.credentialsbox {
+    background-color: white;
+    position: relative;
+    width: 540px;
+    height: 430px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color: crimson;
+}
+
+.credentialsboxreg {
+    height:640px;
+    margin-top: 70px;
+    padding-top:30px;
+}
+.credentialsbox form {
+    width:100%;
+    padding: 40px;
+
+}
+
+.credentialsbox h2 {
+    text-align: center;
+}
+
+.credentialsbox input {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border: 2px solid white;
+    margin: 30px 0px;
+    background-color: rgba(0 , 0 , 0 , 0.5);
+    color: white; 
+    text-indent:10px;
+    font-size: 20px;   
+}
+::placeholder{
+    color:rgba(0, 0, 0, 0.4);
+    text-indent:10px;
+    font-size: 20px;
+}
+
+.credentialsbox button {
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: 3px solid crimson;
+    cursor:pointer;
+    margin-top: 30px;
+    color: crimson;
+    font-size: 20px;
+}
+
+.credentialsbox button:hover {
+    background-color: crimson;
+    color: white;
+}
+
+body {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: crimson;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+

@@ -20,7 +20,7 @@ class ReceptionAuthController extends Controller
         $result = DB::table('employee')
         ->select('special_access')
         ->where('username',$username)
-        ->where('password',hash("sha256",$password))
+        ->where('password',$password)
         ->first();
 
         if(empty($result)){

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/lr.css">
+    <title>Register New Receptionist</title>
+</head>
+<body>
+    <header>
+        <h2 class="title"> Edward V Reception </h2>
+        <nav class = "login-buttons"> 
+            <button class = "buttons" id = "loginbutton" onclick = "window.location.href = 'login.html'"> Login </button>
+        </nav>
+    </header>
+
+    <div class = "credentialsbox credentialsboxreg">
+        <form id = "loginform">
+            <h2> REGISTER </h2>
+            <input type = "text" id = "username" name="username" placeholder = "Admin Username" required>
+            <br>
+            <input type = "password" id = "password" name = "password" placeholder = "Admin Password" required>
+            <br>
+            <input type = "text" id = "newuser" name = "newuser" placeholder = "New Username" required>
+            <br>
+            <input type = "password" id = "newpassword" name = "newpassword" placeholder = "Password">
+            <button type = "submit"> Register </button>
+        </form>
+        <div id = "error"></div>
+    </div>
+
+    <script src=" js/register.js"></script>
+</body>
+</html>

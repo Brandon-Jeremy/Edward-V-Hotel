@@ -1,0 +1,62 @@
+[
+    {
+      "name": "John",
+      "lastName": "Doe",
+      "endDate": "2023-04-13",
+      "roomNo": "101"
+    },
+    {
+      "name": "Jane",
+      "lastName": "Smith",
+      "endDate": "2023-04-14",
+      "roomNo": "102"
+    },
+    {
+      "name": "Bob",
+      "lastName": "Johnson",
+      "endDate": "2023-04-15",
+      "roomNo": "103"
+    },
+    {
+      "name": "Alice",
+      "lastName": "Brown",
+      "endDate": "2023-04-16",
+      "roomNo": "104"
+    },
+    {
+      "name": "Mark",
+      "lastName": "Jones",
+      "endDate": "2023-04-17",
+      "roomNo": "105"
+    },
+    {
+      "name": "Emily",
+      "lastName": "Davis",
+      "endDate": "2023-04-18",
+      "roomNo": "106"
+    },
+    {
+      "name": "David",
+      "lastName": "Wilson",
+      "endDate": "2023-04-19",
+      "roomNo": "107"
+    },
+    {
+      "name": "Maria",
+      "lastName": "Garcia",
+      "endDate": "2023-04-20",
+      "roomNo": "108"
+    },
+    {
+      "name": "Adam",
+      "lastName": "Brown",
+      "endDate": "2023-04-21",
+      "roomNo": "109"
+    },
+    {
+      "name": "Linda",
+      "lastName": "Johnson",
+      "endDate": "2023-04-22",
+      "roomNo": "110"
+    }
+  ]
