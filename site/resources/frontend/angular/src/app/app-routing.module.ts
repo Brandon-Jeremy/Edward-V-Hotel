@@ -27,11 +27,7 @@ const routes: Routes = [
   { path: 'rewards', component: RewardComponent },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  {
-    path: 'reservation-menu',
-    component: ReservationMenuComponent,
-    canActivate: [AuthGuard],
-  },
+  { path: 'reservation-menu', component: ReservationMenuComponent, canActivate: [AuthGuard] },
   { path: 'available-rooms', component: AvailableRoomsComponent },
   { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
   { path: 'location', component: LocationComponent },

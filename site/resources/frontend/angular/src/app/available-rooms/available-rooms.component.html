@@ -10,7 +10,25 @@
   <header>
     <h1>Available Rooms</h1>
   </header>
-  <div id="room-container">
+  <div *ngIf="noRoomsAvailable" class="no-avilable-rooms">
+    <h2>Sorry, no rooms available for the selected dates.</h2>
+  </div>
+  <div *ngIf="roomsAvailable" class="room-info">
+    <img src="{{ roomImageUrl }}" alt="Room Image">
+    <div class="room-details">
+      <h2>{{ roomType }}</h2>
+      <h3>View: {{ roomView }}</h3>
+      <p>{{ roomDescription }}</p>
+      <p>Available Rooms: {{ availableRooms }}</p>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+
+<!-- <div id="room-container">
     <div *ngFor="let room of rooms" class="room-box">
       <img src="{{ room.image }}" alt="{{ room.name }}">
       <h2>Room type: {{ room.name }}</h2>
@@ -18,45 +36,4 @@
       <p> Descirption: {{ room.description }}</p>
       <button>Book Now</button>
     </div>
-  </div>
-</body>
-
-</html>
-
-
-
-<!-- <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Available Rooms</title>
-    </head>
-    <body>
-      <header>
-        <h1>Available Rooms</h1>
-      </header>
-      <main>
-        <div class="room-container">
-          <div class="room-box">
-            <img src="https://d3rg18dos0rgue.cloudfront.net/wp-content/uploads/sites/3/2023/02/Deluxe-Two-Room-Corner.jpg" alt="Room Image">
-            <h2>Single</h2>
-            <p>Single description goes here.</p>
-            <button>Book Now</button>
-          </div>
-          <div class="room-box">
-            <img src="https://d3rg18dos0rgue.cloudfront.net/wp-content/uploads/sites/3/2017/12/Deluxe-Double3.jpg" alt="Room Image">
-            <h2>Double</h2>
-            <p>Double description goes here.</p>
-            <button>Book Now</button>
-          </div>
-          <div class="room-box">
-            <img src="https://d3rg18dos0rgue.cloudfront.net/wp-content/uploads/sites/3/2017/12/Studio-King-Bed.jpg" alt="Room Image">
-            <h2>Suite</h2>
-            <p>Suite description goes here.</p>
-            <button>Book Now</button>
-          </div>
-        </div>
-      </main>
-    </body>
-  </html> -->
+  </div> -->

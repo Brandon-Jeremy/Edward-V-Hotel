@@ -32,6 +32,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { LocationComponent } from './location/location.component';
+import { BookingService } from './booking.service';
 
 @NgModule({
   declarations: [
@@ -55,15 +56,12 @@ import { LocationComponent } from './location/location.component';
   imports: [
     MatDatepickerModule,
     MatNativeDateModule,
-    BrowserModule,
     AppRoutingModule,
     MatIconModule,
     HttpClientModule,
     FormsModule,
-    FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    BrowserModule,
     MatSelectModule,
     MatDialogModule,
     MatButtonModule,
@@ -76,7 +74,7 @@ import { LocationComponent } from './location/location.component';
     MatProgressSpinnerModule,
     RouterModule.forRoot([]),
   ],
-  providers: [AuthService],
+  providers: [AuthService, BookingService],
   bootstrap: [AppComponent],
   entryComponents: [LoginFormComponent, SignUpFormComponent],
 })

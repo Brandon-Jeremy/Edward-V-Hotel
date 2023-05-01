@@ -21,7 +21,7 @@
                 <label for="room-type" class="input-label">Room Type</label>
                 <mat-form-field appearance="fill">
                     <mat-label>Select Room Type</mat-label>
-                    <mat-select #roomTypeSelect>
+                    <mat-select #roomTypeSelect [formControl]="roomTypeFormControl">
                         <mat-option value="one">Single</mat-option>
                         <mat-option value="two">Double</mat-option>
                         <mat-option value="three">Suite</mat-option>
@@ -33,7 +33,7 @@
                 <label for="view" class="input-label">View</label>
                 <mat-form-field>
                     <mat-label>Select View</mat-label>
-                    <mat-select #viewSelect>
+                    <mat-select #viewSelect [formControl]="viewSelectFormControl">
                         <mat-option value="one">Beach</mat-option>
                         <mat-option value="two">City</mat-option>
                     </mat-select>
