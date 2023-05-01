@@ -87,10 +87,21 @@ export class LoginFormComponent {
     this.authService.login(this.email, this.password).subscribe(
       //this.authService.fakeLogin(this.email, this.password).subscribe(
       (response) => {
-        this.credentials = response;
-        console.log(this.credentials);
-        this.clearForm();
-        this.showSnackbar('Logged in successfull');
+        if(response.success){
+          this.credentials = response;
+          this.authService.onSuccessfulLogin(response);
+          // console.log(this.credentials);
+          this.showSnackbar('Logged in successfully');
+          this.clearForm();
+          this.closePopup();
+        }
+        else{
+          this.credentials = response;
+          // console.log(this.credentials);
+          this.clearForm();
+          this.showSnackbar(response.message);
+        }  
+
       },
       (error) => {
         this.showErrorDialog(error.error.message);

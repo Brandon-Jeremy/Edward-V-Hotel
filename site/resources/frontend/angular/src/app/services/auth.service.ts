@@ -61,8 +61,7 @@ export class AuthService {
       .post(this.loginUrl, JSON.stringify(body), { headers })
       .pipe(
         tap((response) => {
-          this.setAuthenticated(true);
-          this.onSuccessfulSignUp(response);
+
         }),
         catchError((error) => {
           console.error(error);
@@ -119,7 +118,6 @@ export class AuthService {
       .post(this.signupUrl, JSON.stringify(body), { headers })
       .pipe(
         tap((response) => {
-          this.onSuccessfulSignUp(response);
         }),
         catchError((error) => {
           console.error(error);
@@ -133,6 +131,8 @@ export class AuthService {
     const userData = response.user;
     localStorage.setItem('authToken', token);
     localStorage.setItem('userData', JSON.stringify(userData));
+    //
+    this.setAuthenticated(true);
   }
 
   onSuccessfulLogin(response: any): void {
@@ -141,6 +141,8 @@ export class AuthService {
     const userData = response.user;
     localStorage.setItem('authToken', token);
     localStorage.setItem('userData', JSON.stringify(userData));
+    //
+    this.setAuthenticated(true);
   }
 
   // Call this method after successful login to store the user data or token

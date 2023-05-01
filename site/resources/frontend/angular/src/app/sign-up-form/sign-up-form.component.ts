@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 import {
   LoginFormComponent,
   MyErrorStateMatcher,
 } from '../login-form/login-form.component';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-sign-up-form',
   templateUrl: './sign-up-form.component.html',
@@ -48,6 +47,13 @@ export class SignUpFormComponent {
     ),
     Validators.minLength(8),
   ]);
+  confirmPasswordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]+$/
+    ),
+    Validators.minLength(8),
+  ]);
 
   firstName: string = '';
   lastName: string = '';
@@ -70,8 +76,8 @@ export class SignUpFormComponent {
 
   constructor(
     private authService: AuthService,
-    private http: HttpClient,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.dob = new FormControl();
   }
@@ -200,19 +206,27 @@ export class SignUpFormComponent {
       return;
     }
 
-    console.log(
-      'password: ',
-      this.password,
-      'Confirm password: ',
-      this.confirmpassword
-    );
+    //confirm password validation
+    if (this.confirmPasswordFormControl.hasError('required')) {
+      this.confirmPasswordError = 'Confirm Password is required';
+      return;
+    }
+    if (this.confirmPasswordFormControl.hasError('pattern')) {
+      this.confirmPasswordError = 'Must include: upper, lower, special, num';
+      return;
+    }
+    if (
+      this.confirmPasswordFormControl.hasError('minLength') ||
+      this.confirmpassword.length < 8
+    ) {
+      this.confirmPasswordError = 'Password must be at least 8 characters long';
+      return;
+    }
     if (!(this.confirmpassword === this.password)) {
       this.confirmPasswordError = 'Passwords do not match';
       return;
     }
 
-    // const dobString = this.dob.toDateString();
-    // console.log(dobString);
 
     const user = {
       mail: this.email,
@@ -223,7 +237,6 @@ export class SignUpFormComponent {
       num: this.phoneNum,
     };
 
-    //console.log(this.getFormattedDate());
     this.authService
       .signUp(
         this.email,
@@ -236,10 +249,19 @@ export class SignUpFormComponent {
       .subscribe(
         //this.authService.signp(user).subscribe(
         (response) => {
-          this.credentials = response;
-          console.log(this.credentials);
-          this.authService.setAuthenticated(true);
-          this.clearForm();
+          if (response.success) {
+            this.credentials = response;
+            this.authService.onSuccessfulSignUp(response);
+            // console.log(this.credentials);
+            this.showSnackbar("Signed Up successfully")
+            this.clearForm();
+            this.closePopup();
+          } else {
+            this.credentials = response;
+            // console.log(this.credentials);
+            this.clearForm();
+            this.showSnackbar(response.message);
+          }
         },
         (error) => {
           console.log(error);
@@ -338,6 +360,14 @@ export class SignUpFormComponent {
     } else {
       this.dobError = '';
     }
+  }
+
+  showSnackbar(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 
   resetError() {

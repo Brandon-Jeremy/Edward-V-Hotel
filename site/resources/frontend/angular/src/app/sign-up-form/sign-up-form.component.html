@@ -72,7 +72,7 @@
 
     <mat-form-field>
       <mat-label>Confirm password</mat-label>
-      <input matInput [type]="hideCP ? 'password' : 'text'" [formControl]="passwordFormControl"
+      <input matInput [type]="hideCP ? 'password' : 'text'" [formControl]="confirmPasswordFormControl"
         [errorStateMatcher]="matcher" required [(ngModel)]="confirmpassword" name="confirmPassword"
         placeholder="Confirm Password">
       <mat-error *ngIf="confirmPasswordError">

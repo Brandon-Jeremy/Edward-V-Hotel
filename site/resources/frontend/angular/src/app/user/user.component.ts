@@ -14,6 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class UserComponent implements OnInit {
   userForm!: FormGroup;
+  firstName: string = '';
+  lastName: string = '';
   email: string = '';
   password: string = '';
   deletionSuccess: boolean = false;
