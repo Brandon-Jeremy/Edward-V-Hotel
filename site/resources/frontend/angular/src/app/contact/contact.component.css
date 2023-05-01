@@ -12,6 +12,7 @@
   
   .traveler-wrap {
     display: none;
+    max-height: 600px;
   }
   
   .section-head {
