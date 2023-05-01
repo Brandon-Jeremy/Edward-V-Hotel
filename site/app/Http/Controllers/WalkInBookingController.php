@@ -696,6 +696,58 @@ class WalkInBookingController extends Controller
             "Success" => $result
         ]);
     }
+
+    /**
+     * GET request to see all current room that are taken
+     * @param None
+     * @return JSONResponse listing all rooms alongside the user's id that are currently residing in the hotel
+     */
+    public function viewBusy(){
+        $activity = 'active';
+        $status = 'busy';
+
+        $busyRooms = [];
+
+        $rooms = DB::table('room')
+        ->where('status',$status)
+        ->get();
+
+        $room_id = $rooms->pluck('id')->toArray();
+
+        foreach($room_id as $room_id){
+            $reservation = DB::table('room')
+            ->join('reservation','room_id','=','reservation.room_id')
+            ->where('room_id','=',$room_id)
+            ->select('reservation.date_from','reservation.date_to','reservation.id')
+            ->first();
+
+            $room = DB::table('room')
+            ->where('id',$room_id)
+            ->select('floor','room_number')
+            ->first();
+
+            if($reservation){
+                $dateFrom = $reservation->date_from;
+                $dateTo = $reservation->date_to;
+                $reservation_id = $reservation->id;
+
+                $roomFound = [
+                    'Reservation_ID' => $reservation_id,
+                    'Date From' => $dateFrom,
+                    'Date To' => $dateTo,
+                    'Room Floor' => $room->floor,
+                    'Room Number' => $room->room_number,
+                    'Room_ID' => $room_id
+                ];
+
+                array_push($busyRooms,$roomFound);
+            }
+        }
+
+        return response()->json([
+            $busyRooms
+        ]);
+    }
     
     
     
