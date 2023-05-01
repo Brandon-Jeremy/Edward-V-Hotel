@@ -23,6 +23,22 @@ class RoomInfoController extends Controller
         $type = $request->type;
         $date_from = $request->datefrom;
         $date_to = $request->dateto;
+
+        // Check if date_from is before today
+        if (strtotime($date_from) < strtotime(date('Y-m-d'))) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Invalid date chosen'
+            ], 400);
+        }
+
+        // Check if date_to is before date_from
+        if (strtotime($date_to) <= strtotime($date_from)) {
+            return response()->json([
+                'success' => false,
+                'error' => 'Invalid date chosen'
+            ], 400);
+        }
     
         $rooms = DB::table('room')
             ->where('type',$type)
