@@ -19,7 +19,7 @@
     padding-bottom:8px;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: 1fr 1fr 1fr 10fr;
+    grid-template-rows: 1fr 1fr 1fr 3fr 10fr;
     grid-gap: 30px;
     justify-content: center;
     align-items: center;
