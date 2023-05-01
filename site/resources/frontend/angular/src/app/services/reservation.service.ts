@@ -7,8 +7,8 @@ import { Reservation } from '../reservation';
   providedIn: 'root',
 })
 export class ReservationService {
-  private baseUrl = 'http://localhost:8000/view-reeservations';
-  private view = 'http://localhost:8000/view-reeservations';
+  private baseUrl = 'http://localhost:8000/view-reservations';
+  private view = 'http://localhost:8000/view-reservations';
 
   constructor(private http: HttpClient) {}
 
