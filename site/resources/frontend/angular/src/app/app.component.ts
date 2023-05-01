@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Router, RouterModule, Routes } from '@angular/router';
+import { Router } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { BookingComponent } from './booking/booking.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { ContactComponent } from './contact/contact.component';
+import { LocationComponent } from './location/location.component';
 import { FooterComponent } from './footer/footer.component';
 
 @Component({
@@ -15,8 +15,6 @@ import { FooterComponent } from './footer/footer.component';
 export class AppComponent {
   title = 'Edward V Hotel';
 
-  isLoggedIn = false;
-
   constructor(public router: Router) {}
 
   sections = [
@@ -24,6 +22,7 @@ export class AppComponent {
     { component:BookingComponent, className: 'book-section' },
     { component:RoomsComponent, className: 'rooms-section' },
     { component:ContactComponent, className: 'contact-section' },
+    { component:LocationComponent, className: 'location-section' },
     { component:FooterComponent, className: 'footer-section' }
   ];
 }

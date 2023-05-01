@@ -31,6 +31,7 @@ import { AvailableRoomsComponent } from './available-rooms/available-rooms.compo
 import { PaymentComponent } from './payment/payment.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { LocationComponent } from './location/location.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReservationMenuComponent,
     AvailableRoomsComponent,
     PaymentComponent,
+    LocationComponent,
   ],
   imports: [
     MatDatepickerModule,
