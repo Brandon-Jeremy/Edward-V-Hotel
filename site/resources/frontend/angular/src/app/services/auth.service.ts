@@ -61,6 +61,7 @@ export class AuthService {
       .post(this.loginUrl, JSON.stringify(body), { headers })
       .pipe(
         tap((response) => {
+          this.setAuthenticated(true);
           this.onSuccessfulSignUp(response);
         }),
         catchError((error) => {
@@ -161,7 +162,7 @@ export class AuthService {
 
   setAuthenticated(status: boolean) {
     this.isAuthenticated.next(status);
-    console.log('isAuthenticated:', this.isAuthenticated.value); // add this line
+    console.log('isAuthenticated:', this.isAuthenticated.value);
   }
 
   getIsAuthenticated(): BehaviorSubject<boolean> {
