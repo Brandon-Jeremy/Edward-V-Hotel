@@ -1,7 +1,8 @@
 const fform = document.querySelector('#formroomtype');
 const sform = document.getElementById("availablerooms");
 const tform = document.getElementById("user")
-
+let from;
+let to;
 fform.addEventListener('submit', (event) => {
   event.preventDefault();
   fform.style.display = "none"; 
@@ -9,7 +10,10 @@ fform.addEventListener('submit', (event) => {
 
   const roomType = fform.querySelector('#roomtype').value;
   const View = fform.querySelector('#view').checked ? 1 : 0;
-  fetch(`http://localhost:8000/api/get-available?roomtype=${roomType}&view=${View}`, {
+  from = fform.querySelector('#from_visitor').value;
+  to = fform.querySelector('#to_visitor').value;
+  console.log(`from = ${from} , to = ${to}`);
+  fetch(`http://localhost:8000/api/get-available?roomtype=${roomType}&view=${View}&date_from=${from}&date_to=${to}`, {
     method: 'POST',
   })
   .then(response => response.json())
@@ -59,8 +63,6 @@ tform.addEventListener("submit" , function(event) {
   const gender = tform.querySelector('#gender_visitor').value;
   const nationality = tform.querySelector('#nationality_visitor').value;
   const cell = tform.querySelector('#cell_visitor').value;
-  const from = tform.querySelector('#from_visitor').value;
-  const to = tform.querySelector('#to_visitor').value;
   fetch(`http://localhost:8000/api/add-user?firstname=${firstName}&lastname=${lastName}&dob=${dob}&gender=${gender}&nationality=${nationality}&phonenum=${cell}` , {
     method: 'POST',
   })
