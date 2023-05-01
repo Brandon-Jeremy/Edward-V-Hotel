@@ -49,14 +49,20 @@ class CustomAuthController extends Controller
 
             // Validate email using regex
             if(!preg_match("/^[a-zA-Z0-9+_.-]+@(?:(gmail)|(hotmail)|(outlook)|(duck)|(pm))\.(?:(com))$/", $user->email)) {
-                return response()->json(['error' => 'Invalid email format'], 400);
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Invalid email format'
+                ], 400);
             }
 
             $user->phone_num=$request->phone_num;
 
             // Validate phone number using regex
             if(!preg_match("/^[\d]{7,}$/", $user->phone_num)) {
-                return response()->json(['error' => 'Invalid phone number format'], 400);
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Invalid phone number format'
+                ], 400);
             }
 
             $pass=$request->password;
@@ -90,6 +96,7 @@ class CustomAuthController extends Controller
             //     "success" => false
             // ]);
             return response()->json([
+                'success' => false,
                 'error' => 'An account with this email or phone number already exists.'
             ],500);
         }
