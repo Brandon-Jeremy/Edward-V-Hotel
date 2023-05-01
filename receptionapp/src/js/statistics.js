@@ -6,6 +6,7 @@ if (specialAccess === '1') {
   console.log("admin");
   const statform = document.querySelector("#period");
   const resultstat = document.querySelector("#result");
+  const pdf = document.querySelector("#pdf");
   statform.querySelector("#statbtn").addEventListener('click' , event => {
     event.preventDefault();
     const statfrom = statform.querySelector("#statfrom").value;
@@ -37,7 +38,21 @@ if (specialAccess === '1') {
         console.log(occ);
         statform.style.display = 'none';
         resultstat.style.display = "block";
-        resultstat.innerHTML = `<table style = "color:white; text-align:left"><tbody><tr><td><b>Single</b></td><td>${si}</td></tr><tr><td><b>Double No View    </b></td><td>${dn}</td></tr><tr><td><b>Double With View</b></td><td>${dv}</td></tr><tr><td><b>Suite</b></td><td>${su}</td></tr><tr><td><b>Revenue</b></td><td>${revenue}</td></tr><tr><td><b>Occupancy</b></td><td>${occ}</td></tr></tbody></table>`
+        resultstat.innerHTML = `<table style = "color:white; text-align:left"><tbody><tr><td><b>Single</b></td><td>${si}</td></tr><tr><td><b>Double No View    </b></td><td>${dn}</td></tr><tr><td><b>Double With View</b></td><td>${dv}</td></tr><tr><td><b>Suite</b></td><td>${su}</td></tr><tr><td><b>Revenue</b></td><td>${revenue}</td></tr><tr><td><b>Occupancy</b></td><td>${occ}</td></tr></tbody></table><br><button type = "submit" id = "pdfbtn">Export Data</button>`
+        resultstat.querySelector("#pdfbtn").addEventListener('click' , event => {
+          event.preventDefault();
+          pdf.style.display = "block";
+          resultstat.style.display = "none";
+          fetch(`http://127.0.0.1:8000/api/generate-pdf?datefrom=${statfrom}&dateto=${statto}` , {method:'POST'})
+          .then(response => response.arrayBuffer())
+          .then(data => {
+            const blob = new Blob([data], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            const iframe = document.createElement('iframe');
+            iframe.src = url;
+            pdf.appendChild(iframe);
+          });
+        })
       })
     })
     
