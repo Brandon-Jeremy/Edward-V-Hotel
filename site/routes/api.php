@@ -72,6 +72,7 @@ Route::post('/extend-stay',[WalkInBookingController::class,'extendStay'])->name(
 Route::post('/extra-charge',[WalkInBookingController::class,'extraCharge'])->name('extra-charge');
 Route::post('/show-charges',[WalkInBookingController::class,'showCharges'])->name('show-charges');
 Route::post('/pay-extracharge', [WalkInBookingController::class, 'payExtraCharges'])->name('pay-extracharge');
+Route::get('/view-busy',[WalkInBookingController::class,'viewBusy'])->name('view-busy'); 
 
 //Reception Authentication
 Route::post('/reception-login',[ReceptionAuthController::class,'receptionLogin'])->name('reception-login');
