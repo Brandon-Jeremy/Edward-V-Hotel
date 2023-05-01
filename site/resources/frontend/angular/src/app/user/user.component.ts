@@ -3,20 +3,27 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { AuthGuard } from '../auth.guard';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
+
+
 export class UserComponent implements OnInit {
   userForm!: FormGroup;
+  email: string = '';
+  password: string = '';
+  deletionSuccess: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private authGuard: AuthGuard
+    private authGuard: AuthGuard,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -69,20 +76,18 @@ export class UserComponent implements OnInit {
   }
 
   onDeleteAccount() {
-    // Call the UserService to delete the user account
-    this.userService.deleteAccount(123).subscribe(
-      // Replace '123' with the actual user ID
-      (response) => {
-        console.log('User account deleted successfully');
-        // Display a success message to the user
-        // Redirect the user to the login page
+    this.userService.deleteAccount(this.email, this.password).subscribe(
+      response => {
+        this.snackBar.open('Account deleted successfully', 'Close', {
+          duration: 3000
+        });
       },
-      (error) => {
-        console.error('Error deleting user account:', error);
-        // Display an error message to the user
+      error => {
+        console.log('Error deleting account:', error);
       }
     );
   }
+  
 
   onLogout() {
     // Call the UserService to log out the user

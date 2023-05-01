@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { NonNullAssert } from '@angular/compiler';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:4000/api'; // Replace with your Laravel API URL
+  private apiUrl = 'http://localhost:8000/delete-account'; // Replace with your Laravel API URL
+  private deleteAccountUrl = 'http://localhost:8000/delete-account';
+
+  email: String = '';
+  password: String = '';
 
   constructor(private http: HttpClient) {}
 
@@ -21,8 +25,13 @@ export class UserService {
     return this.http.put<any>(`${this.apiUrl}/user`, user); // Update the endpoint and payload as needed
   }
 
-  deleteAccount(userId: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/user/${userId}`); // Update the endpoint as needed
+  deleteAccount(email: string, password: string): Observable<any> {
+     const body = {
+      email: this.email,
+      password: this.password
+    };
+
+    return this.http.delete(this.deleteAccountUrl, { body });
   }
 
   logout(): Observable<any> {
