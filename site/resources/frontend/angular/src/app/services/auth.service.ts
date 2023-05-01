@@ -15,39 +15,57 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<any> {
-    const requestBody = {
-      email: email,
-      password: password
-    };
+  // login(email: string, password: string): Observable<any> {
+  //   const requestBody = {
+  //     email: email,
+  //     password: password
+  //   };
   
-    return new Observable(observer => {
-      fetch(this.loginUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(requestBody)
-      })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Failed to login');
-        }
-      })
-      .then(data => {
-        this.onSuccessfulLogin(data);
-        this.setAuthenticated(true);
-        observer.next(data);
-        observer.complete();
-      })
-      .catch(error => {
-        console.error(error);
-        observer.error(error);
-      });
+  //   return new Observable(observer => {
+  //     fetch(this.loginUrl, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Accept': 'application/json'
+  //       },
+  //       body: JSON.stringify(requestBody)
+  //     })
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response.json();
+  //       } else {
+  //         throw new Error('Failed to login');
+  //       }
+  //     })
+  //     .then(data => {
+  //       this.onSuccessfulLogin(data);
+  //       this.setAuthenticated(true);
+  //       observer.next(data);
+  //       observer.complete();
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //       observer.error(error);
+  //     });
+  //   });
+  // }
+
+  login(email: string, password: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     });
+    const body = { email, password};
+
+    return this.http.post(this.loginUrl, JSON.stringify(body), { headers }).pipe(
+      tap(response => {
+        this.onSuccessfulSignUp(response);
+      }),
+      catchError(error => {
+        console.error(error);
+        return of(false);
+      })
+    );
   }
 
   fakeLogin(email: string, password: string): Observable<any> {
@@ -73,9 +91,9 @@ export class AuthService {
     );
   }
 
-  signup(user: any) {
-    return this.http.post(this.signupUrl, user);
-  }
+  // signup(user: any) {
+  //   return this.http.post(this.signupUrl, user);
+  // }
   
   signUp(email: string, password: string, first_name: string, last_name: string, dob: String, phone_num: string): Observable<any> {
     const headers = new HttpHeaders({
@@ -131,7 +149,6 @@ export class AuthService {
   setAuthenticated(status: boolean) {
     this.isAuthenticated.next(status);
     console.log('isAuthenticated:', this.isAuthenticated.value); // add this line
-
   }
 
   getIsAuthenticated(): BehaviorSubject<boolean> {

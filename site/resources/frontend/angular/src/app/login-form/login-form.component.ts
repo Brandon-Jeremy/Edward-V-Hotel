@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SignUpFormComponent } from '../sign-up-form/sign-up-form.component';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -65,8 +66,8 @@ export class LoginFormComponent {
       return;
     }
     
-    //this.authService.login(this.email, this.password).subscribe(
-    this.authService.fakeLogin(this.email, this.password).subscribe(  
+    this.authService.login(this.email, this.password).subscribe(
+    //this.authService.fakeLogin(this.email, this.password).subscribe(  
       (response) => {
         this.credentials = response
         console.log(this.credentials);
@@ -74,9 +75,16 @@ export class LoginFormComponent {
         this.showSnackbar('Logged in successfull');
       },
       (error) => {
-        // Handle login error, e.g., display an error message
+        this.showErrorDialog(error.error.message);
+        this.clearForm();
       }
     );
+  }
+
+  private showErrorDialog(errorMessage: string): void {
+    this.dialog.open(ErrorDialogComponent, {
+      data: { errorMessage },
+    });
   }
 
   showSnackbar(message: string): void {
