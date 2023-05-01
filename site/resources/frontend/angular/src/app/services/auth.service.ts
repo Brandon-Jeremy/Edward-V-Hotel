@@ -53,7 +53,7 @@ export class AuthService {
   login(email: string, password: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Accept: 'application/json',
+      'Accept': 'application/json',
     });
     const body = { email, password };
 
@@ -111,7 +111,7 @@ export class AuthService {
   ): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Accept: 'application/json',
+      'Accept': 'application/json',
     });
     const body = { email, password, first_name, last_name, dob, phone_num };
 

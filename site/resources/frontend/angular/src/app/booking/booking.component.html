@@ -11,17 +11,17 @@
         <form action="" class="book-form" (ngSubmit)="onSearchClick()">
             <div class="input-group">
                 <label for="check-in" class="input-label">Check-in</label>
-                <input type="date" class="input" id="check-in" required>
+                <input type="date" class="input" id="check-in" required #checkInInput>
             </div>
             <div class="input-group">
                 <label for="check-out" class="input-label">Check-out</label>
-                <input type="date" class="input" id="check-out" required>
+                <input type="date" class="input" id="check-out" required #checkOutInput>
             </div>
             <div class="input-group">
                 <label for="room-type" class="input-label">Room Type</label>
                 <mat-form-field appearance="fill">
                     <mat-label>Select Room Type</mat-label>
-                    <mat-select>
+                    <mat-select #roomTypeSelect>
                         <mat-option value="one">Single</mat-option>
                         <mat-option value="two">Double</mat-option>
                         <mat-option value="three">Suite</mat-option>
@@ -33,7 +33,7 @@
                 <label for="view" class="input-label">View</label>
                 <mat-form-field>
                     <mat-label>Select View</mat-label>
-                    <mat-select>
+                    <mat-select #viewSelect>
                         <mat-option value="one">Beach</mat-option>
                         <mat-option value="two">City</mat-option>
                     </mat-select>

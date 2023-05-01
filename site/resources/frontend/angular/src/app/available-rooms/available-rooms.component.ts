@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookingComponent } from '../booking/booking.component';
 
 @Component({
   selector: 'app-available-rooms',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvailableRoomsComponent implements OnInit {
   rooms: any[] = [];
+
+  constructor(private booking:BookingComponent) {}
 
   addRoom(
     roomName: string,
@@ -28,6 +31,13 @@ export class AvailableRoomsComponent implements OnInit {
 
   // Call the addRoom function to add a new room
   ngOnInit() {
+    this.booking.checkAvailability().subscribe((response) => {
+      console.log(response);
+      // this.rooms = response;
+    }, (error) => {
+      console.error(error);
+    });
+
     this.addRoom(
       'Single',
       'beach',
@@ -66,29 +76,3 @@ export class AvailableRoomsComponent implements OnInit {
 // https://d3rg18dos0rgue.cloudfront.net/wp-content/uploads/sites/3/2023/02/Deluxe-Two-Room-Corner.jpg
 // https://d3rg18dos0rgue.cloudfront.net/wp-content/uploads/sites/3/2017/12/Deluxe-Double3.jpg
 // https://d3rg18dos0rgue.cloudfront.net/wp-content/uploads/sites/3/2017/12/Studio-King-Bed.jpg
-
-// addRoom(roomName: string, roomDescription: string, roomImage: string) {
-//   // Create a new room element
-//   const roomElement = document.createElement('div');
-//   roomElement.classList.add('room');
-
-//   // Add the room image
-//   const imageElement = document.createElement('img');
-//   imageElement.setAttribute('src', roomImage);
-//   imageElement.setAttribute('alt', roomName);
-//   roomElement.appendChild(imageElement);
-
-//   // Add the room name
-//   const nameElement = document.createElement('h2');
-//   nameElement.textContent = roomName;
-//   roomElement.appendChild(nameElement);
-
-//   // Add the room description
-//   const descriptionElement = document.createElement('p');
-//   descriptionElement.textContent = roomDescription;
-//   roomElement.appendChild(descriptionElement);
-
-//   // Append the room element to the room container
-//   const roomContainer = document.getElementById('room-container');
-//   roomContainer.appendChild(roomElement);
-// }

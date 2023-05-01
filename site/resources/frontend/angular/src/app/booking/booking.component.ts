@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { AuthGuard } from '../auth.guard';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-booking',
@@ -9,12 +10,24 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./booking.component.css'],
 })
 export class BookingComponent {
+
+  private readonly getRoomsUrl = 'http://localhost:8080/room-availability';
+
+  @ViewChild('checkInInput')
+  checkInInput!: ElementRef;
+  @ViewChild('checkOutInput')
+  checkOutInput!: ElementRef;
+  @ViewChild('roomTypeSelect')
+  roomTypeSelect!: ElementRef;
+  @ViewChild('viewSelect')
+  viewSelect!: ElementRef;
+
   datesSelected = false;
 
   constructor(
-    private authGuard: AuthGuard,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private http: HttpClient
   ) {}
 
   onSearchClick() {
@@ -46,5 +59,28 @@ export class BookingComponent {
 
   searchForRooms() {
     this.router.navigate(['/available-rooms']);
+  }
+
+  public checkAvailability(): Observable<number[]> {
+
+    const checkInValue = this.checkInInput.nativeElement.value as string;
+    const checkOutValue = this.checkOutInput.nativeElement.value as string;
+    const roomType = this.roomTypeSelect.nativeElement.value as string;
+    const view = this.viewSelect.nativeElement.value as string;
+
+    const params = {
+      datefrom: checkInValue,
+      dateto: checkOutValue,
+      type: roomType,
+      view: view
+    };
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+    return this.http.get<number[]>(`${this.getRoomsUrl}/room-availability`, { 
+      params: params,
+      headers: headers
+    });
   }
 }
