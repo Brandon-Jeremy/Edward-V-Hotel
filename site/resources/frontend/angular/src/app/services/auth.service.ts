@@ -73,6 +73,10 @@ export class AuthService {
     );
   }
 
+  signup(user: any) {
+    return this.http.post(this.signupUrl, user);
+  }
+  
   signUp(email: string, password: string, first_name: string, last_name: string, dob: String, phone_num: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
