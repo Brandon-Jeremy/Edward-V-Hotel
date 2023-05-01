@@ -85,10 +85,13 @@ class CustomAuthController extends Controller
         }
         catch (\Exception $e) {
             // Code to handle the exception goes here
-            return response()->json(['error' => $e->getMessage()], 500);
+            // return response()->json(['error' => $e->getMessage()], 500);
             // return response()->json([
             //     "success" => false
             // ]);
+            return response()->json([
+                'error' => 'An account with this email or phone number already exists.'
+            ],500);
         }
         
 
