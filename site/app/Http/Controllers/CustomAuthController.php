@@ -302,7 +302,33 @@ class CustomAuthController extends Controller
             'success' => true,
             'message' => 'email sent'
         ]);
+    }
 
-        
+    public function resetPassword(Request $request, $token){
+        $new_password = $request->password;
+
+        $user = DB::table('users')
+        ->where('token',$token)
+        ->first();
+
+        if(empty($user)){
+            return response()->json([
+                'success' => false,
+                'error' => 'No user found'
+            ]);
+        }
+
+        $hashedPassword = hash('sha256',$new_password);
+
+        $updated_user = DB::table('users')
+        ->where('token',$token)
+        ->update([
+            'password' => $hashedPassword
+        ]);
+
+        return response()->json([
+            'success' => true
+        ]);
+
     }
 }
