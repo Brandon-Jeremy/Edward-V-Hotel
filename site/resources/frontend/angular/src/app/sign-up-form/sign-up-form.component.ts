@@ -174,7 +174,16 @@ export class SignUpFormComponent {
     // const dobString = this.dob.toDateString();
     // console.log(dobString);
 
-    this.authService.signUp(this.email, this.password, this.firstName, this.lastName, 'dobString', this.phoneNum).subscribe(
+    const user = {
+      mail: this.email,
+      pswrd: this.password,
+      fName: this.firstName,
+      lName: this.lastNameError,
+      dob: this.dob,
+      num: this.phoneNum
+    }
+
+    this.authService.signup(user).subscribe(
       (response) => {
         this.credentials = response
         console.log(this.credentials);
@@ -213,7 +222,6 @@ export class SignUpFormComponent {
     }
     return null;
 }
-
 
 
   isDigit(str: string) {
