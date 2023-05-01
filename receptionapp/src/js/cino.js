@@ -33,7 +33,7 @@ fetch('http://127.0.0.1:8000/api/show-checkout')
             <td>${user.firstname}</td>
             <td>${user.lastname}</td>
             <td>${checkout.date}</td>
-            <td><a href = "/charges.html?${}"${checkout.floor}0${checkout.room_number}</td>
+            <td><a href = "/charges.html?room=${checkout.floor}0${checkout.room_number}"${checkout.floor}0${checkout.room_number}</td>
             <td><button class="checkin-btn" onclick = "deleteRow(this)" value = "${checkout.id}|||${checkout.room_id}">↳</button></td>
             `;
             tbody.appendChild(tr);

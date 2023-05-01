@@ -22,14 +22,14 @@ fetch('http://127.0.0.1:8000/api/view-busy')
                 
                 const extstay = document.querySelector('#extendstay');
                 const addserv = document.querySelector('#addcharge');
-                /*extstay.querySelector('#extbutton').addEventListener('submit' , (extevent) => {
+                extstay.querySelector('#extbutton').addEventListener('submit' , (extevent) => {
                     extevent.preventDefault();
                     const newdate = extstay.querySelector('#newdate').value;
-                    const paidext = extstay.querySelector('#paidext');
-
+                    const paidext = extstay.querySelector('#paidext').checked ? 1 : 0;
+                    fetch(`http://127.0.0.1:8000/api/extend-stay?roomnum=${selected_id[2]}&roomfloor=${selected_id[2]}&paid=${paidext}&date=${newdate}` , {method:'POST'})
                 })
 
-                })*/
+                
                 addserv.querySelector('#addbutton').addEventListener('click' , (extevent) => {
                     extevent.preventDefault();
                     const service = document.querySelector('#service').value;
