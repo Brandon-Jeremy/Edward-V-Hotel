@@ -1,0 +1,23 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reward Page</title>
+</head>
+
+<body>
+  <header>
+    <h1>Rewards</h1>
+  </header>
+  <div id="reward-container">
+    <div *ngFor="let reward of rewards" class="reward-box">
+      <img src="{{ reward.image }}" alt="{{ reward.name }}">
+      <h2>Reward: {{ reward.name }}</h2>
+      <p> Descirption: {{ reward.description }}</p>
+      <button>Purchase</button>
+    </div>
+  </div>
+</body>
+
+</html>

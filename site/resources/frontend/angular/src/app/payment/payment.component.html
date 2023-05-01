@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <h1>Payment</h1>
+            <p>Enter your payment information below.</p>
+        </div>
+
+        <form (ngSubmit)="onSubmit()">
+            <mat-form-field>
+                <mat-label>Cardholder Name</mat-label>
+                <input matInput [(ngModel)]="cardName" name="cardName" [formControl]="nameFormControl"
+                    placeholder="John Doe">
+                <mat-error *ngIf="nameFormControl.invalid"> Card Name must be between 3 and 50 characters. </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Card Number</mat-label>
+                <input matInput [(ngModel)]="cardNumber" name="cardNumber" [formControl]="cardNumberFormControl"
+                    placeholder="**** **** **** ****">
+                <mat-error *ngIf="cardNumberFormControl.invalid"> Card Number must be 16 digits, and must contain only
+                    digits. </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Expiration Month</mat-label>
+                <input matInput [(ngModel)]="expirationMonth" name="expirationMonth"
+                    [formControl]="expirationMonthFormControl" placeholder="MM">
+                <mat-error *ngIf="expirationMonthFormControl.invalid">Expiration Month must be 2 digits, and must be
+                    between
+                    1 and 12.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Expiration Year</mat-label>
+                <input matInput [(ngModel)]="expirationYear" name="expirationYear"
+                    [formControl]="expirationYearFormControl" placeholder="YYYY">
+                <mat-error *ngIf="expirationYearFormControl.invalid"> Expiration Year must be 4 digits, must contain
+                    only
+                    digits, and must be between the current year and 10 years from now. </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>CVV</mat-label>
+                <input matInput [(ngModel)]="cvv" name="cvv" [formControl]="cvvFormControl" placeholder="***">
+                <mat-error *ngIf="cvvFormControl.invalid"> CVV must be 3 or 4 digits, and must contain only digits.
+                </mat-error>
+            </mat-form-field>
+            <div class="button-container">
+                <button class="submit-btn" type="submit">Submit Payment</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edward V Hotel</title>
+    <!--Font awesome CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="home.component.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="" class="logo">
+                    <img src="assets/angular/images/logo.png" alt="">
+                </a>
+                <div class="hamburger-menu">
+                    <i class="fas fa-bars"></i>
+                    <i class="fas fa-times"></i>
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <!-- <a routerLink="#home" class="nav-link">Home</a> -->
+                        <button (click)="scrollToTop()" class="btn-main">Home</button>
+                    </li>
+                    <!-- <li class="nav-item">
+                         <a routerLink="#about" class="nav-link">About</a>
+                        <button (click)="scrollToSection('#about')">About</button>
+                    </li> -->
+                    <li class="nav-item">
+                        <!-- <a routerLink="#book" class="nav-link">Reservations</a> -->
+                        <button (click)="scrollToSection('#reservation')" class="btn-main">Reservations</button>
+                    </li>
+                    <li class="nav-item">
+                        <!-- <a routerLink="#rooms" class="nav-link">Rooms</a> -->
+                        <button (click)="scrollToSection('#rooms')" class="btn-main">Rooms</button>
+                    </li>
+                    <li class="nav-item">
+                        <!-- <a routerLink="#contact" class="nav-link">Contact</a> -->
+                        <button (click)="scrollToSection('#contact')" class="btn-main">Contact</button>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link" (click)="navigateToAccount()">Account</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="hero">
+            <div class="container">
+                <div class="main-heading">
+                    <h1 class="title">Edward V</h1>
+                    <h2 class="subtitle">Luxury Hotel</h2>
+                </div>
+                <div class="btns">
+                    <a (click)="openLoginForm()" class="btn btn-gradient">Login</a>
+                    <a (click)="openSignUpForm()" class="btn btn-gradient">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="home.component.ts"></script>
+</body>
+
+</html>

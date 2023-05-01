@@ -1,0 +1,151 @@
+<mat-dialog-content>
+  <button mat-icon-button class="close-button" (click)="closePopup()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-dialog-content>
+<div class="header">
+  <h2 class="center">Welcome</h2>
+  <p class="center welcome">Edward V Hotel</p>
+</div>
+<div class="form-container">
+  <form class="popup" #signUpForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input type="name" matInput [formControl]="firstNameFormControl" [errorStateMatcher]="matcher" required
+        [(ngModel)]="firstName" name="firstName" placeholder="Ex. Brandon">
+      <mat-error *ngIf="firstNameError" class="error">
+        {{ firstNameError }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input type="name" matInput [formControl]="lastNameFormControl" [errorStateMatcher]="matcher" required
+        [(ngModel)]="lastName" name="lastName" placeholder="Ex. Nader">
+      <mat-error *ngIf="lastNameError" class="error">
+        {{ lastNameError }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Date of birth</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" [formControl]="dobFormControl"
+        [errorStateMatcher]="matcher" name="dob">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="dobError" class="error">
+        {{ dobError }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" required
+        [(ngModel)]="email" name="email" placeholder="Ex. name@example.com">
+      <mat-error *ngIf="emailError">
+        {{ emailError }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Phone Number</mat-label>
+      <input matInput placeholder="** *** ***" [formControl]="phoneNumFormControl" [errorStateMatcher]="matcher"
+        required [(ngModel)]="phoneNum" name="phoneNum">
+      <mat-error *ngIf="phoneNumError" class="error">
+        {{ phoneNumError }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hideP ? 'password' : 'text'" [formControl]="passwordFormControl"
+        [errorStateMatcher]="matcher" required [(ngModel)]="password" name="password" placeholder="Password">
+      <mat-error *ngIf="passwordError">
+        {{ passwordError }}
+      </mat-error>
+      <button mat-icon-button matSuffix type="button" (click)="hideP = !hideP" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hideP">
+        <mat-icon>{{hideP ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Confirm password</mat-label>
+      <input matInput [type]="hideCP ? 'password' : 'text'" [formControl]="passwordFormControl"
+        [errorStateMatcher]="matcher" required [(ngModel)]="confirmpassword" name="confirmPassword"
+        placeholder="Confirm Password">
+      <mat-error *ngIf="confirmPasswordError">
+        {{ confirmPasswordError }}
+      </mat-error>
+      <button mat-icon-button matSuffix type="button" (click)="hideCP = !hideCP" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hideCP">
+        <mat-icon>{{hideCP ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button class="submit-btn" type="submit">Sign Up</button>
+
+  </form>
+</div>
+<div class="routes">
+  <span>Already have an account? </span><a class="routes-login" (click)="openLoginForm()">Login</a>
+</div>
+
+<!-- <mat-dialog-content>
+  <button mat-icon-button class="close-button" (click)="closePopup()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-dialog-content>
+<div class="container">
+  <div class="header">
+    <h2 class="center">Hotel Name</h2>
+    <p class="center welcome">Welcome</p>
+  </div>
+  <form class="popup" #signUpForm="ngForm" (ngSubmit)="onSignUp()">
+    <mat-form-field>
+      <input matInput placeholder="First name" required [(ngModel)]="firstName" name="firstName">
+    </mat-form-field>
+    <div *ngIf="firstNameError" class="error">
+      {{ firstNameError }}
+    </div>
+    <mat-form-field>
+      <input matInput placeholder="Last name" required [(ngModel)]="lastName" name="lastName">
+    </mat-form-field>
+    <div *ngIf="lastNameError" class="error">
+      {{ lastNameError }}
+    </div>
+    <mat-form-field>
+      <input matInput placeholder="Date of Birth" type="date" required [(ngModel)]="dob" name="dob">
+      <mat-error *ngIf="dobError" class="error">
+        {{ dobError }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" type="email" required [(ngModel)]="email" name="email">
+    </mat-form-field>
+    <div *ngIf="emailError" class="error">
+      {{ emailError }}
+    </div>
+    <mat-form-field>
+      <input matInput placeholder="Phone Number" required [(ngModel)]="phoneNum" name="phoneNum">
+    </mat-form-field>
+    <div *ngIf="phoneNumError" class="error">
+      {{ phoneNumError }}
+    </div>
+    <mat-form-field>
+      <input matInput placeholder="Password" type="password" required [(ngModel)]="password" name="password">
+    </mat-form-field>
+    <div *ngIf="passwordError" class="error">
+      {{ passwordError }}
+    </div>
+    <mat-form-field>
+      <input matInput placeholder="Confirm Password" type="password" required [(ngModel)]="confirmpassword"
+        name="confirmPassword">
+    </mat-form-field>
+    <button class="popup-button" mat-raised-button color="primary" type="submit">Sign Up</button>
+    <div class="routes">
+      <span>Already have an account? </span><a (click)="openLoginForm()">Login</a>
+    </div>
+  </form>
+</div> -->

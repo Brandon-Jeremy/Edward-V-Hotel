@@ -1,0 +1,241 @@
+/* Rooms section styles */
+.price-spacing {
+    margin-bottom: 15px;
+    display: block;
+}
+
+.rooms{
+    margin-top: 0%;
+    padding-top: 0%;
+}
+
+.section-head{
+    text-align: center;
+    margin-bottom: 5rem;
+    margin-top: 20px;
+}
+
+.heading{
+    
+    margin: 10px;
+    display: block;
+    font-size: 5rem;
+    text-transform: uppercase;
+    font-family: 'Aboreto';
+}
+
+.sub-heading{
+    font-size: 2.1rem;
+    /* font-family: 'Courgette', cursive; */
+    font-weight: 300;
+    color: #a5a5a5;
+    font-family: Tapestry;
+    margin-top: 15px;
+}
+
+.grid-container {
+    max-width: 90%; /* Adjust the percentage to control the space between the grid and the screen edges */
+    margin: 0 auto; /* This centers the grid container */
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    grid-gap: 2.5rem;
+}
+
+.grid-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.featured-hotels{
+    height: 35rem;
+    color: #ffff;
+    padding: 1rem;
+    position: relative;
+    z-index: 0;
+}
+
+.featured-hotels::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--purple-transparent-alt);
+    z-index: -1;
+}
+
+.hotel-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+.hotel-name{
+    font-size: 2.6rem;
+    font-family: Tapestry;
+}
+
+.hotel-price{
+    font-size: 1.8rem;
+    font-family: Tapestry;
+}
+
+.submit{
+    display: flow-root;
+}
+
+/* .hotel-rating{
+    margin: 1rem 0 2.5rem;
+}
+
+.rating{
+    color: var(--yellow-solid);
+} */
+
+
+@media screen and (min-width: 768px){
+    .header{
+        height: 10rem;
+    }
+    .header.active{
+        height: 6rem;
+    }
+    .title{
+        font-size: 8rem;
+    }
+    .contact-content{
+        justify-content: space-between;
+    }
+    .traveler-wrap{
+        display: block;
+        flex:0 0 45%;
+    }
+    .traveler-wrap img{
+        width: 100%;
+    }
+    .contact-form{
+        flex: 0 0 50%;
+        align-self: flex-start;
+    }
+    .input-group-wrap{
+        display:flex;
+    }
+    .input-group-wrap .input-group{
+        width: 50%;
+        margin-right: 2rem;
+    }
+    .input-group-wrap .input-group:last-child{
+        margin-right: 0;
+    }
+
+    /* Footer Section */
+    .footer{
+        overflow-x: hidden;
+    }
+
+    .footer-content{
+        display: flex;
+    }
+    .footer-content-brand{
+        margin-bottom: 0;
+        flex: 0 0 60%;
+    }
+
+    .footer .footer-paragraph{
+        margin-top: 2.5rem;
+
+    }
+
+    .footer-heading{
+        margin-bottom: 5rem;
+    }
+
+    .social-media-wrap{
+        flex: 0 0 40%;
+        margin-left: 2.5rem;
+    }
+}
+
+@media screen and (min-width: 1000px){
+    section:not(.booking){
+        padding: 10rem 0;
+    }
+
+    .hamburger-menu{
+        display: none;
+    }
+    .nav-list{
+        position: initial;
+        width: initial;
+        height: initial;
+        background-color: transparent;
+        flex-direction: row;
+        justify-content: initial;
+        opacity: 1;
+        transform: scale(1);
+    }
+    .nav-item:not(:last-child){
+        margin-right: 3rem;
+        margin-bottom: 0;
+    }
+    .nav-link{
+        font-size: 1.3rem;
+        font-weight: normal;
+        transition: color .5s;
+    }
+    .nav-link:hover{
+        color: var(--yellow-solid);
+    }
+    /* Hero section styles */
+    .title{
+        font-size: 12rem;
+    }
+    .subtitle{
+        font-size: 4.6rem;  
+    }
+
+    .book-form{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .book-form .input-group{
+        margin-bottom: 0;
+    }
+
+    .book-form .input-group:first-child{
+        flex: 0 0 20%
+    }
+
+    .input,
+    .options{
+        min-width: 10rem;
+    }
+
+    /* Room section */
+    .rooms-grid{
+        grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+        grid-gap: 8rem;
+    }
+    .featured-rooms{
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .book-form .input-group:first-child{
+        flex: 0 0 30%
+    }
+
+}
