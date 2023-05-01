@@ -19,7 +19,16 @@
         <h2 style = "margin-top: 200px;"> Access to this page has been restricted! </h3>
     </div>
     <div id = "admin">
-        <h3 style = "margin-top: 200px;"> You are stupid </h3>
+        <form class = "forms" id = "period">
+            <label for = "statfrom"> From: </label><br>
+            <input type = "date" id = "statfrom" name = "statfrom"><br>
+            <label for = "statfrom"> To: </label><br>
+            <input type = "date" id = "statto" name = "statto"><br>
+            <button type = "submit" id = "statbtn">Search</button>
+        </form>
+        <div class="forms" style = "display:none;" id = "result">
+
+        </div>
     </div>
     
 </body>
