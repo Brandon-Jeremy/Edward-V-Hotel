@@ -16,6 +16,11 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
  * Run `npm install && npm run dev` to compile the frontend assets. 
 */
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyAccount;
+use App\Mail\OTPVerification;
+
+
 class CustomAuthController extends Controller
 {
     //Not needed. Not a server rendered site.
@@ -40,7 +45,19 @@ class CustomAuthController extends Controller
             $user->dob=$request->dob;
             // $user->nationality=NULL;
             $user->email=$request->email;
+
+            // Validate email using regex
+            if(!preg_match("/^[a-zA-Z0-9+_.-]+@(?:(gmail)|(hotmail)|(outlook)|(duck)|(pm))\.(?:(com))$/", $user->email)) {
+                return response()->json(['error' => 'Invalid email format'], 400);
+            }
+
             $user->phone_num=$request->phone_num;
+
+            // Validate phone number using regex
+            if(!preg_match("/^[\d]{7,}$/", $user->phone_num)) {
+                return response()->json(['error' => 'Invalid phone number format'], 400);
+            }
+
             $pass=$request->password;
             $user->password=hash("sha256",$pass);
             $user->points=0;
@@ -54,6 +71,16 @@ class CustomAuthController extends Controller
             $user->token_expiration=NULL;
 
             $user->save();
+
+            $link = "http://127.0.0.1:8000/api/";
+            $api = "validate-email/";
+            
+            $mailData = [
+                'url' => $link . $api . $token
+            ];
+
+            Mail::to($user->email)->send(new VerifyAccount($mailData));
+            
         }
         catch (\Exception $e) {
             // Code to handle the exception goes here
@@ -68,6 +95,24 @@ class CustomAuthController extends Controller
             "success" => true
         ]);
     }
+
+    public function validateEmail(Request $request, $token) {
+        // retrieve the user based on the token
+        $user = User::where('token', $token)->first();
+    
+        // check if a user was found
+        if (!$user) {
+            return response()->json(['error' => 'Invalid token'], 400);
+        }
+    
+        // update the email_verified_at field to mark the email as verified
+        $user->email_verified_at = Carbon::now();
+        $user->save();
+    
+        // return a success message
+        return response()->json(['message' => 'Email verified successfully'], 200);
+    }
+    
 
     use AuthenticatesUsers, ThrottlesLogins;
     public function loginUser(Request $request)
@@ -92,6 +137,36 @@ class CustomAuthController extends Controller
         if ($user) {
             // Clear rate limiting
             $this->clearLoginAttempts($request);
+
+            $otp =  Str::random(6);
+            
+            // Individual variable for each digit
+            $d1 = substr($otp, 0, 1);
+            $d2 = substr($otp, 1, 1);
+            $d3 = substr($otp, 2, 1);
+            $d4 = substr($otp, 3, 1);
+            $d5 = substr($otp, 4, 1);
+            $d6 = substr($otp, 5, 1);
+
+            $mailData = [
+                'first' => $d1,
+                'second' => $d2,
+                'third' => $d3,
+                'fourth' => $d4,
+                'fifth' => $d5,
+                'sixth' => $d6
+            ];
+
+            Mail::to($request->email)->send(new OTPVerification($mailData));
+
+            $otp_expiration = Carbon::now()->add(5, 'minutes');
+
+            // Update the user's row in the database
+            $user->otp = $otp;
+            $user->otp_expiration = $otp_expiration;
+            $user->save();
+
+
             return response()->json([
                 "success" => true,
             ]);
@@ -105,10 +180,44 @@ class CustomAuthController extends Controller
         }
     }
 
+    public function validateOTP(Request $request){
+        $email = $request->email;
+        $otp = $request->otp;
+    
+        $user = DB::table('users')
+            ->where('email',$email)
+            ->first();
+
+        if(empty($user)){
+            return response()->json([
+                'success' => false,
+                'error' => 'user does not exist'
+            ]);
+        }
+    
+        $otp_from_db = $user->otp;
+        $expiration_date = $user->otp_expiration;
+    
+        if ($otp === $otp_from_db && time() <= strtotime($expiration_date)) {
+            // OTP is valid and not expired
+            $user_id = $user->id;
+            // perform additional actions here
+            return response()->json([
+                'success' => true,
+                'user_id' => $user_id
+            ]);
+        } else {
+            // OTP is invalid or expired
+            return response()->json([
+                'success' => 'false',
+                'message' => 'otp invalid or expired'
+            ]);
+        }
+    }
 
     public function getEmail(Request $request){
         $email = $request->email;
-        $record = DB::table('registered_users')->where('email', $email)->first();
+        $record = DB::table('users')->where('email', $email)->first();
 
         if (is_null($record)) {
             return response()->json([
@@ -117,7 +226,8 @@ class CustomAuthController extends Controller
         } 
         else {
             return response()->json([
-                "success" => true
+                "success" => true,
+                "user_id" => $record->id
             ]);
         }
     }
@@ -133,7 +243,18 @@ class CustomAuthController extends Controller
         //If the password is the same as the one in the DB, return failure otherwise return success
         $email = $request->email;
         $newPassword = hash("sha256",$request->password);
-        $password = DB::table('registered_users')->where('email', $email)->value('password');
+
+        $found = DB::table('users')
+        ->where('email',$email)
+        ->first();
+
+        if(empty($found)){
+            return response()->json([
+                'error' => 'No user with that email'
+            ]);
+        }
+
+        $password = DB::table('users')->where('email', $email)->value('password');
         if ($password == $newPassword){
             return response()->json([
                 "success" => false
@@ -144,7 +265,7 @@ class CustomAuthController extends Controller
                 'password' => $newPassword,
                 'updated_at' => Carbon::now(),
             ];
-            DB::table('registered_users')->where('email',$email)->update($newData);
+            DB::table('users')->where('email',$email)->update($newData);
             
             return response()->json([
                 "success" => true

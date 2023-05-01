@@ -12,6 +12,12 @@ use App\Http\Controllers\FinancesController;
 use App\Http\Controllers\ReceptionAuthController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\RoomInfoController;
+use App\Http\Controllers\GiftcardController;
+use App\Http\Controllers\WaitinglistController;
+use App\Http\Controllers\ProfileController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,12 +45,18 @@ Route::post('/login-user',[CustomAuthController::class,'loginUser'])->name('logi
 Route::post('/request-email',[CustomAuthController::class,'getEmail'])->name('request-email');
 Route::post('/change-password',[CustomAuthController::class,'changePassword'])->name('change-password');
 
+Route::post('/validate-email/{token}',[CustomAuthController::class,'validateEmail'])->name('validate-email');
+Route::post('/validate-otp',[CustomAuthController::class,'validateOTP'])->name('validate-otp');
+
 //To be done like this with token, used to send to email
 Route::post('/change-pass/{token}',[CustomAuthController::class,'changePass'])->name('change-pass');
 
 //Authenticated APIs
 Route::get('/get-rewards',[rewardController::class,'getRewards'])->name('get-rewards');
 Route::post('/purchase-reward',[rewardController::class,'purchaseReward'])->name('purchase-reward');
+Route::post('/calculate-points',[rewardController::class,'calculatePoints'])->name('calculate-points');
+Route::post('/user-rewards',[rewardController::class,'userRewards'])->name('user-rewards');
+Route::post('/use-reward',[rewardController::class,'useReward'])->name('use-reward');
  
 Route::post('/create-reservation',[OnlineReservationController::class,'createReservation'])->name('create-reservation');
 
@@ -73,7 +85,34 @@ Route::post('/set-clean',[HousekeepingController::class,'setClean'])->name('set-
 Route::post('/financial-data',[FinancesController::class,'computeFinances'])->name('financial-data');
 Route::post('/occupancy-data',[FinancesController::class,'occupancyData'])->name('occupancy-data');
 
+//Send emails
 Route::post('/test-email',[EmailController::class,'testEmail'])->name('test-email');
+Route::post('/email-current',[EmailController::class,'emailCurrent'])->name('email-current');
+Route::post('/email-all',[EmailController::class,'emailAll'])->name('email-all');
+Route::post('/send-mail-to-hotel',[EmailController::class,'sendEmailToHotel'])->name('send-mail-to-hotel');
 
 //PDF Export
 Route::post('/generate-pdf',[ExportController::class,'generatePDF'])->name('generate-pdf');
+
+//Room Information Website
+Route::get('/room-info',[RoomInfoController::class,'roomInfo'])->name('room-info');
+Route::post('/room-availability',[RoomInfoController::class,'roomAvailability'])->name('room-availability');
+
+Route::post('/view-reservations',[OnlineReservationController::class,'viewReservations'])->name('view-reservations');
+
+//Giftcards
+// Route::post('/create-giftcard',[GiftcardController::class,'createGiftcard'])->name('create-giftcard');
+Route::post('/purchase_giftcard',[GiftcardController::class,'purchaseGiftcard'])->name('purchase-giftcard');
+Route::post('/redeem-giftcard',[GiftcardController::class,'redeemGiftcard'])->name('redeem-giftcard');
+
+//Waitinglist
+Route::post('/add-waitinglist',[WaitinglistController::class,'addtoWaitinglist'])->name('add-waitinglist');
+
+//Online Reservations
+Route::post('/create-reservation',[OnlineReservationController::class,'createReservation'])->name('create-reservation');
+Route::post('/cancel-reservation',[OnlineReservationController::class,'cancelReservation'])->name('cancel-reservation');
+Route::post('/edit-reservation',[OnlineReservationController::class,'editReservation'])->name('edit-reservation');
+
+//Profile management
+Route::post('/delete-account',[ProfileController::class,'deleteAccount'])->name('delete-account');
+Route::post('/edit-account',[ProfileController::class,'editAccount'])->name('edit-account');

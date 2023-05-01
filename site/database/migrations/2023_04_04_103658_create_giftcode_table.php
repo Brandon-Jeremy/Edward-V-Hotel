@@ -22,6 +22,7 @@ class CreateGiftcodeTable extends Migration
             $table->integer('value');
             $table->timestamp('creation_date')->nullable();
             $table->timestamp('expiration_date')->nullable();
+            $table->integer('redeemed_by')->nullable();
         });
     }
 

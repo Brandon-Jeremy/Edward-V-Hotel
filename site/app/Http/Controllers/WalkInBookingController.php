@@ -13,6 +13,8 @@ use App\Models\Rooms;
 //Used for emailing
 use App\Mail\RequestFeedback;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\WaitingListNotification;
+
 
 class WalkInBookingController extends Controller
 {
@@ -67,26 +69,63 @@ class WalkInBookingController extends Controller
         
     }
 
+    // public function fetchAvailable(Request $request){
+    //     $roomtype = $request->roomtype;
+    //     $view = $request->view;
+    //     $status = "available";
+
+    //     $result = DB::table('room')->select('type','floor','room_number','view')
+    //         ->where('type', $roomtype)
+    //         ->where('status', $status)
+    //         ->where('view',$view)
+    //         ->get();
+
+    //     $prices = DB::table('room_prices')->select('price','capacity')
+    //         ->where('view', $view)
+    //         ->where('type', $roomtype)
+    //         ->get();
+
+    //     $availableRooms = $result->merge($prices);
+
+    //     return response()->json($availableRooms);
+    // }
+
     public function fetchAvailable(Request $request){
         $roomtype = $request->roomtype;
         $view = $request->view;
-        $status = "available";
-
+        // $status = "busy";
+        $date_from = $request->date_from;
+        $date_to = $request->date_to;
+    
         $result = DB::table('room')->select('type','floor','room_number','view')
             ->where('type', $roomtype)
-            ->where('status', $status)
+            // ->where('status', '!=', $status)
             ->where('view',$view)
+            ->whereNotIn('id', function($query) use ($date_from, $date_to) {
+                $query->select('room_id')
+                    ->from('reservation')
+                    ->where('activity','!=','inactive')
+                    ->where(function($q) use ($date_from, $date_to) {
+                        $q->whereBetween('date_from', [$date_from, $date_to])
+                          ->orWhereBetween('date_to', [$date_from, $date_to])
+                          ->orWhere(function($q) use ($date_from, $date_to) {
+                                $q->where('date_from', '<=', $date_from)
+                                  ->where('date_to', '>=', $date_to);
+                          });
+                    });
+            })
             ->get();
-
+    
         $prices = DB::table('room_prices')->select('price','capacity')
             ->where('view', $view)
             ->where('type', $roomtype)
             ->get();
-
+    
         $availableRooms = $result->merge($prices);
-
+    
         return response()->json($availableRooms);
     }
+    
         
 
     public function bookRoom(Request $request){
@@ -110,19 +149,22 @@ class WalkInBookingController extends Controller
         ->where('room_number', $room_number)
         ->first();
 
-        $reservation = DB::table('reservation')
-        ->where('date_from', $date_from)
-        ->where('date_to', $date_to)
-        ->where('room_id', $room->id)
-        ->where('user_id', $user_id)
-        ->where('user_type', $user_type)
-        ->first();
+        $roomid = $room->id;
 
-        // return response()->json([
-        //     'value' => $reservation
-        // ]);
-        
-        if(empty($reservation)){
+        $overlappingReservations = DB::table('reservation')
+        ->where('room_id',$roomid)
+        ->where('activity','!=','inactive')
+        ->where(function($query) use ($date_from, $date_to){
+            $query->whereBetween('date_from', [$date_from, $date_to])
+                  ->orWhereBetween('date_to', [$date_from, $date_to])
+                  ->orWhere(function($query) use ($date_from, $date_to){
+                      $query->where('date_from', '<=', $date_from)
+                            ->where('date_to', '>=', $date_to);
+                  });
+        })
+        ->count();
+
+        if($overlappingReservations==0){
             // If reservation is not found in the table, add it
             $reservation_id = DB::table('reservation')->insertGetId([
                 'date_from' => $date_from,
@@ -149,7 +191,7 @@ class WalkInBookingController extends Controller
             // If reservation already exists, return an error message
             return response()->json([
                 'success' => false,
-                'error' => 'Reservation already exists.'
+                'error' => 'Room already booked'
             ]);
         }
 
@@ -205,54 +247,46 @@ class WalkInBookingController extends Controller
             ->select('room_number','floor','id')
             ->where('status', 'reserved')
             ->get();
-
-
-        // var_dump($roomInfo);die;
-        // return response()->json([
-        //     'result' => $roomInfo
-        // ]);
     
         $reservationInfo = DB::table('reservation')
             ->select('room_id', 'user_id','date_from','date_to')
             ->where('activity', 'pending')
             ->get();
-
-        // return response()->json([
-        //     'result' => $reservationInfo
-        // ]);
-        
+    
         $userInformation = DB::table('users')
             ->select('id', 'first_name','last_name')
             ->whereIn('id', $reservationInfo->pluck('user_id')->toArray())
             ->get();
-
-        // return response()->json([
-        //     'result' => $userInformation
-        // ]);
-            
-            $mergedData = $roomInfo->map(function ($room) use ($reservationInfo, $userInformation) 
-            { 
-                $reservation = $reservationInfo->firstWhere('room_id', $room->id); 
-                // var_dump($reservation);die;
-                $user = $userInformation->firstWhere('id',$reservation->user_id); 
-                
-                return [ 
-                    'room_number' => $room->room_number, 
-                    'floor' => $room->floor, 
-                    'user' => 
-                        [ 
-                            'id' => $user->id, 
-                            'first_name' => $user->first_name, 
-                            'last_name' => $user->last_name 
-                        ], 
-                            'date_from' => $reservation->date_from, 
-                            'date_to' => $reservation->date_to 
-                    ];
-            }); 
-                        
-                return $mergedData; 
-
+    
+        $mergedData = $roomInfo->map(function ($room) use ($reservationInfo, $userInformation) {
+            $reservations = $reservationInfo->where('room_id', $room->id);
+            $reservationData = [];
+    
+            foreach ($reservations as $reservation) {
+                $user = $userInformation->firstWhere('id',$reservation->user_id);
+    
+                $reservationData[] = [
+                    'room_number' => $room->room_number,
+                    'floor' => $room->floor,
+                    'user' => [
+                        'id' => $user->id,
+                        'first_name' => $user->first_name,
+                        'last_name' => $user->last_name
+                    ],
+                    'date_from' => $reservation->date_from,
+                    'date_to' => $reservation->date_to
+                ];
+            }
+    
+            return $reservationData;
+        });
+    
+        // Flatten the array to remove nested arrays
+        $mergedData = array_merge(...$mergedData);
+    
+        return $mergedData;
     }
+    
 
     public function checkIn(Request $request){
         $room_floor = $request->floor;
@@ -271,8 +305,6 @@ class WalkInBookingController extends Controller
         DB::table('room')
         ->where('id', $roomid->id)
         ->update(['status' => 'busy']);
-
-        //TODO: Change pending to active as well
 
         DB::table('reservation')
         ->where('activity','pending')
@@ -294,6 +326,7 @@ class WalkInBookingController extends Controller
         $checkOuts = DB::table('reservation')
             ->select('room_id','activity','id')
             ->where('date_to', $date)
+            ->where('activity','!=','inactive')
             ->get();
     
         $roomIds = $checkOuts->pluck('room_id')->toArray();
@@ -320,7 +353,7 @@ class WalkInBookingController extends Controller
 
     /**
      * Check out guest from user.
-     * Set room activity to inactive after checkout.
+     * Set room activity to inactive after checkout in reservation.
      * Set room status to dirty if the activity was set as available.
      * Set room status to available if the activity was set as pending.
      *
@@ -329,8 +362,8 @@ class WalkInBookingController extends Controller
      */
     public function checkOut(Request $request){
         //TODO: Ask this, should app send me roomid or table id?
-        //TODO: Override checkout
 
+        $override = $request->override;
         $roomId = $request->roomid;
         $id = $request->id; //reservation id
 
@@ -356,7 +389,7 @@ class WalkInBookingController extends Controller
             ->where('paid', 0)
             ->get();
 
-        if ($additionalCharges->count() > 0) {
+        if ($additionalCharges->count() > 0 && !$override) {
             // There are unpaid additional charges for the given room & guest
             return response()->json([
                 "Error" => "Outstanding charges unpaid"
@@ -398,6 +431,25 @@ class WalkInBookingController extends Controller
             DB::table('room')
             ->where('id',$roomId)
             ->update(['status' => 'available']);
+
+            //Get all users to email once room is available
+            $users = DB::table('waitinglist')
+            ->get();
+
+            $user_id = $users->pluck('user_id')->toArray();
+
+            foreach($user_id as $user_id){
+                $email = DB::table('users')
+                ->select('email')
+                ->where('id',$user_id)
+                ->first();
+
+                if(!empty($email)){
+                    Mail::to($email->email)->send(new WaitingListNotification);
+                    DB::table('waitinglist')->where('user_id', $user_id)->delete();
+                }
+                
+            }            
 
             return response()->json([
                 'success' => true,
@@ -472,6 +524,26 @@ class WalkInBookingController extends Controller
         ->first();
 
         $userid = $user_id->user_id;
+        $date_from = $user_id->date_from;
+
+        $overlappingReservations = DB::table('reservation')
+        ->where('room_id',$roomid)
+        ->where('activity','!=','inactive')
+        ->where(function($query) use ($date_from, $date_to){
+            $query->whereBetween('date_from', [$date_from, $date_to])
+                  ->orWhereBetween('date_to', [$date_from, $date_to])
+                  ->orWhere(function($query) use ($date_from, $date_to){
+                      $query->where('date_from', '<=', $date_from)
+                            ->where('date_to', '>=', $date_to);
+                  });
+        })
+        ->count();
+
+        if($overlappingReservations!=1){
+            return response()->json([
+                'error' => "Conflicting date for selected room"
+            ]);
+        }
 
         $updated = DB::table('reservation')
         ->where('room_id',$roomid)
@@ -579,6 +651,12 @@ class WalkInBookingController extends Controller
         ->where('floor',$floor)
         ->where('status', 'busy')
         ->first();
+
+        if(empty($id)){
+            return response()->json([
+                'error' => 'That room is currently not booked or busy'
+            ]);
+        }
 
         $roomid = $id->id;
 
