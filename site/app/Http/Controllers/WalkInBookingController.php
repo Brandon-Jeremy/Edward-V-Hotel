@@ -316,6 +316,16 @@ class WalkInBookingController extends Controller
         ]);
     }
 
+    public function userCreds(Request $request) {
+        $id = $request->id;
+    
+        $sql = "SELECT first_name, last_name FROM users WHERE id = $id";
+        $result = DB::select($sql);
+    
+        $data = array('firstname' => $result[0]->first_name, 'lastname' => $result[0]->last_name);
+        return response()->json($data);
+    }
+
     /**
      * Display rooms that can be checked out on the reception desk
      * @param None displayCheckOut is a GET request
@@ -324,7 +334,7 @@ class WalkInBookingController extends Controller
     public function displayCheckOut(){
         $date = Carbon::now()->format('Y-m-d');
         $checkOuts = DB::table('reservation')
-            ->select('room_id','activity','id')
+            ->select('room_id','activity','id' , 'user_id')
             ->where('date_to', $date)
             ->where('activity','!=','inactive')
             ->get();
@@ -342,6 +352,8 @@ class WalkInBookingController extends Controller
             $room = $rooms->firstWhere('id', $checkout->room_id);
             $checkout->floor = $room->floor;
             $checkout->room_number = $room->room_number;
+            $checkout->date = $date;
+            $checkout->userid = $checkout->user_id;
             $checkoutsWithRooms->push($checkout);
         }
     
@@ -732,12 +744,12 @@ class WalkInBookingController extends Controller
                 $reservation_id = $reservation->id;
 
                 $roomFound = [
-                    'Reservation_ID' => $reservation_id,
-                    'Date From' => $dateFrom,
-                    'Date To' => $dateTo,
-                    'Room Floor' => $room->floor,
-                    'Room Number' => $room->room_number,
-                    'Room_ID' => $room_id
+                    'reservation_id' => $reservation_id,
+                    'datefrom' => $dateFrom,
+                    'dateto' => $dateTo,
+                    'roomfloor' => $room->floor,
+                    'roomnumber' => $room->room_number,
+                    'room_id' => $room_id
                 ];
 
                 array_push($busyRooms,$roomFound);

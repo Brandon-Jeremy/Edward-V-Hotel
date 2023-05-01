@@ -12,7 +12,7 @@ fform.addEventListener('submit', (event) => {
   const View = fform.querySelector('#view').checked ? 1 : 0;
   from = fform.querySelector('#from_visitor').value;
   to = fform.querySelector('#to_visitor').value;
-  console.log(`from = ${from} , to = ${to}`);
+  console.log(`http://localhost:8000/api/get-available?roomtype=${roomType}&view=${View}&date_from=${from}&date_to=${to}`);
   fetch(`http://localhost:8000/api/get-available?roomtype=${roomType}&view=${View}&date_from=${from}&date_to=${to}`, {
     method: 'POST',
   })
@@ -69,10 +69,12 @@ tform.addEventListener("submit" , function(event) {
   .then(response => response.json())
   .then(data => {
     const id = data.user_id;
-    const roomnum = selectedroom[0];
-    const roomfloor = selectedroom[2];
+    const roomnum = selectedroom[2];
+    const roomfloor = selectedroom[0];
     const isnew = data.success;
+    console.log(`http://localhost:8000/api/book-room?id=${id}&floor=${roomfloor}&number=${roomnum}&datefrom=${from}&dateto=${to}`);
     console.log(id , roomnum , roomfloor , isnew);
+    console.log(`http://localhost:8000/api/book-room?id=${id}&floor=${roomfloor}&number=${roomnum}&datefrom=${from}&dateto=${to}`);
     fetch(`http://localhost:8000/api/book-room?id=${id}&floor=${roomfloor}&number=${roomnum}&datefrom=${from}&dateto=${to}` , {
       method: 'POST',
     })

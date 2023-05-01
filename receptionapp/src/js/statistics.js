@@ -4,6 +4,7 @@ if (specialAccess === '1') {
   const employeeerror = document.getElementById('employee');
   employeeerror.style.display = 'none';
   console.log("admin");
+  
 }
 else {
     const adminstuff = document.getElementById('admin');

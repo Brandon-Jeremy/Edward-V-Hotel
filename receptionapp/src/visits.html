@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <script src = "js/visitmanager.js"></script>
+    
     <title>Reception</title>
     <link rel="stylesheet" href="styles/cino.css">
   </head>
@@ -17,10 +17,9 @@
       <table id = "visits">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Last Name</th>
-            <th>Start Date</th>
             <th>Room No</th>
+            <th>Start Date</th>
+            <th>End Date</th>
             <th></th>
           </tr>
         </thead>
@@ -32,20 +31,23 @@
     <br><br>
     <br>
     <div id = "visitmanager">
-      <form id = "extendstay" class = "forms" style = "margin-top: -40px;">
-        <input type = "date" name = "new_to">
-        <button type = "submit"> Extend Stay </button>
+      <form id = "extendstay" class = "forms" style = "margin-top: -75px;">
+        <input id = "newdate" type = "date" name = "new_to">
+        <br>
+        <label for = "paid" style = "color:white;">Paid</label>
+        <input type = "checkbox" name = "paid" id = "paidext">
+        <br>
+        <button type = "submit" id = "extbutton"> Extend Stay </button>
       </form>
-      <form class = "forms" style = "margin-top : 240px;">
-        <select id = "add_service" name = "add_service">
-          <option selected disabled>Room Service</option>
-          <option value = "cleaning">Cleaning</option>
-          <option value = "breakfast">Breakfast to Door</option>
-          <option value = "dinner">Dinner To Door</option>
-        </select>
-        <button type = "submit"> Add </button>
+      <form id = "addcharge" class = "forms" style = "margin-top : 285px;">
+        <input type = "text" placeholder = "Service" id = "service">
+        <input type = "number" placeholder = "Price" id = "price"><br>
+        <label for = "paidd" style = "color:white;">Paid</label>
+        <input type = "checkbox" name = "paidd" id = "paidd"> <br>
+        <button id = "addbutton" type = "submit"> Add </button>
       </form>
 
     </div>
+    <script defer src = "js/visitmanager.js"></script>
   </body>
 </html>

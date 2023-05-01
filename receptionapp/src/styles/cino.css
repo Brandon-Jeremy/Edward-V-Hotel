@@ -144,7 +144,7 @@ td:nth-child(5) {
   display:inline-block;
   color: white;
 }
-.forms select , .forms input[type=text] , .forms input[type=date] , .forms input[type=tel] {
+.forms select , .forms input[type=text] , .forms input[type=date] , .forms input[type=tel] , .forms input[type=number] {
   width: 80%;
   background-color: rgba(104, 11, 30, 0.629);
   display: inline-block;
@@ -175,6 +175,12 @@ td:nth-child(5) {
 
 #visitmanager {
   display: none;
+}
+textarea {
+  width: 90%;
+  height:260px;
+  resize: none;
+  font-size: 100%;
 }
 body {
     background-color: rgba(228, 229, 230 , 1);
