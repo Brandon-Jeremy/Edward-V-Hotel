@@ -1,0 +1,42 @@
+[
+    {
+      "name": "John",
+      "lastname": "Doe",
+      "id_visit": "123",
+      "startdate": "2023-04-26",
+      "enddate": "2023-04-28",
+      "room_no": "101"
+    },
+    {
+      "name": "Jane",
+      "lastname": "Doe",
+      "id_visit": "456",
+      "startdate": "2023-05-01",
+      "enddate": "2023-05-03",
+      "room_no": "102"
+    },
+    {
+      "name": "Bob",
+      "lastname": "Smith",
+      "id_visit": "789",
+      "startdate": "2023-05-05",
+      "enddate": "2023-05-07",
+      "room_no": "103"
+    },
+    {
+      "name": "Alice",
+      "lastname": "Johnson",
+      "id_visit": "101",
+      "startdate": "2023-05-09",
+      "enddate": "2023-05-11",
+      "room_no": "104"
+    },
+    {
+      "name": "Tom",
+      "lastname": "Wilson",
+      "id_visit": "111",
+      "startdate": "2023-05-13",
+      "enddate": "2023-05-15",
+      "room_no": "105"
+    }
+]

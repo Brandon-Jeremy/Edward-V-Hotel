@@ -67,7 +67,24 @@ header {
     color: crimson;
     background-color: white;
 }
+.tables button {
+    width:6%;
+    height: 30px;
+    font-size: 120%;
+    border: 2px solid crimson;
+    color: crimson;
+    background-color: white;
+    transition: 0.1s;
+    margin-top:20px;
+    margin-left: 47%;
+    transition: 0.2s;
+}
 
+.tables button:hover {
+    border: 2px solid crimson;
+    color: white;
+    background-color: crimson;
+}
 th:nth-child(1),
 td:nth-child(1) {
   width: 30%;
@@ -98,6 +115,67 @@ td:nth-child(5) {
     background-color: #ddd;
   }
 
+#availablerooms {
+  display: none;
+}
+#user {
+  display:none;
+}
+
+.forms {
+  font-size: 120%;
+  background-color: crimson;
+  margin:auto;
+  width: 35%;
+  padding: 40px;
+  position: absolute; 
+  top: 40%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  text-align: center;
+  margin-top: 90px;
+}
+.forms .viewlabel {
+  margin: auto;
+  display: inline-block;
+  color: white;
+}
+.datelabel{
+  display:inline-block;
+  color: white;
+}
+.forms select , .forms input[type=text] , .forms input[type=date] , .forms input[type=tel] {
+  width: 80%;
+  background-color: rgba(104, 11, 30, 0.629);
+  display: inline-block;
+  margin: auto;
+  margin-top:10%;
+  margin-bottom:5%;
+  height: 40px;
+  color: white;
+  font-size: 90%;
+}
+.forms button {
+  display:inline-block;
+  margin: auto;
+  margin-top: 10%;
+  width: 45%;
+  height: 30px;
+  font-size: 110%;
+  background-color: white;
+  color:crimson;
+  border: 2px solid white;
+  transition: 0.2s;
+}
+.forms button:hover {
+  width: 47%;
+  height: 33px;
+  margin-top: 9.8%;
+}
+
+#visitmanager {
+  display: none;
+}
 body {
     background-color: rgba(228, 229, 230 , 1);
 }
