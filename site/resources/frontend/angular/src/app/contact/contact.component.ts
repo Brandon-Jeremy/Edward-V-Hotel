@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { tap } from 'rxjs/internal/operators/tap';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact',
@@ -24,7 +25,11 @@ export class ContactComponent {
     Validators.email,
   ]);
 
-  constructor(private http: HttpClient, private dialog: MatDialog) {}
+  constructor(
+    private http: HttpClient,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   private sendMessageUrl = 'http://localhost:8000/api/send-mail-to-hotel';
 
@@ -71,6 +76,14 @@ export class ContactComponent {
   }
 
   onSuccess(response: any) {
-    throw new Error('Method not implemented.');
+    this.showSnackbar("Email Sent");
+  }
+
+  showSnackbar(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 }
