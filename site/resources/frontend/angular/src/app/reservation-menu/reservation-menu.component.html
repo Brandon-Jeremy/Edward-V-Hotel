@@ -1,31 +1,23 @@
-<h2>Reservation Menu</h2>
-
-<div *ngIf="reservations; else noReservations">
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <div *ngIf="!isLoading">
-    <h2>Reservations</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Party Size</th>
-          <th>Customer Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let reservation of reservations">
-          <td>{{ reservation.date }}</td>
-          <td>{{ reservation.time }}</td>
-          <td>{{ reservation.numGuests }} people</td>
-          <td>{{ reservation.customerName }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-<ng-template #noReservations>
-  <div class="no-reservations">
-    <h2>No reservations found</h2>
-  </div>
-</ng-template>
+<h2>Your Reservations</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Date From</th>
+      <th>Date To</th>
+      <th>Room Type</th>
+      <th>Room View</th>
+      <th>Room ID</th>
+      <th>Reservation ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let reservation of reservations">
+      <td>{{ reservation.date_from }}</td>
+      <td>{{ reservation.date_to }}</td>
+      <td>{{ reservation.room_type }}</td>
+      <td>{{ reservation.room_view }}</td>
+      <td>{{ reservation.room_id }}</td>
+      <td>{{ reservation.reservation_id }}</td>
+    </tr>
+  </tbody>
+</table>

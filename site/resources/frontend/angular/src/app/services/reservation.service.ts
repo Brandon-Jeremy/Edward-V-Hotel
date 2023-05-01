@@ -7,12 +7,14 @@ import { Reservation } from '../reservation';
   providedIn: 'root',
 })
 export class ReservationService {
-  private baseUrl = 'http://localhost:3000/api';
+  private baseUrl = 'http://localhost:8000/view-reeservations';
+  private view = 'http://localhost:8000/view-reeservations';
 
   constructor(private http: HttpClient) {}
 
-  getReservations(): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.baseUrl}/reservations`);
+  viewReservations(email: string): Observable<Reservation[]> {
+    const url = `${this.view}/reservations?email=${email}`;
+    return this.http.get<Reservation[]>(url);
   }
 
   addReservation(reservation: Reservation): Observable<Reservation> {

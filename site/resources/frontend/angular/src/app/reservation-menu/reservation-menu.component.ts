@@ -18,20 +18,17 @@ export class ReservationMenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.reservationService.getReservations().subscribe((reservations) => {
-      this.reservations = reservations;
-      this.isLoading = false;
-    });
+    this.viewReservations();
   }
 
-  getReservations(): void {
-    // Get the user's reservations from the ReservationService
-    this.reservationService.getReservations().subscribe(
-      (reservations) => {
-        this.reservations = reservations;
+  viewReservations() {
+    const email = 'brandonnader1@gmail.com'; // Replace with actual email
+    this.reservationService.viewReservations(email).subscribe(
+      response => {
+        this.reservations = response;
       },
-      (error) => {
-        console.log('Error getting reservations: ', error);
+      error => {
+        console.log('Error retrieving reservations:', error);
       }
     );
   }

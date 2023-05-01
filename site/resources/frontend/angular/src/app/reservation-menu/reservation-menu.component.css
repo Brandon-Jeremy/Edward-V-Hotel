@@ -1,64 +1,23 @@
-.reservation-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
 }
 
-.reservation-card {
-  width: 80%;
-  margin-bottom: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-.reservation-card:hover {
-  cursor: pointer;
-  transform: translateY(-2px);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+th {
+  background-color: #f2f2f2;
 }
 
-.reservation-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
-.reservation-info p {
-  font-size: 18px;
-  margin: 0;
-}
-
-.reservation-info .btn-group {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.delete-btn {
-  margin-left: 10px;
-  color: #f44336;
-}
-
-.delete-btn:hover {
-  color: #b71c1c;
-}
-
-.edit-btn {
-  margin-left: 10px;
-  color: #2196f3;
-}
-
-.edit-btn:hover {
-  color: #0d47a1;
-}
-
-.no-reservation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  margin-top: 20px;
-  color: #666;
+tr:hover {
+  background-color: #ddd;
 }
