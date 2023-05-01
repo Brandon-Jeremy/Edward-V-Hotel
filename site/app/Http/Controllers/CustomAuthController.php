@@ -19,6 +19,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyAccount;
 use App\Mail\OTPVerification;
+use App\Mail\ForgotPassword;
 
 
 class CustomAuthController extends Controller
@@ -271,5 +272,37 @@ class CustomAuthController extends Controller
                 "success" => true
             ]);
         }
+    }
+
+    public function forgotPassword(Request $request){
+        $email = $request->email;
+
+        $user = DB::table('users')
+        ->where('email',$email)
+        ->first();
+
+        if(empty($user)){
+            return response()->json([
+                'error' => 'user does not exist'
+            ]);
+        }
+
+        $token = $user->token;
+
+        $link = "http://127.0.0.1:8000/api/";
+        $api = "";
+
+        $mailData = [
+            'url' => $link . $api . $token
+        ];
+
+        Mail::to($user->email)->send(new ForgotPassword($mailData));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'email sent'
+        ]);
+
+        
     }
 }
