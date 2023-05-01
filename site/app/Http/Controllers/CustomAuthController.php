@@ -243,22 +243,25 @@ class CustomAuthController extends Controller
         //and the user's new password
         //If the password is the same as the one in the DB, return failure otherwise return success
         $email = $request->email;
-        $newPassword = hash("sha256",$request->password);
+        $oldPassword = hash('sha256',$request->oldpassword);
+        $newPassword = hash("sha256",$request->newpassword);
 
         $found = DB::table('users')
         ->where('email',$email)
+        ->where('password',$oldPassword)
         ->first();
 
         if(empty($found)){
             return response()->json([
-                'error' => 'No user with that email'
+                'success' => false,
+                'error' => 'Incorrect email or password'
             ]);
         }
 
-        $password = DB::table('users')->where('email', $email)->value('password');
-        if ($password == $newPassword){
+        if ($oldPassword == $newPassword){
             return response()->json([
-                "success" => false
+                'success' => false,
+                'error' => 'Old password and new password match'
             ]);
         }
         else{
