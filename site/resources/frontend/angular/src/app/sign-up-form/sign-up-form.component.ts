@@ -206,8 +206,8 @@ export class SignUpFormComponent {
       'Confirm password: ',
       this.confirmpassword
     );
-    if (this.confirmpassword != this.password) {
-      this.confirmPasswordError = 'Password and confirm Password do not match';
+    if (!(this.confirmpassword === this.password)) {
+      this.confirmPasswordError = 'Passwords do not match';
       return;
     }
 
