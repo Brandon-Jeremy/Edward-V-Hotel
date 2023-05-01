@@ -48,7 +48,7 @@ Route::post('/change-password',[CustomAuthController::class,'changePassword'])->
 Route::post('/validate-email/{token}',[CustomAuthController::class,'validateEmail'])->name('validate-email');
 Route::post('/validate-otp',[CustomAuthController::class,'validateOTP'])->name('validate-otp');
 Route::post('/forgot-password',[CustomAuthController::class,'forgotPassword'])->name('forgot-password');
-Route::post('/reset-password{token}',[CustomAuthController::class,'resetPassword'])->name('reset-password');
+Route::post('/reset-password/{token}',[CustomAuthController::class,'resetPassword'])->name('reset-password');
 
 
 //To be done like this with token, used to send to email
