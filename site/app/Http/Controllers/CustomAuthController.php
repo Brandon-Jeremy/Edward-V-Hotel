@@ -290,7 +290,7 @@ class CustomAuthController extends Controller
         $token = $user->token;
 
         $link = "http://127.0.0.1:8000/api/";
-        $api = "";
+        $api = "resetPassword/";
 
         $mailData = [
             'url' => $link . $api . $token
