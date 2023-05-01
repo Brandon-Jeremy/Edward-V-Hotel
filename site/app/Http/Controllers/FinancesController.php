@@ -117,6 +117,7 @@ class FinancesController extends Controller
             $roomids = DB::table('reservation')
             ->where('date_from','>=',$date_from)
             ->where('date_to','<=',$date_to)
+            ->where('activity','!=','pending')
             ->get();
 
             $roomID = $roomids->pluck('room_id')->toArray();
