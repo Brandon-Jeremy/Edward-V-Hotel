@@ -21,7 +21,8 @@
         </div>
         <div class="form-group">
           <label for="confirmPassword">Confirm Password</label>
-          <input type="password" formControlName="confirmPassword" class="form-control" minlength="6" mustMatch="password">
+          <input type="password" formControlName="confirmPassword" class="form-control" minlength="6"
+            mustMatch="password">
         </div>
         <div class="form-group">
           <label for="dob">Date of Birth</label>
@@ -29,11 +30,13 @@
         </div>
         <div class="form-group">
           <label for="phoneNumber">Phone Number</label>
-          <input type="tel" formControlName="phoneNumber" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+          <input type="tel" formControlName="phoneNumber" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            required>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-primary mr-2">Confirm Changes</button>
-          <button type="button" class="btn btn-secondary mr-2" (click)="onViewEditReservations()">View/Edit Reservations</button>
+          <button type="button" class="btn btn-secondary mr-2" (click)="onViewEditReservations()">View/Edit
+            Reservations</button>
           <!-- <button type="button" class="btn btn-secondary mr-2"  routerLink="/reservation-menu">View/Edit Reservation</button> -->
           <button type="button" class="btn btn-danger mr-2" (click)="onDeleteAccount()">Delete Account</button>
           <button type="button" class="btn btn-warning" (click)="onLogout()">Logout</button>

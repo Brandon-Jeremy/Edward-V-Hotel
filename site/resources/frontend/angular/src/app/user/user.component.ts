@@ -7,13 +7,17 @@ import { AuthGuard } from '../auth.guard';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
   userForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router,
-    private authGuard:AuthGuard) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router,
+    private authGuard: AuthGuard
+  ) {}
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
@@ -28,11 +32,11 @@ export class UserComponent implements OnInit {
 
     // Fetch the user data from the UserService and update the form values
     this.userService.getUserData().subscribe(
-      response => {
+      (response) => {
         const userData = response.data; // Update the property names to match your Laravel API response
         this.userForm.patchValue(userData);
       },
-      error => {
+      (error) => {
         console.error('Error fetching user data:', error);
         // Display an error message to the user
       }
@@ -43,11 +47,11 @@ export class UserComponent implements OnInit {
     if (this.userForm.valid) {
       // Call the UserService to update the user information
       this.userService.updateProfile(this.userForm.value).subscribe(
-        response => {
+        (response) => {
           console.log('User information updated successfully');
           // Display a success message to the user
         },
-        error => {
+        (error) => {
           console.error('Error updating user information:', error);
           // Display an error message to the user
         }
@@ -66,13 +70,14 @@ export class UserComponent implements OnInit {
 
   onDeleteAccount() {
     // Call the UserService to delete the user account
-    this.userService.deleteAccount(123).subscribe( // Replace '123' with the actual user ID
-      response => {
+    this.userService.deleteAccount(123).subscribe(
+      // Replace '123' with the actual user ID
+      (response) => {
         console.log('User account deleted successfully');
         // Display a success message to the user
         // Redirect the user to the login page
       },
-      error => {
+      (error) => {
         console.error('Error deleting user account:', error);
         // Display an error message to the user
       }
@@ -82,11 +87,11 @@ export class UserComponent implements OnInit {
   onLogout() {
     // Call the UserService to log out the user
     this.userService.logout().subscribe(
-      response => {
+      (response) => {
         console.log('User logged out successfully');
         // Redirect the user to the login page
       },
-      error => {
+      (error) => {
         console.error('Error logging out:', error);
         // Display an error message to the user
       }

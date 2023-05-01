@@ -6,17 +6,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-reservation-menu',
   templateUrl: './reservation-menu.component.html',
-  styleUrls: ['./reservation-menu.component.css']
+  styleUrls: ['./reservation-menu.component.css'],
 })
 export class ReservationMenuComponent implements OnInit {
-
   reservations: Reservation[] = [];
   isLoading: boolean = true;
 
-  constructor(private reservationService: ReservationService, private snackbar: MatSnackBar) { }
+  constructor(
+    private reservationService: ReservationService,
+    private snackbar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
-    this.reservationService.getReservations().subscribe(reservations => {
+    this.reservationService.getReservations().subscribe((reservations) => {
       this.reservations = reservations;
       this.isLoading = false;
     });
@@ -25,10 +27,10 @@ export class ReservationMenuComponent implements OnInit {
   getReservations(): void {
     // Get the user's reservations from the ReservationService
     this.reservationService.getReservations().subscribe(
-      reservations => {
+      (reservations) => {
         this.reservations = reservations;
       },
-      error => {
+      (error) => {
         console.log('Error getting reservations: ', error);
       }
     );
@@ -37,12 +39,14 @@ export class ReservationMenuComponent implements OnInit {
   cancelReservation(id: number): void {
     // Call the cancelReservation method of the ReservationService
     this.reservationService.cancelReservation(id).subscribe(
-      response => {
+      (response) => {
         console.log('Reservation canceled successfully');
         // Remove the canceled reservation from the array
-        this.reservations = this.reservations.filter(reservation => reservation.id !== id);
+        this.reservations = this.reservations.filter(
+          (reservation) => reservation.id !== id
+        );
       },
-      error => {
+      (error) => {
         console.log('Error canceling reservation: ', error);
       }
     );
@@ -57,5 +61,4 @@ export class ReservationMenuComponent implements OnInit {
   refundReservation(id: number): void {
     this.snackbar.open('Refunds are not available at the moment', 'Close');
   }
-
 }

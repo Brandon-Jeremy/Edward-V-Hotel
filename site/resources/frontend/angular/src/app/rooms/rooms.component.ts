@@ -8,14 +8,21 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
-  styleUrls: ['./rooms.component.css']
+  styleUrls: ['./rooms.component.css'],
 })
 export class RoomsComponent {
-
-  constructor(private authService:AuthService, private router:Router, private snackBar:MatSnackBar, private dialog:MatDialog) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) {}
 
   isUserLoggedIn(): boolean {
-    console.log('authStatus:', this.authService.getIsAuthenticated().getValue());
+    console.log(
+      'authStatus:',
+      this.authService.getIsAuthenticated().getValue()
+    );
     return this.authService.getIsAuthenticated().getValue();
   }
 
@@ -43,5 +50,4 @@ export class RoomsComponent {
       height: '500px', // Adjust the height
     });
   }
-
 }

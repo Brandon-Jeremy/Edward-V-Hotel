@@ -78,6 +78,6 @@ import { LocationComponent } from './location/location.component';
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
-  entryComponents: [LoginFormComponent, SignUpFormComponent]
+  entryComponents: [LoginFormComponent, SignUpFormComponent],
 })
-export class AppModule { }
+export class AppModule {}

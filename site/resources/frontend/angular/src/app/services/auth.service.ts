@@ -4,7 +4,7 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 import { tap, delay, catchError } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private loginUrl = 'http://localhost:8000/api/login-user';
@@ -20,7 +20,7 @@ export class AuthService {
   //     email: email,
   //     password: password
   //   };
-  
+
   //   return new Observable(observer => {
   //     fetch(this.loginUrl, {
   //       method: 'POST',
@@ -53,19 +53,21 @@ export class AuthService {
   login(email: string, password: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json',
     });
-    const body = { email, password};
+    const body = { email, password };
 
-    return this.http.post(this.loginUrl, JSON.stringify(body), { headers }).pipe(
-      tap(response => {
-        this.onSuccessfulSignUp(response);
-      }),
-      catchError(error => {
-        console.error(error);
-        return of(false);
-      })
-    );
+    return this.http
+      .post(this.loginUrl, JSON.stringify(body), { headers })
+      .pipe(
+        tap((response) => {
+          this.onSuccessfulSignUp(response);
+        }),
+        catchError((error) => {
+          console.error(error);
+          return of(false);
+        })
+      );
   }
 
   fakeLogin(email: string, password: string): Observable<any> {
@@ -73,17 +75,20 @@ export class AuthService {
       id: 1,
       email: email,
       firstName: 'John',
-      lastName: 'Doe'
+      lastName: 'Doe',
     };
     const response = {
       success: true,
       message: 'Login successful',
       data: {
         user: userData,
-        access_token: 'some-auth-token'
-      }
+        access_token: 'some-auth-token',
+      },
     };
-    return of({ access_token: 'fakeToken', user: { email, firstName: 'John', lastName: 'Doe' } }).pipe(
+    return of({
+      access_token: 'fakeToken',
+      user: { email, firstName: 'John', lastName: 'Doe' },
+    }).pipe(
       delay(1000),
       tap((response) => {
         this.isAuthenticated.next(true);
@@ -94,23 +99,32 @@ export class AuthService {
   // signup(user: any) {
   //   return this.http.post(this.signupUrl, user);
   // }
-  
-  signUp(email: string, password: string, first_name: string, last_name: string, dob: String, phone_num: string): Observable<any> {
+
+  signUp(
+    email: string,
+    password: string,
+    first_name: string,
+    last_name: string,
+    dob: String,
+    phone_num: string
+  ): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      Accept: 'application/json',
     });
     const body = { email, password, first_name, last_name, dob, phone_num };
 
-    return this.http.post(this.signupUrl, JSON.stringify(body), { headers }).pipe(
-      tap(response => {
-        this.onSuccessfulSignUp(response);
-      }),
-      catchError(error => {
-        console.error(error);
-        return of(false);
-      })
-    );
+    return this.http
+      .post(this.signupUrl, JSON.stringify(body), { headers })
+      .pipe(
+        tap((response) => {
+          this.onSuccessfulSignUp(response);
+        }),
+        catchError((error) => {
+          console.error(error);
+          return of(false);
+        })
+      );
   }
 
   onSuccessfulSignUp(response: any): void {
@@ -138,7 +152,6 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.isAuthenticated.getValue();
   }
-  
 
   logout() {
     // Perform your logout logic here, e.g., API calls
@@ -155,7 +168,7 @@ export class AuthService {
     return this.isAuthenticated;
   }
 
-  //for testing 
+  //for testing
   trulyAuthenticatted(): boolean {
     return true;
   }

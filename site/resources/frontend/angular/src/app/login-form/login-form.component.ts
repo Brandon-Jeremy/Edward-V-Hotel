@@ -3,73 +3,91 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SignUpFormComponent } from '../sign-up-form/sign-up-form.component';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import {
+  FormControl,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    return !!(
+      control &&
+      control.invalid &&
+      (control.dirty || control.touched || isSubmitted)
+    );
   }
 }
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+  styleUrls: ['./login-form.component.css'],
 })
 export class LoginFormComponent {
-
   hide = true;
 
   @ViewChild('templateRef') templateRef!: ElementRef;
 
-  email : string = '';
-  password : string = '';
-  emailError : string = '';
-  passwordError : string = '';
+  email: string = '';
+  password: string = '';
+  emailError: string = '';
+  passwordError: string = '';
   credentials: any = [];
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar, private dialog: MatDialog) { }
+  constructor(
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) {}
 
   matcher = new MyErrorStateMatcher();
-  
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
-  passwordFormControl =  new FormControl('',[Validators.required])
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+
+  passwordFormControl = new FormControl('', [Validators.required]);
 
   openForm(): void {
     this.templateRef.nativeElement.style.display = 'block';
   }
-  
+
   onSubmit(): void {
     console.log(this.email);
     console.log(this.password);
 
     this.resetError();
-    
+
     //email validation
-    if (this.emailFormControl.hasError('required')){
-      this.emailError = "Email is required";
+    if (this.emailFormControl.hasError('required')) {
+      this.emailError = 'Email is required';
       return;
     }
-    if(this.emailFormControl.hasError('email')){
-      this.emailError = "Invalid email format";
+    if (this.emailFormControl.hasError('email')) {
+      this.emailError = 'Invalid email format';
       return;
     }
 
     //password validation
-    if (this.passwordFormControl.hasError('required')){
-      this.passwordError = "Password is required";
+    if (this.passwordFormControl.hasError('required')) {
+      this.passwordError = 'Password is required';
       return;
     }
-    
+
     this.authService.login(this.email, this.password).subscribe(
-    //this.authService.fakeLogin(this.email, this.password).subscribe(  
+      //this.authService.fakeLogin(this.email, this.password).subscribe(
       (response) => {
-        this.credentials = response
+        this.credentials = response;
         console.log(this.credentials);
         this.clearForm();
         this.showSnackbar('Logged in successfull');
@@ -95,7 +113,7 @@ export class LoginFormComponent {
     });
   }
 
-  resetError(){
+  resetError() {
     this.emailError = '';
     this.passwordError = '';
   }
@@ -115,9 +133,8 @@ export class LoginFormComponent {
     });
   }
 
-  closePopup(){
+  closePopup() {
     //close login form before opening signup form
     this.dialog.closeAll();
   }
-
 }

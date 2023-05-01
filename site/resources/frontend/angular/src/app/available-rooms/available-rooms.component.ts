@@ -58,7 +58,7 @@ export class AvailableRoomsComponent implements OnInit {
       'A comfortable room with two double beds and all the necessary amenities',
       'https://d3rg18dos0rgue.cloudfront.net/wp-content/uploads/sites/3/2017/12/Deluxe-Double3.jpg'
     );
-   }
+  }
 }
 
 // room images

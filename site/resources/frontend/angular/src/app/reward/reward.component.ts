@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reward.component.css'],
 })
 export class RewardComponent implements OnInit {
-  
   rewards: any[] = [];
 
   addReward(

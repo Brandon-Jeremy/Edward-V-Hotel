@@ -75,11 +75,9 @@ button[type="submit"] {
   color: #fff;
 }
 
-
 button[type="submit"]:hover {
   opacity: 0.8;
 }
-
 
 button[type="button"] {
   background-color: #fff;
@@ -120,20 +118,17 @@ button:active {
   background-color: #ffbb33;
   color: #000;
 }
-.form-group > button 
-{
-  margin: .5rem;
+.form-group > button {
+  margin: 0.5rem;
 }
 .form-group > button:hover {
   color: #f2f2f2;
-
 }
-
 
 @media only screen and (min-width: 768px) {
   .form-container {
     width: 70%;
-    margin-right: .5rem;
-    margin-top: .5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
   }
 }

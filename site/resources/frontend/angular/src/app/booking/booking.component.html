@@ -1,56 +1,58 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
-        <title>Booking</title>
-      </head>
-    <section id="reservation" class="booking">
-        <div class="container">
-            <form action="" class="book-form" (ngSubmit)="onSearchClick()">
-                <div class="input-group">
-                    <label for="check-in" class="input-label">Check-in</label>
-                    <input type="date" class="input" id="check-in" required>
-                </div>
-                <div class="input-group">
-                    <label for="check-out" class="input-label">Check-out</label>
-                    <input type="date" class="input" id="check-out" required>
-                </div>
-                <div class="input-group">
-                    <label for="room-type" class="input-label">Room Type</label>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Select Room Type</mat-label>
-                            <mat-select>
-                              <mat-option value="one">Single</mat-option>
-                              <mat-option value="two">Double</mat-option>
-                              <mat-option value="three">Suite</mat-option>
-                            </mat-select>
-                          </mat-form-field>
 
-                </div>
-                <div class="input-group">
-                    <label for="view" class="input-label">View</label>
-                        <mat-form-field>
-                            <mat-label>Select View</mat-label>
-                            <mat-select>
-                              <mat-option value="one">Beach</mat-option>
-                              <mat-option value="two">City</mat-option>
-                            </mat-select>
-                          </mat-form-field>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Booking</title>
+</head>
+<section id="reservation" class="booking">
+    <div class="container">
+        <form action="" class="book-form" (ngSubmit)="onSearchClick()">
+            <div class="input-group">
+                <label for="check-in" class="input-label">Check-in</label>
+                <input type="date" class="input" id="check-in" required>
+            </div>
+            <div class="input-group">
+                <label for="check-out" class="input-label">Check-out</label>
+                <input type="date" class="input" id="check-out" required>
+            </div>
+            <div class="input-group">
+                <label for="room-type" class="input-label">Room Type</label>
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Room Type</mat-label>
+                    <mat-select>
+                        <mat-option value="one">Single</mat-option>
+                        <mat-option value="two">Double</mat-option>
+                        <mat-option value="three">Suite</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-                </div>
-                <button type="submit" class="btn form-btn btn-purple" (click)="onSearchClick()">Search</button>
-            </form>
-        </div>   
-    </section>
+            </div>
+            <div class="input-group">
+                <label for="view" class="input-label">View</label>
+                <mat-form-field>
+                    <mat-label>Select View</mat-label>
+                    <mat-select>
+                        <mat-option value="one">Beach</mat-option>
+                        <mat-option value="two">City</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            </div>
+            <button type="submit" class="btn form-btn btn-purple" (click)="onSearchClick()">Search</button>
+        </form>
+    </div>
+</section>
+
 </html>
 
 
-                        <!-- <option value="0">Choose</option>
+<!-- <option value="0">Choose</option>
                         <option value="0">Single</option>
                         <option value="1">Double</option>
                         <option value="2">Suite</option> -->
 
-                        <!-- <option value="0">Choose</option>
+<!-- <option value="0">Choose</option>
                         <option value="1">Beach</option>
                         <option value="2">City</option> -->

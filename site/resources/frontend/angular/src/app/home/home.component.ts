@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, HostListener, Inject, InjectionToken } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  HostListener,
+  Inject,
+  InjectionToken,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { SignUpFormComponent } from '../sign-up-form/sign-up-form.component';
@@ -11,11 +18,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-
-  constructor(private authService: AuthService,private snackBar: MatSnackBar, private dialog: MatDialog, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    private router: Router
+  ) {}
 
   header: HTMLElement | null = null; // define header property
 
@@ -25,7 +36,7 @@ export class HomeComponent implements OnInit {
     this.header = document.querySelector('.header'); // assign value to header property
     const hamburgerMenu = document.querySelector('.hamburger-menu');
 
-    this.authService.authStatus$.subscribe(status => {
+    this.authService.authStatus$.subscribe((status) => {
       // do something with the new authentication status
     });
 
@@ -42,7 +53,10 @@ export class HomeComponent implements OnInit {
   }
 
   isUserLoggedIn(): boolean {
-    console.log('authStatus:', this.authService.getIsAuthenticated().getValue());
+    console.log(
+      'authStatus:',
+      this.authService.getIsAuthenticated().getValue()
+    );
     return this.authService.getIsAuthenticated().getValue();
   }
 
@@ -89,6 +103,4 @@ export class HomeComponent implements OnInit {
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-
- 
 }

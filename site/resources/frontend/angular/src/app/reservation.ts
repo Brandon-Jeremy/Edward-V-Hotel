@@ -6,7 +6,13 @@ export class Reservation {
   partySize: number;
   customerName: string;
 
-  constructor(id: number, date: string, numGuests: number, partySize: number, customerName: string) {
+  constructor(
+    id: number,
+    date: string,
+    numGuests: number,
+    partySize: number,
+    customerName: string
+  ) {
     this.id = id;
     this.date = date;
     this.numGuests = numGuests;
