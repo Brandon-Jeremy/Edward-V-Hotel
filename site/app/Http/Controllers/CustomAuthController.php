@@ -86,7 +86,7 @@ class CustomAuthController extends Controller
                 'url' => $link . $api . $token
             ];
 
-            // Mail::to($user->email)->send(new VerifyAccount($mailData));
+            Mail::to($user->email)->send(new VerifyAccount($mailData));
             
         }
         catch (\Exception $e) {
